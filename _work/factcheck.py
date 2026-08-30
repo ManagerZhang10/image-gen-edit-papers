@@ -4,6 +4,7 @@
 不做语义判断，只标出'原文里根本没有这个数'的高风险条目，供人工复核。"""
 import os, re, json, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PAPERS = os.path.join(ROOT, "papers")
 SEC = re.compile(r"^(#|\|?\s*)?\d{1,2}\.\d?$")
 
 def normalize(t):
@@ -31,8 +32,8 @@ def strip_noise(md):
     return md
 
 rows = []
-for d in sorted(os.listdir(ROOT)):
-    fd = os.path.join(ROOT, d)
+for d in sorted(os.listdir(PAPERS)):
+    fd = os.path.join(PAPERS, d)
     mt, mdp = os.path.join(fd, "meta.json"), os.path.join(fd, "解读.md")
     if not (os.path.isdir(fd) and os.path.exists(mt) and os.path.exists(mdp)): continue
     meta = json.load(open(mt, encoding="utf-8"))

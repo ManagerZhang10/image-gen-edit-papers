@@ -7,14 +7,17 @@
 
 ```
 image_edit_paper/
-├── prompt.md                    ← 解读规范（用户提供，唯一标准）
-├── PLAN.md                      ← 本文件
-├── INDEX.md                     ← 总索引：按主题分组 + 演进脉络
-├── 2022-11_InstructPix2Pix/
-│   ├── paper.pdf                ← arXiv 原文
-│   ├── 解读.md                  ← 11 节深读笔记
-│   └── meta.json                ← arXiv ID / 日期 / 校验后字数 / token 用量
-└── ...（每篇一个 YYYY-MM_简称 文件夹，按时间自然排序）
+├── README.md                    ← 仓库主页
+├── docs/
+│   ├── prompt.md                ← 解读规范（用户提供，唯一标准）
+│   ├── PLAN.md                  ← 本文件
+│   └── INDEX.md                 ← 总索引：按主题分组 + 演进脉络
+└── papers/
+    ├── 2022-11_InstructPix2Pix/
+    │   ├── paper.pdf            ← arXiv 原文（不进仓库，用 scripts/fetch_pdfs.py 拉）
+    │   ├── 解读.md               ← 11 节深读笔记
+    │   └── meta.json            ← arXiv ID / 日期 / 校验后字数 / token 用量
+    └── ...（每篇一个 YYYY-MM_简称 文件夹，按时间自然排序）
 ```
 
 ## 五个阶段

@@ -16,10 +16,10 @@
 
 ## 完整逐项表
 
-- [Benchmark 前半组：12 项](_review/bench_early_manifest.md)
-- [Benchmark 后半组与综述：12 项](_review/bench_late_manifest.md)
-- [基础模型、数据与控制方法：18 项](_review/models_core_manifest.md)
-- [其余编辑方法与产品条目：13 项](_review/models_methods_manifest.md)
+- [Benchmark 前半组：12 项](review/bench_early_manifest.md)
+- [Benchmark 后半组与综述：12 项](review/bench_late_manifest.md)
+- [基础模型、数据与控制方法：18 项](review/models_core_manifest.md)
+- [其余编辑方法与产品条目：13 项](review/models_methods_manifest.md)
 
 四张表均包含：本地目录、PDF/笔记状态、首次公开、正式 venue/发表时间、引用量、provider、核对日和一手来源入口。没有被引用数据库收录的论文写“未收录/不可得”，而不是伪写成 0。
 

@@ -17,8 +17,9 @@
 | `2026/judge.py` | 2026 那轮：DeepSeek 逐篇对 15 条脉络打分 |
 | `2026/pick.py` / `2026/signal.py` | 按分数和月均密度配额横向比选，最终留下 33 篇 |
 
-⚠️ 上面这些脚本依赖当时的本机路径和 DeepSeek API key，**没有做过在别的机器上重跑的验证**。
-它们的用途是说明产出流程和校验环节，不是开箱即用的工具。
+⚠️ 上面这些脚本要有 DeepSeek API key 才能跑：从环境变量 `LLM_ENV_FILE` 指向的 .env 里读
+`DEEPSEEK_API_KEY` / `DEEPSEEK_BASE_URL` / `DEEPSEEK_V4_PRO_MODEL`，默认找 `~/ZhangYu/BaseModel/.env`。
+**没有做过在别的机器上重跑的验证**，用途是说明产出流程和校验环节，不是开箱即用的工具。
 
 ## 2026-08-30 加的，这几个是能直接跑的
 
@@ -28,6 +29,7 @@
 | `check_anchors.py` | 复刻 github-slugger 的去标点规则，检查 md 里的站内锚点能不能对上真实标题 |
 | `check_table_rows.py` | 全量核对附二每一行：解读路径、简称、标题、链接、⚠️ 标注、字数必须都来自同一个目录 |
 | `spotcheck.py` | 从成品 README 随机抽几行，真去打开链接，比对返回的 `citation_title` 和表里写的标题 |
+| `check_links.py` | 扫全部进了仓库的 `.md`，站内相对链接的目标文件必须真实存在 |
 | `pdf_link_check.json` | 不是脚本，是 [`scripts/verify_pdf_links.py`](../scripts/verify_pdf_links.py) 的核验结果快照，附二那张表的依据 |
 
-这三个只用标准库（`gen_paper_table.py` 要能 import `scripts/pdf_sources.py`），在本仓库里跑过。
+这五个只用标准库（`gen_paper_table.py` 要能 import `scripts/pdf_sources.py`），都在本仓库里跑过。原文写「这三个」但表里当时就有四个脚本，一并改了。

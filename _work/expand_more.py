@@ -23,7 +23,7 @@ def clean(md):
     return md.strip()
 
 def run(aid, short, date, title):
-    folder = os.path.join(ROOT, f"{date[:7].replace('/','-')}_{short}")
+    folder = os.path.join(ROOT, "papers", f"{date[:7].replace('/','-')}_{short}")
     out = os.path.join(folder, "解读.md")
     txt = os.path.join(ROOT, "_work", f"txt_{aid}.txt")
     if not os.path.exists(txt):

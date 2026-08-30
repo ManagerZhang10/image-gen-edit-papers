@@ -12,7 +12,7 @@ A,B,C,D=[part(t,n) for t,n in [("A","B"),("B","C"),("C","D"),("D",None)]]
 B=open("_work/crossB.md",encoding="utf-8").read().strip()
 
 meta={}
-for f in glob.glob("20*/meta.json"):
+for f in glob.glob("papers/20*/meta.json"):
     d=json.load(open(f,encoding="utf-8")); meta[d["short"]]=d
 yr=collections.Counter(re.match(r"(\d{4})",str(d["date"])).group(1) for d in meta.values())
 ARX={"2022":96,"2023":228,"2024":289,"2025":428,"2026":392}
@@ -150,5 +150,5 @@ prompt.md 要求 6500–8500，有 4 篇轻微超上限（MGIE 8830、FLUX-Konte
 """)
 
 out="\n".join(L)
-open("总结分析.md","w",encoding="utf-8").write(out)
+open("docs/总结分析.md","w",encoding="utf-8").write(out)
 print("字数",len(out.replace(" ","")))

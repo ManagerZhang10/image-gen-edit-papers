@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os, re, json, datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PAPERS = os.path.join(ROOT, "papers")
 THEME = {
  "训练-free 扩散编辑：靠注意力和反演改图": ["SDEdit","Prompt-to-Prompt","Imagic","DiffEdit","Plug-and-Play","pix2pix-zero","MasaCtrl","Cross-Image-Attention","StyleAligned","Self-Guidance","LEDITSpp","Blended-Latent-Diffusion","Add-it","editing-manifold"],
  "反演精度：真实图片怎么无损映回噪声": ["Null-text-Inversion","EDICT","ReNoise","RF-Inversion","RF-Solver-Edit","InfEdit","TurboEdit","directedit","cfg-inversion-fail"],
@@ -20,8 +21,8 @@ THEME = {
  "新一代评测：物理合理性与多轮": ["PICABench","EdiVal-Agent","IIE-Survey","reasoning-to-pixels","banana100","beyond-accuracy","edit-compass","lighting-edit-bench"],
 }
 info = {}
-for d in os.listdir(ROOT):
-    fd = os.path.join(ROOT, d)
+for d in os.listdir(PAPERS):
+    fd = os.path.join(PAPERS, d)
     mt = os.path.join(fd, "meta.json")
     if not (os.path.isdir(fd) and re.match(r"^20\d\d-\d\d_", d) and os.path.exists(mt)): continue
     m = json.load(open(mt, encoding="utf-8"))
@@ -59,14 +60,14 @@ for theme, shorts in THEME.items():
     for s in have:
         m = info[s]; used.add(s)
         ttl = m["title"].replace("|", "/").replace("$", "")
-        lines.append(f"| {m['date'][:7].replace('/','-')} | [{s}]({m['dir']}/解读.md) | {ttl} | {m['one']} |")
+        lines.append(f"| {m['date'][:7].replace('/','-')} | [{s}](../papers/{m['dir']}/解读.md) | {ttl} | {m['one']} |")
     lines.append("")
 rest = sorted(set(info) - used, key=lambda s: info[s]["date"])
 if rest:
     lines += ["### 其他", "", "| 时间 | 简称 | 论文标题 | 一句话 |", "| --- | --- | --- | --- |"]
     for s in rest:
         m = info[s]
-        lines.append(f"| {m['date'][:7].replace('/','-')} | [{s}]({m['dir']}/解读.md) | {m['title'].replace('|','/')} | {m['one']} |")
+        lines.append(f"| {m['date'][:7].replace('/','-')} | [{s}](../papers/{m['dir']}/解读.md) | {m['title'].replace('|','/')} | {m['one']} |")
     lines.append("")
 lines += ["## 2. 可信度边界", "",
  "160 个 arXiv ID 全部实抓 `arxiv.org/abs` 比对过标题与日期；160 篇解读结构完整、篇幅达标、PDF 全部可解析。",
@@ -75,6 +76,6 @@ lines += ["## 2. 可信度边界", "",
  "## 3. 按时间的全量清单", "", "| 时间 | 简称 | arXiv | 解读字数 |", "| --- | --- | --- | --- |"]
 for s in sorted(info, key=lambda s: (info[s]["date"], s)):
     m = info[s]
-    lines.append(f"| {m['date'].replace('/','-')} | [{s}]({m['dir']}/解读.md) | [{m['arxiv_id']}]({m['url']}) | {m['cn_chars']} |")
-open(os.path.join(ROOT, "INDEX.md"), "w", encoding="utf-8").write("\n".join(lines) + "\n")
+    lines.append(f"| {m['date'].replace('/','-')} | [{s}](../papers/{m['dir']}/解读.md) | [{m['arxiv_id']}]({m['url']}) | {m['cn_chars']} |")
+open(os.path.join(ROOT, "docs", "INDEX.md"), "w", encoding="utf-8").write("\n".join(lines) + "\n")
 print("INDEX.md 已生成，收录", len(info), "篇")

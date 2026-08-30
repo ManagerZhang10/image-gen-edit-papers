@@ -3,12 +3,13 @@
 """扫描所有已生成的解读，把不达标的挑出来交回 pipeline 重生成"""
 import os, re, sys, subprocess, json
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PAPERS = os.path.join(ROOT, "papers")
 sys.path.insert(0, os.path.join(ROOT, "_work"))
 from pipeline import validate, cn_len
 
 bad = []
-for d in sorted(os.listdir(ROOT)):
-    fd = os.path.join(ROOT, d)
+for d in sorted(os.listdir(PAPERS)):
+    fd = os.path.join(PAPERS, d)
     if not (os.path.isdir(fd) and re.match(r"^20\d\d-\d\d_", d)): continue
     mdp, mtp = os.path.join(fd, "解读.md"), os.path.join(fd, "meta.json")
     if not os.path.exists(mdp): bad.append((d, "缺解读")); continue

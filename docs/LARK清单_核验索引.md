@@ -8,10 +8,10 @@
 
 | 分组 | 条目 | 有论文 PDF | 无独立论文的产品说明 | 逐项清单 |
 | --- | ---: | ---: | ---: | --- |
-| Benchmark 前半 | 12 | 12 | 0 | [manifest](_review/bench_early_manifest.md) |
-| Benchmark 后半与综述 | 12 | 12 | 0 | [manifest](_review/bench_late_manifest.md) |
-| 基础模型、数据与控制方法 | 18 | 15 | 3 | [manifest](_review/models_core_manifest.md) |
-| 其余编辑方法与产品 | 13 | 12 | 1 | [manifest](_review/models_methods_manifest.md) |
+| Benchmark 前半 | 12 | 12 | 0 | [manifest](review/bench_early_manifest.md) |
+| Benchmark 后半与综述 | 12 | 12 | 0 | [manifest](review/bench_late_manifest.md) |
+| 基础模型、数据与控制方法 | 18 | 15 | 3 | [manifest](review/models_core_manifest.md) |
+| 其余编辑方法与产品 | 13 | 12 | 1 | [manifest](review/models_methods_manifest.md) |
 | **合计** | **55** | **51** | **4** | — |
 
 Lark 中的组合条目被拆成可独立核验的版本，例如基础 FLUX.1 与 FLUX.1 Kontext、Qwen-Image 报告与 Qwen-Image-Edit-2511、SeedEdit/SeedEdit3/Seedream4，因此本地载体数多于原始标题数。
@@ -20,7 +20,7 @@ Lark 中的组合条目被拆成可独立核验的版本，例如基础 FLUX.1 �
 
 ## 先看哪几个文件
 
-1. `_review/` 下四份 `*_errors.md`：会影响技术或权威性判断的问题，逐条给了 Lark 里该改成什么、为什么影响决策。
+1. `review/` 下四份 `*_errors.md`：会影响技术或权威性判断的问题，逐条给了 Lark 里该改成什么、为什么影响决策。
    （汇总版 `严重事实错误_待Review_临时.md` 是内部 review 件，只留在维护者本地，没有进仓库。）
 2. [LARK清单_权威性与影响力.md](LARK清单_权威性与影响力.md)：venue、首发/正式发表时间、引用量口径与完整逐项表入口。
 3. 四份分组 manifest：定位每个本地目录、PDF、笔记和一手来源。
@@ -28,10 +28,10 @@ Lark 中的组合条目被拆成可独立核验的版本，例如基础 FLUX.1 �
 
 ## 本轮新增或补齐的代表条目
 
-- [FlowChef](2024-12_FlowChef/解读.md)：补正式 ICCV PDF 与方法深读。
-- [InstructEdit](2023-05_InstructEdit/解读.md)：补自动 mask 生成/编辑流水线深读。
-- [Rich Text](2023-04_Rich-Text/解读.md)：补富文本区域控制深读，并纠正真实图仍需 grounded segmentation。
-- [GPT Image 2](2026-04_GPT-Image-2/解读.md)、[FLUX.1](2024-08_FLUX.1/解读.md)、[Qwen-Image-Edit-2511](2025-12_Qwen-Image-Edit-2511/解读.md)、[Grok/Aurora](2024-12_Grok-Aurora/解读.md)：明确标注“没有独立正式论文”，只保留官方资料/核验边界。
+- [FlowChef](../papers/2024-12_FlowChef/解读.md)：补正式 ICCV PDF 与方法深读。
+- [InstructEdit](../papers/2023-05_InstructEdit/解读.md)：补自动 mask 生成/编辑流水线深读。
+- [Rich Text](../papers/2023-04_Rich-Text/解读.md)：补富文本区域控制深读，并纠正真实图仍需 grounded segmentation。
+- [GPT Image 2](../papers/2026-04_GPT-Image-2/解读.md)、[FLUX.1](../papers/2024-08_FLUX.1/解读.md)、[Qwen-Image-Edit-2511](../papers/2025-12_Qwen-Image-Edit-2511/解读.md)、[Grok/Aurora](../papers/2024-12_Grok-Aurora/解读.md)：明确标注“没有独立正式论文”，只保留官方资料/核验边界。
 
 ## 笔记验收口径
 

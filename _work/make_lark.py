@@ -5,16 +5,16 @@ import re, json, glob, os, datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 url = {}
-for m in glob.glob("20*/meta.json"):
+for m in glob.glob("papers/20*/meta.json"):
     d = json.load(open(m, encoding="utf-8"))
-    url[os.path.dirname(m)] = d["url"]
-s = open("INDEX.md", encoding="utf-8").read()
+    url[os.path.basename(os.path.dirname(m))] = d["url"]
+s = open("docs/INDEX.md", encoding="utf-8").read()
 
 def fix(mo):
     return f"[{mo.group(1)}]({url[mo.group(2)]})"
-s = re.sub(r"\[([^\]]+)\]\((20[^)/]+)/解读\.md\)", fix, s)
+s = re.sub(r"\[([^\]]+)\]\(\.\./papers/([^)/]+)/解读\.md\)", fix, s)
 n = len(url)
-dates = sorted(json.load(open(m, encoding="utf-8"))["date"][:7].replace("/", "-") for m in glob.glob("20*/meta.json"))
+dates = sorted(json.load(open(m, encoding="utf-8"))["date"][:7].replace("/", "-") for m in glob.glob("papers/20*/meta.json"))
 
 HEAD = f"""# 图像编辑论文库索引（2022–2026，{n} 篇）
 

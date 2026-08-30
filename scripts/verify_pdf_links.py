@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pdf_sources import pdf_url          # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PAPERS = os.path.join(ROOT, "papers")
 UA = "image_edit_paper/1.0 (https://github.com/ManagerYu10/image_edit_paper)"
 DELAY = 3.0          # arXiv 对批量访问要求 >=3s 间隔
 OUT = os.path.join(ROOT, "_work", "pdf_link_check.json")
@@ -40,14 +41,14 @@ def probe(url):
 
 def main(argv):
     dirs = sorted(
-        d for d in os.listdir(ROOT)
-        if os.path.isdir(os.path.join(ROOT, d)) and d[0].isdigit()
+        d for d in os.listdir(PAPERS)
+        if os.path.isdir(os.path.join(PAPERS, d)) and d[0].isdigit()
     )
     if argv:
         dirs = [d for d in dirs if d in argv]
     rows, first = [], True
     for d in dirs:
-        meta = json.load(open(os.path.join(ROOT, d, "meta.json")))
+        meta = json.load(open(os.path.join(PAPERS, d, "meta.json")))
         url = pdf_url(meta, d)
         row = {"dir": d, "short": meta.get("short"), "url": url}
         if url is None:
@@ -59,7 +60,7 @@ def main(argv):
         if not first:
             time.sleep(DELAY)
         first = False
-        local = os.path.join(ROOT, d, "paper.pdf")
+        local = os.path.join(PAPERS, d, "paper.pdf")
         row["local_bytes"] = os.path.getsize(local) if os.path.exists(local) else None
         try:
             code, ctype, magic, total = probe(url)

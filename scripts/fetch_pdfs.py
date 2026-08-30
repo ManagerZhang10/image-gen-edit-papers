@@ -27,14 +27,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pdf_sources import pdf_url          # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PAPERS = os.path.join(ROOT, "papers")
 UA = "image_edit_paper/1.0 (https://github.com/ManagerYu10/image_edit_paper)"
 DELAY = 3.0
 
 
 def paper_dirs():
     return sorted(
-        d for d in os.listdir(ROOT)
-        if re.match(r"^\d{4}-\d{2}_", d) and os.path.isdir(os.path.join(ROOT, d))
+        d for d in os.listdir(PAPERS)
+        if re.match(r"^\d{4}-\d{2}_", d) and os.path.isdir(os.path.join(PAPERS, d))
     )
 
 
@@ -60,7 +61,7 @@ def main():
 
     todo, skipped, done = [], [], []
     for d in targets:
-        meta_path = os.path.join(ROOT, d, "meta.json")
+        meta_path = os.path.join(PAPERS, d, "meta.json")
         if not os.path.exists(meta_path):
             skipped.append((d, "没有 meta.json"))
             continue
@@ -69,7 +70,7 @@ def main():
         if not src:
             skipped.append((d, "无独立论文，按设计不放 paper.pdf"))
             continue
-        pdf = os.path.join(ROOT, d, "paper.pdf")
+        pdf = os.path.join(PAPERS, d, "paper.pdf")
         (done if os.path.exists(pdf) else todo).append((d, src, pdf))
 
     print(f"已有 {len(done)} 份，待下载 {len(todo)} 份，跳过 {len(skipped)} 个目录")

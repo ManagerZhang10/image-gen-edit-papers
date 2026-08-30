@@ -5,7 +5,7 @@ import json, os, re, sys, time, urllib.request, urllib.error
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.path.join(ROOT, "_work")
-PROMPT = open(os.path.join(ROOT, "prompt.md"), encoding="utf-8").read()
+PROMPT = open(os.path.join(ROOT, "docs", "prompt.md"), encoding="utf-8").read()
 
 def load_env(p):
     e = {}
@@ -89,7 +89,7 @@ def validate(md):
     return errs, n
 
 def run(aid, short, date, title):
-    folder = os.path.join(ROOT, f"{date[:7].replace('/','-')}_{short}")
+    folder = os.path.join(ROOT, "papers", f"{date[:7].replace('/','-')}_{short}")
     os.makedirs(folder, exist_ok=True)
     pdf = os.path.join(folder, "paper.pdf")
     txt = os.path.join(WORK, f"txt_{aid}.txt")
@@ -210,7 +210,7 @@ if __name__ == "__main__":
     try:
         rc = run(aid.strip(), short, date, title.strip())
     finally:
-        lk = os.path.join(ROOT, f"{date[:7].replace('/','-')}_{short}", ".LOCK")
+        lk = os.path.join(ROOT, "papers", f"{date[:7].replace('/','-')}_{short}", ".LOCK")
         if os.path.exists(lk):
             try: os.remove(lk)
             except OSError: pass
