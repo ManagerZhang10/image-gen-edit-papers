@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """对偏短但结构完整的解读做强化扩写：逐节点名，最多两轮，只补论文里已有的细节。"""
 import os, re, sys, json, time
-ROOT = "/Users/yuzhang/ZhangYu/image_edit_paper"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT + "/_work")
 from pipeline import deepseek, validate, validate_struct, cn_len, PROMPT, extract, fetch_pdf
 

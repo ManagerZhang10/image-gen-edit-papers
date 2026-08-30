@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os, re, json, datetime
-ROOT = "/Users/yuzhang/ZhangYu/image_edit_paper"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 THEME = {
  "训练-free 扩散编辑：靠注意力和反演改图": ["SDEdit","Prompt-to-Prompt","Imagic","DiffEdit","Plug-and-Play","pix2pix-zero","MasaCtrl","Cross-Image-Attention","StyleAligned","Self-Guidance","LEDITSpp","Blended-Latent-Diffusion","Add-it","editing-manifold"],
  "反演精度：真实图片怎么无损映回噪声": ["Null-text-Inversion","EDICT","ReNoise","RF-Inversion","RF-Solver-Edit","InfEdit","TurboEdit","directedit","cfg-inversion-fail"],

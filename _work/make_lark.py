@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """INDEX.md -> _work/INDEX_lark.md：本地路径换成 arXiv 链接，换掉开头和第 2 节。"""
 import re, json, glob, os, datetime
-ROOT = "/Users/yuzhang/ZhangYu/image_edit_paper"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 url = {}
 for m in glob.glob("20*/meta.json"):
@@ -26,7 +26,7 @@ HEAD = f"""# 图像编辑论文库索引（2022–2026，{n} 篇）
 ## 0. 先说这个库怎么用
 
 **正文和 PDF 都在本地**，这份 Lark 文档只是目录，方便分享和挑论文。
-库在张钰的 Mac 上：`/Users/yuzhang/ZhangYu/image_edit_paper`，
+库在 https://github.com/ManagerYu10/image_edit_paper，
 每篇一个文件夹，里面是 `paper.pdf`（arXiv 原文）、`解读.md`（11 节中文深读）、
 `meta.json`（arXiv ID、日期、字数）。下面表里的链接指向 arXiv 原文。
 跨论文的结论在本地 `总结分析.md`，不在这份文档里。

@@ -3,7 +3,7 @@
 """数字溯源检查：解读里出现的数字断言，是否能在论文抽取文本中找到。
 不做语义判断，只标出'原文里根本没有这个数'的高风险条目，供人工复核。"""
 import os, re, json, sys
-ROOT = "/Users/yuzhang/ZhangYu/image_edit_paper"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEC = re.compile(r"^(#|\|?\s*)?\d{1,2}\.\d?$")
 
 def normalize(t):

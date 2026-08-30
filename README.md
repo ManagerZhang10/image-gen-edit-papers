@@ -1,10 +1,21 @@
 # 图像编辑论文库 2021–2026
 
+[![papers](https://img.shields.io/badge/papers-186-2b7489)](#附二全量清单186-项每项一条核验过的原文直链)
+[![notes](https://img.shields.io/badge/notes-1.23M_CJK_chars-4c9a2a)](#4-两批笔记格式和验收口径都不一样)
+[![coverage](https://img.shields.io/badge/coverage-2021.08_--_2026.08-e07b39)](#2-五年读下来的结论)
+[![links](https://img.shields.io/badge/source_links-181%2F186_byte--verified-1f883d)](#附二全量清单186-项每项一条核验过的原文直链)
+[![license](https://img.shields.io/badge/license-CC_BY_4.0-777777)](LICENSE)
+
+**186 篇图像编辑论文的中文深读笔记，2021-08 → 2026-08，合计 1,231,636 个汉字。**
+每篇笔记都配一条核验过的原文直链——181 条与写笔记时用的本地 PDF 逐字节比对一致，1 条渲染版本存疑已标注，4 项确实没有独立论文。
+
+*186 in-depth Chinese reading notes on image-editing papers (Aug 2021 – Aug 2026, 1.23M CJK characters). Every source link is byte-verified against the exact PDF the note was written from — see [附二](#附二全量清单186-项每项一条核验过的原文直链).*
+
 > **读者**：要系统补齐图像编辑技术脉络的算法同学，或者要为某个具体方案（人像编辑、身份保持、局部保持、评测选型）找证据的人
 > **目标**：读完这页知道该从哪儿进去、每篇笔记能替代什么、哪些结论可以直接拿去做决策、哪些必须回原文
-> **元信息**：186 项 · 2021-08 ～ 2026-08 · 约 123 万中文字 · 维护者 张钰 <zhangyu@romangic.com>
-> **配套 Lark 文档**：[图像编辑论文库索引](https://romangic.sg.larksuite.com/wiki/WjXRwwMv1izlSOk9aQwlM6dIg3d)（只是目录的在线版，正文和数据都在本仓库）
+> **元信息**：186 项 · 2021-08 ～ 2026-08 · 约 123 万中文字 · 维护者 [@ManagerYu10](https://github.com/ManagerYu10)
 > **原文直链**：[附二](#附二全量清单186-项每项一条核验过的原文直链)有全部 186 项的直链——181 条 PDF 与本地副本逐字节对过，1 条标注版本存疑，4 项无独立论文给官方来源
+> **授权**：[CC BY 4.0](LICENSE)——署名即可自由转载、改写、商用
 > **最后核对**：2026-08-30
 
 每篇论文一个目录，里面是 `解读.md`（中文深读笔记）和 `meta.json`（arXiv ID、日期、字数、venue、引用量）。
@@ -254,7 +265,6 @@ python3 scripts/verify_pdf_links.py 2023-02_ControlNet # 只核一条
 - [arXiv](https://arxiv.org/) — 所有 PDF 的来源
 - [OpenAlex](https://openalex.org/) — `_review/` 里引用量的 provider（Semantic Scholar 返回 429 后统一回退到它）
 - [CVF Open Access](https://openaccess.thecvf.com/) — CVPR / ICCV 正式 proceedings
-- 配套 Lark 文档：[图像编辑论文库索引](https://romangic.sg.larksuite.com/wiki/WjXRwwMv1izlSOk9aQwlM6dIg3d)
 
 ---
 

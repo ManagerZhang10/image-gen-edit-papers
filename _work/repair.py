@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """扫描所有已生成的解读，把不达标的挑出来交回 pipeline 重生成"""
 import os, re, sys, subprocess, json
-ROOT = "/Users/yuzhang/ZhangYu/image_edit_paper"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "_work"))
 from pipeline import validate, cn_len
 

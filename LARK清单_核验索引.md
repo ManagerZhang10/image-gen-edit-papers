@@ -1,8 +1,8 @@
-# Lark《Image Edit领域论文调研》核验索引
+# 《Image Edit 领域论文调研》清单核验索引
 
-> 来源：[Lark Wiki](https://romangic.sg.larksuite.com/wiki/Ab9QwdNuTiv41FkWyB7lLic9gHh)，读取 revision 1687  
+> 基准：《Image Edit 领域论文调研》清单 revision 1687  
 > 核对日期：2026-08-29  
-> 仓库：<https://github.com/romangic/image_edit_paper>
+> 仓库：<https://github.com/ManagerYu10/image_edit_paper>
 
 ## 交付结果
 

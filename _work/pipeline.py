@@ -3,7 +3,7 @@
 """下载 arXiv 论文 PDF -> 抽取正文 -> 调 DeepSeek v4 Pro 生成深读笔记 -> 校验 -> 落盘"""
 import json, os, re, sys, time, urllib.request, urllib.error
 
-ROOT = "/Users/yuzhang/ZhangYu/image_edit_paper"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORK = os.path.join(ROOT, "_work")
 PROMPT = open(os.path.join(ROOT, "prompt.md"), encoding="utf-8").read()
 
@@ -14,7 +14,8 @@ def load_env(p):
         if ln and not ln.startswith("#") and "=" in ln:
             k, v = ln.split("=", 1); e[k] = v.strip().strip('"').strip("'")
     return e
-ENV = load_env("/Users/yuzhang/ZhangYu/BaseModel/.env")
+ENV = load_env(os.environ.get("LLM_ENV_FILE",
+                              os.path.expanduser("~/ZhangYu/BaseModel/.env")))
 
 HEADS = ["## 1. 30 秒定位","## 2. 为什么这篇论文会出现","## 3. 读懂前需要的最小概念",
          "## 4. 方法全景：先看数据流","## 5. 核心公式与直觉","## 6. 训练到底怎么跑",

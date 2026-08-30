@@ -1,6 +1,7 @@
 import json,os,re,sys,urllib.request,time
 
-ENV="/Users/yuzhang/ZhangYu/BaseModel/.env"
+ENV=os.environ.get("LLM_ENV_FILE",
+                   os.path.expanduser("~/ZhangYu/BaseModel/.env"))
 cfg={}
 for l in open(ENV,encoding="utf-8"):
     l=l.strip()

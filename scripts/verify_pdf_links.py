@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pdf_sources import pdf_url          # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-UA = "image_edit_paper/1.0 (https://github.com/romangic/image_edit_paper)"
+UA = "image_edit_paper/1.0 (https://github.com/ManagerYu10/image_edit_paper)"
 DELAY = 3.0          # arXiv 对批量访问要求 >=3s 间隔
 OUT = os.path.join(ROOT, "_work", "pdf_link_check.json")
 
