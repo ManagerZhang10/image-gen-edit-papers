@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2603.28547",
+  "short": "GEditBench-v2",
+  "date": "2026/03/30",
+  "cn_chars": 3755,
+  "title": "GEditBench v2: A Human-Aligned Benchmark for General Image Editing",
+  "url": "https://arxiv.org/abs/2603.28547",
+  "publication": {
+    "status": "preprint",
+    "venue": "arXiv",
+    "venue_type": "preprint",
+    "first_public_date": "2026-03-30",
+    "formal_publication_date": null,
+    "official_url": "https://arxiv.org/abs/2603.28547"
+  },
+  "impact": {
+    "citation_count": 6,
+    "provider": "Semantic Scholar",
+    "provider_url": "https://www.semanticscholar.org/paper/9b8476c018b6099dc45e6dae661d762e4502c13f",
+    "checked_at": "2026-08-29"
+  }
+}

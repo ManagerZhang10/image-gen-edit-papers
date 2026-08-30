@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2412.00100",
+  "short": "FlowChef",
+  "date": "2024/11/27",
+  "title": "FlowChef: Steering of Rectified Flow Models for Controlled Generations",
+  "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Patel_FlowChef_Steering_of_Rectified_Flow_Models_for_Controlled_Generations_ICCV_2025_paper.html",
+  "project_url": "https://flowchef.github.io/",
+  "code_url": "https://github.com/FlowChef/FlowChef",
+  "source_type": "formal_paper",
+  "publication": {
+    "first_public": "2024-11-27",
+    "venue": "ICCV 2025",
+    "formal_publication": "2025-10"
+  },
+  "impact": {
+    "citation_count": 40,
+    "provider": "Semantic Scholar Graph API",
+    "checked_at": "2026-08-29"
+  },
+  "paper_sha256": "d273b6b9f9186bd5a05cc141bf0fba2ed4bf7801261ad99d508eb3165f1dd3e4",
+  "note": "DeepSeek V4 Pro 初稿，已按 ICCV 正式论文人工复核"
+}

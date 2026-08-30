@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2505.00502",
+  "short": "HATIE",
+  "date": "2025/05/01",
+  "title": "Towards Scalable Human-aligned Benchmark for Text-guided Image Editing",
+  "url": "https://arxiv.org/abs/2505.00502",
+  "cn_chars": 6842,
+  "note": "DeepSeek V4 Pro 长稿；按用户要求保留并人工复核",
+  "attempts": 1,
+  "publication": {
+    "venue": "CVPR 2025 Highlight",
+    "first_public": "2025-05-01",
+    "formal_publication": "2025-06",
+    "venue_source": "https://openaccess.thecvf.com/content/CVPR2025/html/Ryu_Towards_Scalable_Human-aligned_Benchmark_for_Text-guided_Image_Editing_CVPR_2025_paper.html"
+  },
+  "impact": {
+    "citation_count": 0,
+    "citation_provider": "OpenAlex（Semantic Scholar API HTTP 429 后统一回退）",
+    "citation_record": "https://openalex.org/W4413144382",
+    "checked_at": "2026-08-29"
+  }
+}

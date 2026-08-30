@@ -1,0 +1,23 @@
+{
+  "arxiv_id": null,
+  "associated_arxiv_id": "2508.02324",
+  "short": "Qwen-Image-Edit-2511",
+  "date": "2025/12/17",
+  "title": "Qwen-Image-Edit-2511",
+  "url": "https://huggingface.co/Qwen/Qwen-Image-Edit-2511",
+  "source_type": "official_model_card_update",
+  "paper_pdf": false,
+  "publication": {
+    "first_public": "2025-12-17",
+    "venue": "Qwen official model card",
+    "formal_publication": null
+  },
+  "impact": {
+    "citation_count": null,
+    "provider": null,
+    "associated_report_citation_count": 930,
+    "associated_report_provider": "Semantic Scholar Graph API",
+    "checked_at": "2026-08-29"
+  },
+  "note": "2511 无独立论文；关联 Qwen-Image Technical Report 已存 2025-08_Qwen-Image"
+}

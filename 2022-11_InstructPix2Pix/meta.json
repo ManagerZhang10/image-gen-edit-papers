@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2211.09800",
+  "short": "InstructPix2Pix",
+  "date": "2022/11/17",
+  "title": "InstructPix2Pix: Learning to Follow Image Editing Instructions",
+  "url": "https://arxiv.org/abs/2211.09800",
+  "cn_chars": 7603,
+  "usage": {
+    "prompt_tokens": 14930,
+    "completion_tokens": 8182,
+    "total_tokens": 23112,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 997
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 14930
+  },
+  "attempts": 1,
+  "note": "达标"
+}

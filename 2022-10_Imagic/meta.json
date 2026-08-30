@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2210.09276",
+  "short": "Imagic",
+  "date": "2022/10/17",
+  "title": "Imagic: Text-Based Real Image Editing with Diffusion Models",
+  "url": "https://arxiv.org/abs/2210.09276",
+  "cn_chars": 7049,
+  "usage": {
+    "prompt_tokens": 15788,
+    "completion_tokens": 9787,
+    "total_tokens": 25575,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 2575
+    },
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 14892
+  },
+  "attempts": 1
+}

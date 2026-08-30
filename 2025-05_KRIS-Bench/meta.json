@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2505.16707",
+  "short": "KRIS-Bench",
+  "date": "2025/05/22",
+  "title": "KRIS-Bench: Benchmarking Next-Level Intelligent Image Editing Models",
+  "url": "https://arxiv.org/abs/2505.16707",
+  "cn_chars": 7494,
+  "note": "扩写达标（初稿 5438 字）",
+  "attempts": 2,
+  "publication": {
+    "venue": "NeurIPS 2025 Datasets & Benchmarks Track",
+    "first_public": "2025-05-22",
+    "formal_publication": "2025-12",
+    "venue_source": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/e619b285582fb12f4c3de3a507b8b99c-Abstract-Datasets_and_Benchmarks_Track.html"
+  },
+  "impact": {
+    "citation_count": 0,
+    "citation_provider": "OpenAlex（Semantic Scholar API HTTP 429 后统一回退）",
+    "citation_record": "https://openalex.org/W4416452763",
+    "checked_at": "2026-08-29"
+  }
+}

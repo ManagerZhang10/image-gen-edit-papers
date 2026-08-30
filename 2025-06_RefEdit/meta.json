@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2506.03448",
+  "short": "RefEdit",
+  "date": "2025/06/03",
+  "title": "RefEdit: A Benchmark and Method for Improving Instruction-based Image Editing Model on Referring Expressions",
+  "url": "https://arxiv.org/abs/2506.03448",
+  "cn_chars": 2516,
+  "note": "DeepSeek V4 Pro 决策型初稿；已按论文原文人工复核",
+  "attempts": 1,
+  "publication": {
+    "venue": "ICCV 2025",
+    "first_public": "2025-06-03",
+    "formal_publication": "2025-10",
+    "venue_source": "https://openaccess.thecvf.com/content/ICCV2025/html/Pathiraja_RefEdit_A_Benchmark_and_Method_for_Improving_Instruction-based_Image_Editing_ICCV_2025_paper.html"
+  },
+  "impact": {
+    "citation_count": 0,
+    "citation_provider": "OpenAlex（Semantic Scholar API HTTP 429 后统一回退）",
+    "citation_record": "https://openalex.org/W4416072503",
+    "checked_at": "2026-08-29"
+  }
+}

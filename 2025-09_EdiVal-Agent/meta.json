@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2509.13399",
+  "short": "EdiVal-Agent",
+  "date": "2025/09/16",
+  "title": "EdiVal-Agent: An Object-Centric Framework for Automated, Fine-Grained Evaluation of Multi-Turn Editing",
+  "url": "https://arxiv.org/abs/2509.13399",
+  "cn_chars": 6599,
+  "note": "扩写达标（初稿 5092 字）",
+  "attempts": 1,
+  "publication": {
+    "status": "published",
+    "venue": "ICLR 2026",
+    "venue_type": "conference",
+    "first_public_date": "2025-09-16",
+    "formal_publication_date": "2026",
+    "official_url": "https://openreview.net/forum?id=YkV0fnXgJA"
+  },
+  "impact": {
+    "citation_count": 10,
+    "provider": "Semantic Scholar",
+    "provider_url": "https://www.semanticscholar.org/paper/097b54e24c91cf0e751b145a7a9b8146497d59b2",
+    "checked_at": "2026-08-29"
+  }
+}

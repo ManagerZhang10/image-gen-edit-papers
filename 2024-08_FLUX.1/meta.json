@@ -1,0 +1,21 @@
+{
+  "arxiv_id": null,
+  "short": "FLUX.1",
+  "date": "2024/08/01",
+  "title": "FLUX.1 Model Family",
+  "url": "https://bfl.ai/blog/24-08-01-bfl",
+  "model_card_url": "https://huggingface.co/black-forest-labs/FLUX.1-dev",
+  "source_type": "official_product_blog_and_model_card",
+  "paper_pdf": false,
+  "publication": {
+    "first_public": "2024-08-01",
+    "venue": "Black Forest Labs official launch blog/model card",
+    "formal_publication": null
+  },
+  "impact": {
+    "citation_count": null,
+    "provider": null,
+    "checked_at": "2026-08-29"
+  },
+  "note": "基础 FLUX.1 无正式论文；不要与 2025 FLUX.1 Kontext 论文混同"
+}

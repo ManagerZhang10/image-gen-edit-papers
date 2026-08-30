@@ -1,0 +1,25 @@
+{
+  "arxiv_id": "2505.20405",
+  "short": "DICE",
+  "date": "2025/05/26",
+  "title": "What Changed? Detecting and Evaluating Instruction-Guided Image Edits with Multimodal Large Language Models",
+  "url": "https://arxiv.org/abs/2505.20405",
+  "cn_chars": 3306,
+  "publication": {
+    "status": "published",
+    "venue": "ICCV 2025",
+    "venue_type": "conference",
+    "first_public_date": "2025-05-26",
+    "formal_publication_date": "2025-10",
+    "pages": "16217-16226",
+    "doi": "10.1109/ICCV51701.2025.01505",
+    "official_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Baraldi_What_Changed_Detecting_and_Evaluating_Instruction-Guided_Image_Edits_with_Multimodal_ICCV_2025_paper.html"
+  },
+  "impact": {
+    "citation_count": 0,
+    "provider": "OpenAlex",
+    "provider_url": "https://openalex.org/W4415035814",
+    "checked_at": "2026-08-29",
+    "note": "Semantic Scholar API repeatedly returned HTTP 429; used the OpenAlex ICCV DOI record without combining counts."
+  }
+}

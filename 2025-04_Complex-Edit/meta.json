@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2504.13143",
+  "short": "Complex-Edit",
+  "date": "2025/04/17",
+  "title": "$texttt{Complex-Edit}$: CoT-Like Instruction Generation for Complexity-Controllable Image Editing Benchmark",
+  "url": "https://arxiv.org/abs/2504.13143",
+  "cn_chars": 8329,
+  "note": "扩写达标（初稿 5973 字）",
+  "attempts": 1,
+  "publication": {
+    "venue": "Transactions on Machine Learning Research (TMLR)",
+    "first_public": "2025-04-17",
+    "formal_publication": "2026-03",
+    "venue_source": "https://openreview.net/forum?id=lL1JR6dxG8"
+  },
+  "impact": {
+    "citation_count": 0,
+    "citation_provider": "OpenAlex（Semantic Scholar API HTTP 429 后统一回退）",
+    "citation_record": "https://openalex.org/W4416538115",
+    "checked_at": "2026-08-29"
+  }
+}

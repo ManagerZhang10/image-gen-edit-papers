@@ -1,0 +1,22 @@
+{
+  "arxiv_id": null,
+  "short": "Inter-Edit",
+  "date": "2026/06/01",
+  "title": "Inter-Edit: First Benchmark for Interactive Instruction-Based Image Editing",
+  "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Liu_Inter-Edit_First_Benchmark_for_Interactive_Instruction-Based_Image_Editing_CVPR_2026_paper.html",
+  "cn_chars": 2661,
+  "note": "DeepSeek V4 Pro 决策型初稿；已按论文原文人工复核",
+  "attempts": 1,
+  "publication": {
+    "venue": "CVPR 2026",
+    "first_public": "2026-06（未发现更早预印本）",
+    "formal_publication": "2026-06",
+    "venue_source": "https://openaccess.thecvf.com/content/CVPR2026/html/Liu_Inter-Edit_First_Benchmark_for_Interactive_Instruction-Based_Image_Editing_CVPR_2026_paper.html"
+  },
+  "impact": {
+    "citation_count": null,
+    "citation_provider": "OpenAlex（Semantic Scholar API HTTP 429 后统一回退）",
+    "citation_record": null,
+    "checked_at": "2026-08-29"
+  }
+}

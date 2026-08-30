@@ -1,0 +1,20 @@
+# arXiv 原文不进仓库：182 份 PDF 合计 3.3 GB，超出 GitHub 建议的仓库体积。
+# 用 scripts/fetch_pdfs.py 从每个目录的 meta.json 重新下载。
+*.pdf
+
+# 生产过程的中间产物和日志（PDF 抽取文本、批次日志、候选清单、被拒草稿）读者不会
+# 重复遇到，只保留 _work/ 下的 .py 管线脚本，用于说明这批解读是怎么产出和校验的。
+_work/*
+!_work/*/
+!_work/*.py
+!_work/README.md
+_work/*/*
+!_work/*/*.py
+
+# 生成中的目录锁
+.LOCK
+
+# 内部 review 件，不属于论文库内容
+严重事实错误_待Review_临时.md
+
+.DS_Store

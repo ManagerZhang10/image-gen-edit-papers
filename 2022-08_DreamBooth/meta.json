@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2208.12242",
+  "short": "DreamBooth",
+  "date": "2022/08/25",
+  "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+  "url": "https://arxiv.org/abs/2208.12242",
+  "cn_chars": 6553,
+  "usage": {
+    "prompt_tokens": 19039,
+    "completion_tokens": 11407,
+    "total_tokens": 30446,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 4746
+    },
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 18143
+  },
+  "attempts": 1
+}

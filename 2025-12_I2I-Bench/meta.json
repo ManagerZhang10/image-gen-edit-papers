@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2512.04660",
+  "short": "I2I-Bench",
+  "date": "2025/12/04",
+  "title": "I2I-Bench: A Comprehensive Benchmark Suite for Image-to-Image Editing Models",
+  "url": "https://arxiv.org/abs/2512.04660",
+  "cn_chars": 7049,
+  "note": "DeepSeek V4 Pro 长稿；按用户要求保留并人工复核",
+  "attempts": 1,
+  "publication": {
+    "venue": "CVPR 2026",
+    "first_public": "2025-12-04",
+    "formal_publication": "2026-06",
+    "venue_source": "https://openaccess.thecvf.com/content/CVPR2026/html/Wang_I2I-Bench_A_Comprehensive_Benchmark_Suite_for_Image-to-Image_Editing_Models_CVPR_2026_paper.html"
+  },
+  "impact": {
+    "citation_count": 0,
+    "citation_provider": "OpenAlex（Semantic Scholar API HTTP 429 后统一回退）",
+    "citation_record": "https://openalex.org/W4417086874",
+    "checked_at": "2026-08-29"
+  }
+}

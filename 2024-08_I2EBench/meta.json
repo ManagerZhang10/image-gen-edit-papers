@@ -1,0 +1,22 @@
+{
+  "arxiv_id": "2408.14180",
+  "short": "I2EBench",
+  "date": "2024/08/26",
+  "title": "I2EBench: A Comprehensive Benchmark for Instruction-based Image Editing",
+  "url": "https://arxiv.org/abs/2408.14180",
+  "cn_chars": 2518,
+  "note": "DeepSeek V4 Pro 决策型初稿；已按论文原文人工复核",
+  "attempts": 1,
+  "publication": {
+    "venue": "NeurIPS 2024 Main Conference",
+    "first_public": "2024-08-26",
+    "formal_publication": "2024-12",
+    "venue_source": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/48fecef47b19fe501d27d338b6d52582-Abstract-Conference.html"
+  },
+  "impact": {
+    "citation_count": 1,
+    "citation_provider": "OpenAlex（Semantic Scholar API HTTP 429 后统一回退）",
+    "citation_record": "https://openalex.org/W7103752508",
+    "checked_at": "2026-08-29"
+  }
+}

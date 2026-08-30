@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2505.11493",
+  "short": "GIE-Bench",
+  "date": "2025/05/16",
+  "title": "GIE-Bench: Towards Grounded Evaluation for Text-Guided Image Editing",
+  "url": "https://arxiv.org/abs/2505.11493",
+  "cn_chars": 2670,
+  "publication": {
+    "status": "preprint / conference submission",
+    "venue": "arXiv; submitted to ICLR 2026",
+    "venue_type": "preprint",
+    "first_public_date": "2025-05-16",
+    "formal_publication_date": null,
+    "official_url": "https://openreview.net/forum?id=BdzayGKKVc",
+    "note": "The official OpenReview PDF is labeled under review, not published as an ICLR 2026 conference paper."
+  },
+  "impact": {
+    "citation_count": 14,
+    "provider": "Semantic Scholar",
+    "provider_url": "https://www.semanticscholar.org/paper/cfaa5cf32ea38ec18622013cc8373877851bcf4f",
+    "checked_at": "2026-08-29"
+  }
+}

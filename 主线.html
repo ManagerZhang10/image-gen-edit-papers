@@ -1,0 +1,959 @@
+<title>图像编辑五年主线</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#F1F3F5; --surface:#FFFFFF; --surface2:#E7EAEE; --sunk:#DCE0E5;
+  --ink:#10161B; --ink2:#2C343C; --muted:#5A6570; --faint:#8792A0;
+  --line:#D3D8DE; --line2:#C2C9D1;
+  --c-body:#0B6E78; --c-stack:#2F4B8F; --c-rl:#8A5A0C; --c-eval:#A32B5D; --c-out:#9AA3AD;
+  --c-body-w:#0B6E7818; --c-stack-w:#2F4B8F18; --c-rl-w:#8A5A0C18; --c-eval-w:#A32B5D18;
+  --warn:#8A5A0C;
+  --f-disp:"Newsreader","Noto Serif SC",Georgia,"Songti SC",serif;
+  --f-body:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --shadow:0 1px 2px rgba(16,22,27,.05),0 8px 24px -12px rgba(16,22,27,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0F12; --surface:#131A1F; --surface2:#1A222A; --sunk:#0F161B;
+    --ink:#E7EDF2; --ink2:#C3CCD5; --muted:#8C97A3; --faint:#6B7682;
+    --line:#232C34; --line2:#2E3941;
+    --c-body:#4FC7D4; --c-stack:#8AA6EE; --c-rl:#E0A64B; --c-eval:#F0759D; --c-out:#5E6873;
+    --c-body-w:#4FC7D422; --c-stack-w:#8AA6EE22; --c-rl-w:#E0A64B22; --c-eval-w:#F0759D22;
+    --warn:#E0A64B;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0F12; --surface:#131A1F; --surface2:#1A222A; --sunk:#0F161B;
+  --ink:#E7EDF2; --ink2:#C3CCD5; --muted:#8C97A3; --faint:#6B7682;
+  --line:#232C34; --line2:#2E3941;
+  --c-body:#4FC7D4; --c-stack:#8AA6EE; --c-rl:#E0A64B; --c-eval:#F0759D; --c-out:#5E6873;
+  --c-body-w:#4FC7D422; --c-stack-w:#8AA6EE22; --c-rl-w:#E0A64B22; --c-eval-w:#F0759D22;
+  --warn:#E0A64B;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-weight:400;
+  font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;letter-spacing:.01em}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--f-disp);font-weight:600;text-wrap:balance;letter-spacing:0}
+p{margin:0}
+table{border-collapse:collapse;width:100%}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:minmax(0,1fr);max-width:1180px;margin:0 auto;padding:0 24px}
+@media(min-width:1000px){
+  .shell{grid-template-columns:196px minmax(0,1fr);gap:56px;padding:0 32px}
+}
+.rail{display:none}
+@media(min-width:1000px){
+  .rail{display:block;position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    padding:34px 0 40px;border-right:1px solid var(--line)}
+}
+.rail-title{font-family:var(--f-disp);font-size:15px;font-weight:600;line-height:1.4;margin-bottom:4px}
+.rail-sub{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);letter-spacing:.05em;margin-bottom:24px}
+.rail a{display:flex;gap:9px;text-decoration:none;color:var(--muted);font-size:12.5px;line-height:1.45;
+  padding:5px 10px 5px 0;border-left:2px solid transparent;padding-left:10px;transition:color .15s,border-color .15s}
+.rail a:hover,.rail a:focus-visible{color:var(--ink);border-left-color:var(--c-body)}
+.rail a .n{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);padding-top:1px}
+.rail a.on{color:var(--ink);border-left-color:var(--c-body);font-weight:500}
+
+main{min-width:0;padding-bottom:96px}
+section{padding-top:64px;scroll-margin-top:24px}
+.wrap{max-width:74ch}
+
+/* ---------- eyebrow / heads ---------- */
+.eyebrow{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;
+  border-bottom:1px solid var(--line);padding-bottom:9px}
+.eyebrow .n{font-family:var(--f-mono);font-size:11px;color:var(--c-body);letter-spacing:.12em}
+.eyebrow h2{font-size:23px;margin:0;flex:1}
+.eyebrow .c{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.lede{color:var(--ink2);font-size:15.5px;margin-top:14px}
+.note{font-size:13px;color:var(--muted);line-height:1.7}
+.note strong,.note b{color:var(--ink2);font-weight:500}
+.tbl .num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;color:var(--ink);
+  white-space:nowrap}
+code{font-family:var(--f-mono);font-size:.88em;background:var(--sunk);padding:1px 5px;border-radius:2px;
+  color:var(--ink2);word-break:break-all}
+
+/* ---------- hero ---------- */
+.hero{padding-top:52px}
+.hero h1{font-size:clamp(40px,7vw,62px);line-height:1.06;margin:0 0 4px;letter-spacing:-.01em}
+.hero .kicker{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;color:var(--c-body);
+  text-transform:uppercase;margin-bottom:20px}
+.thesis{font-family:var(--f-disp);font-size:clamp(19px,2.4vw,23px);line-height:1.62;color:var(--ink);
+  margin:26px 0 0;max-width:34em;border-left:2px solid var(--c-body);padding-left:20px}
+.thesis em{font-style:normal;background:var(--c-body-w);box-shadow:0 -.34em 0 0 var(--c-body-w) inset;
+  color:var(--ink);font-weight:600}
+.meta{display:grid;gap:2px;margin-top:32px;font-size:13px;color:var(--muted);
+  grid-template-columns:auto 1fr;column-gap:16px;max-width:62ch}
+.meta dt{font-family:var(--f-mono);font-size:11px;color:var(--faint);letter-spacing:.06em;padding-top:4px}
+.meta dd{margin:0;padding-top:2px}
+.stats{display:flex;flex-wrap:wrap;gap:0;margin-top:34px;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line)}
+.stat{flex:1 1 132px;padding:16px 18px 15px 0;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--f-mono);font-size:27px;font-weight:500;line-height:1.1;
+  color:var(--ink);font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.4}
+
+/* ---------- tables ---------- */
+.tbl{width:100%;font-size:13.5px;line-height:1.65}
+.tbl th{text-align:left;font-family:var(--f-mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;
+  color:var(--faint);text-transform:uppercase;padding:0 16px 8px 0;border-bottom:1px solid var(--line2);
+  vertical-align:bottom}
+.tbl td{padding:13px 16px 13px 0;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:last-child,.tbl th:last-child{padding-right:0}
+.tbl .you{color:var(--muted)}
+.tbl .real{color:var(--ink)}
+.scrollx{overflow-x:auto;margin-inline:-2px;padding-inline:2px}
+
+/* ---------- turning points ---------- */
+.tps{display:flex;flex-direction:column;gap:0;margin-top:24px}
+.tp{display:grid;grid-template-columns:1fr;gap:0;padding:26px 0;border-top:1px solid var(--line)}
+.tp:first-child{border-top:0;padding-top:14px}
+.tp-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:16px}
+.tp-when{font-family:var(--f-mono);font-size:11px;color:var(--c-body);letter-spacing:.08em;
+  border:1px solid var(--c-body);border-radius:2px;padding:2px 7px;white-space:nowrap}
+.tp-head h3{font-size:19px;margin:0;flex:1 1 260px;line-height:1.4}
+.tp-by{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.tp-by b{color:var(--ink);font-weight:500}
+.ba{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:3px;overflow:hidden}
+@media(min-width:660px){.ba{grid-template-columns:1fr 1fr}}
+.ba>div{padding:15px 17px;background:var(--surface)}
+.ba .before{background:var(--surface2);color:var(--muted)}
+.ba .after{position:relative}
+.ba .after::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--c-body)}
+.ba .lab{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);display:block;margin-bottom:7px}
+.ba .after .lab{color:var(--c-body)}
+.ba p{font-size:13.5px;line-height:1.7}
+.ba .after p{color:var(--ink2)}
+.flag{display:flex;gap:9px;margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.65;
+  background:var(--c-rl-w);border-left:2px solid var(--warn);padding:11px 14px;border-radius:0 2px 2px 0}
+.flag b{color:var(--warn);font-weight:500}
+
+/* ---------- figure ---------- */
+figure{margin:28px 0 0}
+.bleed{max-width:none}
+figure svg{width:100%;height:auto;display:block;color:var(--ink)}
+figure svg text{font-family:var(--f-body)}
+figure svg text.svgm{font-family:var(--f-mono)}
+figcaption{font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.7;max-width:72ch}
+.era{display:grid;gap:10px;margin-top:22px}
+@media(min-width:760px){.era{grid-template-columns:repeat(3,1fr)}}
+.era>div{border-top:2px solid var(--line2);padding-top:11px}
+.era .y{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--faint);display:block;margin-bottom:3px}
+.era p{font-size:13px;color:var(--ink2);line-height:1.65}
+.era>div:nth-child(1){border-top-color:var(--c-body)}
+.era>div:nth-child(2){border-top-color:var(--c-stack)}
+.era>div:nth-child(3){border-top-color:var(--c-eval)}
+
+/* ---------- track cards ---------- */
+.tracks{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;
+  overflow:hidden;margin-top:22px}
+@media(min-width:720px){.tracks{grid-template-columns:1fr 1fr}}
+.tk{background:var(--surface);padding:0}
+.tk>summary{list-style:none;cursor:pointer;padding:17px 18px;display:block;position:relative}
+.tk>summary::-webkit-details-marker{display:none}
+.tk>summary:focus-visible{outline:2px solid var(--c-body);outline-offset:-2px}
+.tk-top{display:flex;align-items:baseline;gap:9px;margin-bottom:7px}
+.tk-no{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);width:20px;flex:none;
+  font-variant-numeric:tabular-nums}
+.tk-name{font-family:var(--f-disp);font-size:16px;font-weight:600;line-height:1.35;flex:1}
+.tk-n{font-family:var(--f-mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.tk-bar{height:2px;background:var(--sunk);margin:0 0 10px;position:relative;overflow:hidden}
+.tk-bar i{position:absolute;inset:0 auto 0 0;display:block}
+.tk-span{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);letter-spacing:.04em;margin-bottom:9px}
+.tk-what{font-size:13px;color:var(--ink2);line-height:1.68}
+.tk-more{font-family:var(--f-mono);font-size:10.5px;color:var(--c-body);letter-spacing:.06em;margin-top:11px;
+  display:flex;align-items:center;gap:6px}
+.tk-more::after{content:"▾";font-size:9px;transition:transform .18s}
+.tk[open] .tk-more::after{transform:rotate(180deg)}
+.tk-body{padding:0 18px 18px;border-top:1px dashed var(--line);margin-top:2px;padding-top:15px}
+.tk-row{margin-bottom:14px}
+.tk-row .lab{font-family:var(--f-mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--faint);display:block;margin-bottom:5px}
+.tk-row p{font-size:13px;color:var(--ink2);line-height:1.68}
+.tk-row.gap p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.chip{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);background:var(--surface2);
+  border:1px solid var(--line);border-radius:2px;padding:2px 6px;text-decoration:none;white-space:nowrap;
+  transition:color .13s,border-color .13s}
+.chip:hover{color:var(--ink);border-color:var(--line2)}
+.chip .d{color:var(--faint);font-size:9.5px}
+
+/* ---------- patterns ---------- */
+.pats{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;
+  overflow:hidden;margin-top:22px}
+@media(min-width:700px){.pats{grid-template-columns:1fr 1fr}}
+.pat{background:var(--surface);padding:17px 18px}
+.pat h3,.pat h4{font-size:14.5px;margin:0 0 7px;line-height:1.45;font-weight:600}
+.pat p{font-size:12.5px;color:var(--muted);line-height:1.68;margin:0}
+.pat .w{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);line-height:1.85;
+  letter-spacing:.01em;padding-bottom:8px;margin-bottom:8px;border-bottom:1px dashed var(--line)}
+.pat .y{color:var(--ink2)}
+.tbl.big td:first-child{width:23%;color:var(--ink)}
+.tbl.big td:nth-child(2){width:47%}
+.tbl.big tr.hot td{background:var(--c-eval-w)}
+.tbl.big tr.hot td:first-child b{color:var(--c-eval)}
+.note .warn{color:var(--warn);display:block;margin-top:6px}
+
+/* ---------- corpus chart ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 18px}
+.lg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:5px 10px;
+  font-family:var(--f-body);transition:border-color .13s,color .13s}
+.lg:hover{border-color:var(--line2);color:var(--ink)}
+.lg[aria-pressed="false"]{opacity:.4}
+.lg i{width:9px;height:12px;border-radius:1px;display:block;flex:none}
+.lg b{font-family:var(--f-mono);font-size:10.5px;font-weight:500;color:var(--faint);font-variant-numeric:tabular-nums}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:20px 18px 12px;
+  overflow-x:auto}
+.cols{display:flex;align-items:flex-end;gap:10px;min-width:640px}
+.col{flex:1 1 0;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-width:0}
+.col .cells{display:flex;flex-direction:column-reverse;gap:2px}
+.cell{height:8px;border-radius:1px;cursor:pointer;border:0;padding:0;width:100%;display:block;
+  transition:transform .1s,opacity .12s}
+.cell:hover,.cell:focus-visible{transform:scaleX(1.06);outline:none;box-shadow:0 0 0 1px var(--ink)}
+.cell.dim{opacity:.13}
+.col .xl{font-family:var(--f-mono);font-size:10px;color:var(--faint);text-align:center;margin-top:9px;
+  padding-top:7px;border-top:1px solid var(--line);letter-spacing:.02em}
+.col .xn{font-family:var(--f-mono);font-size:10px;color:var(--muted);text-align:center;margin-bottom:5px;
+  font-variant-numeric:tabular-nums}
+.readout{margin-top:14px;border:1px solid var(--line);border-radius:3px;background:var(--surface2);
+  padding:13px 15px;min-height:86px;display:flex;flex-direction:column;gap:5px}
+.readout .rk{font-family:var(--f-mono);font-size:13px;color:var(--ink);font-weight:500}
+.readout .rt{font-size:12.5px;color:var(--ink2);line-height:1.55}
+.readout .rm{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);letter-spacing:.04em;
+  display:flex;flex-wrap:wrap;gap:5px 14px}
+.readout .rm a{color:var(--c-body);text-decoration:none;border-bottom:1px solid transparent}
+.readout .rm a:hover{border-bottom-color:var(--c-body)}
+.readout .empty{font-size:12.5px;color:var(--faint)}
+
+.cited{margin-top:26px;border:1px solid var(--line);border-radius:3px;background:var(--surface);padding:17px 18px}
+.cited h4{margin:0 0 4px;font-size:14.5px}
+.cited ol{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:0}
+.cited li{display:flex;align-items:baseline;gap:10px;font-size:12.5px;padding:6px 0;
+  border-bottom:1px solid var(--line)}
+.cited li:last-child{border-bottom:0}
+.cited .nm{flex:1;font-family:var(--f-mono);font-size:12px;color:var(--ink)}
+.cited .vn{color:var(--muted);font-size:11.5px}
+.cited .ct{font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--ink2);min-width:48px;
+  text-align:right}
+.cited .pv{font-family:var(--f-mono);font-size:10px;color:var(--faint);min-width:56px;text-align:right}
+
+/* ---------- limits ---------- */
+.lim{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;
+  overflow:hidden;margin-top:20px}
+.lim>div{background:var(--surface);padding:14px 17px;display:grid;gap:4px;
+  grid-template-columns:1fr}
+@media(min-width:640px){.lim>div{grid-template-columns:200px 1fr;gap:18px}}
+.lim .k{font-size:13px;font-weight:500;color:var(--ink)}
+.lim .v{font-size:12.5px;color:var(--muted);line-height:1.68}
+.safe{margin-top:18px;border-left:2px solid var(--c-body);background:var(--c-body-w);padding:14px 17px;
+  border-radius:0 2px 2px 0;font-size:13px;color:var(--ink2);line-height:1.7}
+.safe b{color:var(--ink);font-weight:500}
+
+footer{border-top:1px solid var(--line);margin-top:72px;padding-top:24px;font-size:12px;color:var(--faint);
+  display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--f-mono)}
+footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line2)}
+footer a:hover{color:var(--ink)}
+:focus-visible{outline:2px solid var(--c-body);outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="shell">
+<nav class="rail" aria-label="章节">
+  <div class="rail-title">图像编辑五年主线</div>
+  <div class="rail-sub">2021-08 → 2026-08</div>
+  <a href="#s0"><span class="n">00</span><span>先破一个误解</span></a>
+  <a href="#s1"><span class="n">01</span><span>六个转折点</span></a>
+  <a href="#s2"><span class="n">02</span><span>谁站在谁肩上</span></a>
+  <a href="#s3"><span class="n">03</span><span>十五条脉络</span></a>
+  <a href="#s4"><span class="n">04</span><span>反复出现的模式</span></a>
+  <a href="#s5"><span class="n">05</span><span>全领域还没解决的</span></a>
+  <a href="#s6"><span class="n">06</span><span>论文库全景</span></a>
+  <a href="#s7"><span class="n">07</span><span>可信度边界</span></a>
+</nav>
+
+<main>
+
+<header class="hero wrap">
+  <div class="kicker">186 篇深读笔记 · 15 条脉络 · 一条主线</div>
+  <h1>图像编辑五年主线</h1>
+  <p class="thesis">2022–2023 全部精力在「怎么改图」，2024 下沉到骨干和数据，2025 之后上移到「什么算改对了」。
+  主线不是模型变大，而是 <em>控制权一层层往上挪</em>——最后卡在没人能可靠判断一次编辑到底对不对。</p>
+
+  <dl class="meta">
+    <dt>读者</dt><dd>已经知道图像编辑大概在做什么，想搞清楚这五年主线怎么走的、现在该押哪条路</dd>
+    <dt>素材</dt><dd><code>image_edit_paper/</code> 里 186 篇论文的中文深读笔记，本页结论转引自其中的 <code>总结分析.md</code></dd>
+    <dt>最后核对</dt><dd>源文档 2026-08-28 · 本页 2026-08-30</dd>
+  </dl>
+
+  <div class="stats">
+    <div class="stat"><b>186</b><span>本地深读笔记</span></div>
+    <div class="stat"><b>160</b><span>进入本次归纳</span></div>
+    <div class="stat"><b>15</b><span>技术脉络</span></div>
+    <div class="stat"><b>6</b><span>真正的转折点</span></div>
+    <div class="stat"><b>5</b><span>年跨度</span></div>
+  </div>
+</header>
+
+<section id="s0">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">00</span><h2>先破一个误解</h2><span class="c">4 组对照</span></div>
+    <p class="lede">最容易想当然的一个认知错误：只要把图像、指令和文本一起交给更大的统一多模态模型，编辑一致性和评估可靠性就会自动变好。</p>
+  </div>
+  <div class="wrap scrollx" style="margin-top:22px">
+  <table class="tbl">
+    <thead><tr><th style="width:36%">你以为</th><th>实际</th></tr></thead>
+    <tbody>
+      <tr><td class="you">统一序列把源图、文本、目标图放在一起，未编辑区域自然保持不变</td>
+          <td class="real">统一序列仍出现条件泄漏和像素漂移。InternVL-U 必须把理解特征与 VAE 潜变量解耦；Qwen-Image-Layered 要输出多层 RGBA 才能显式隔离编辑区域</td></tr>
+      <tr><td class="you">用更大的 VLM / 奖励模型当裁判，评估与 RL 更可靠</td>
+          <td class="real">EdiVal-Agent 换 OWL-ViT 后人类一致率从 81.3% 跌到 53.67%；banana100 里传统 NR-IQA 给后轮退化图更好或同等分数；T2I-R1 的单一 VQA 奖励会被策略 hack</td></tr>
+      <tr><td class="you">合成编辑数据越多，下游模型越好</td>
+          <td class="real">NoHumansRequired 的基准提升仅 +0.03 且置信区间重叠；OpenGPT-4o-Image 数据从 30k 扩到 40k 已经出现回退</td></tr>
+      <tr><td class="you">强化学习进入生成轨迹后，推理编辑任务会稳定提升</td>
+          <td class="real">reward hacking 只能缓解不能根除，多篇只能靠提前停止、正则或选早 checkpoint 规避；DanceGRPO 只用 HPS 会产出油腻图像</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="wrap"><p class="note" style="margin-top:18px">这些失败指向同一件事：把「更大 / 更统一」当成路线本身，会掩盖真正的瓶颈——<strong>细粒度跨图比较、局部信用分配、表示解耦</strong>。模型规模没有解决编辑里「局部保持 ↔ 语义对齐」的矛盾，只是把问题转移到了奖励设计、评测锚点和数据验证上。</p></div>
+</section>
+
+<section id="s1">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">01</span><h2>六个转折点</h2><span class="c">主线</span></div>
+    <p class="lede">哪些算转折是判断题，不是算出来的。这里的标准是<strong>「之后大部分工作都改了做法」</strong>，而不是「这篇有影响力」——所以只有六条，很多更有名的工作没进来。</p>
+  </div>
+
+  <div class="wrap tps">
+
+    <article class="tp">
+      <div class="tp-head"><span class="tp-when">2022 H2</span>
+        <h3>控制权从外部掩码搬进模型内部的注意力</h3>
+        <span class="tp-by">触发 · <b>Prompt-to-Prompt</b></span></div>
+      <div class="ba">
+        <div class="before"><span class="lab">之前</span><p>SDEdit 加噪重绘、Blended-Latent-Diffusion 在潜空间按掩码混合——编辑区域必须由外部 mask 指定。</p></div>
+        <div class="after"><span class="lab">之后</span><p>注入或引导交叉注意力图。换词、加短语这类语义编辑，不再绑定像素级掩码。</p></div>
+      </div>
+    </article>
+
+    <article class="tp">
+      <div class="tp-head"><span class="tp-when">2022 H2 – 2023 H1</span>
+        <h3>指令编辑从单图反演变成可训练的双条件扩散</h3>
+        <span class="tp-by">触发 · <b>InstructPix2Pix</b></span></div>
+      <div class="ba">
+        <div class="before"><span class="lab">之前</span><p>缺可扩展的成对监督，真实图编辑多是 per-image inversion 或注意力注入。</p></div>
+        <div class="after"><span class="lab">之后</span><p>GPT-3 生成指令 + Stable Diffusion / Prompt-to-Prompt 合成配对图，训练双条件潜扩散。MagicBrush、HIVE、HQ-Edit、UltraEdit 全部沿用并改进这套数据与条件范式。</p></div>
+      </div>
+      <p class="flag"><b>⚠ 六条里证据最薄的一条。</b>素材对指令线明确的后续转折是「真实数据 + MLLM 编码器替代」；把 IP2P 本身列为全局转折，主要靠后续多篇沿用它的范式，而不是素材直说。</p>
+    </article>
+
+    <article class="tp">
+      <div class="tp-head"><span class="tp-when">2023 H2</span>
+        <h3>显式反演可以被绕开</h3>
+        <span class="tp-by">触发 · <b>InfEdit</b> 的 DDCM 虚拟反演</span></div>
+      <div class="ba">
+        <div class="before"><span class="lab">之前</span><p>真实图编辑先做 DDIM 反演，或用 Null-text Inversion 逐步优化空文本嵌入——单图 40–120 秒。</p></div>
+        <div class="after"><span class="lab">之后</span><p>用特殊方差参数让去噪退化成一致性采样，完全跳过显式反演。ReNoise、TurboEdit 等少步模型直接适配，速度进到数秒甚至亚秒。</p></div>
+      </div>
+    </article>
+
+    <article class="tp">
+      <div class="tp-head"><span class="tp-when">2024 H1</span>
+        <h3>骨干从 UNet cross-attention 转向 MM-DiT 的 token 共享注意力</h3>
+        <span class="tp-by">触发 · <b>SD3-RectifiedFlow</b></span></div>
+      <div class="ba">
+        <div class="before"><span class="lab">之前</span><p>ControlNet / IP-Adapter 用特征加法或独立 cross-attention 注入条件，受 UNet 架构限制。</p></div>
+        <div class="after"><span class="lab">之后</span><p>FLUX-Kontext 的序列拼接、Qwen-Image 的双编码，把参考图和文本直接放进同一序列。生成与编辑统一到同一个 token 化底座。</p></div>
+      </div>
+    </article>
+
+    <article class="tp">
+      <div class="tp-head"><span class="tp-when">2025 H1</span>
+        <h3>推理步骤本身成为可训练的策略</h3>
+        <span class="tp-by">触发 · <b>Flow-GRPO</b>、<b>DanceGRPO</b></span></div>
+      <div class="ba">
+        <div class="before"><span class="lab">之前</span><p>GoT 等只把显式推理链当成静态文本条件，喂给扩散模型。</p></div>
+        <div class="after"><span class="lab">之后</span><p>用 SDE 给确定性 ODE / 流匹配采样注入随机探索，GRPO 组内优势训练生成模型。T2I-R1、Meta-CoT 把规划和生成步骤本身当作策略来优化。</p></div>
+      </div>
+    </article>
+
+    <article class="tp">
+      <div class="tp-head"><span class="tp-when">2025 H2 – 2026 H1</span>
+        <h3>评估器自己被证明不可信</h3>
+        <span class="tp-by">触发 · <b>EdiVal-Agent</b>、<b>banana100</b></span></div>
+      <div class="ba">
+        <div class="before"><span class="lab">之前</span><p>用整图 VLM 开放打分，或传统 NR-IQA 指标度量编辑质量。</p></div>
+        <div class="after"><span class="lab">之后</span><p>引入检测框 ROI 二值判断、HDR 开/关灯真值、场景图事实网格这类可验证锚点，把「真伪」和「好不好」分开测量。</p></div>
+      </div>
+      <p class="flag"><b>这条不是前五条直接触发的。</b>是上游方法大量产出「看起来对」的结果之后，评测端自己暴露出检测器可替换、NR-IQA 会给反向分数的问题。</p>
+    </article>
+
+  </div>
+</section>
+
+<section id="s2">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">02</span><h2>谁站在谁肩上</h2><span class="c">四层结构</span></div>
+    <p class="lede">十五条脉络不是并列的十五个话题，是四层。<strong>越靠上的层越晚成熟，也越是现在的主战场。</strong></p>
+  </div>
+
+  <figure class="bleed">
+  <svg viewBox="0 0 920 588" role="img" aria-label="图像编辑研究的四层结构：最上是评测与奖励模型，向下依次是推理与强化学习、编辑方法本体、生成骨干与编辑数据工程；上层定义什么算编辑对并变成训练信号，下层承载方法运行">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+      </marker>
+      <marker id="arE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="var(--c-eval)"/>
+      </marker>
+    </defs>
+
+    <!-- LAYER A : eval + reward -->
+    <rect x="34" y="16" width="586" height="92" rx="3" fill="var(--c-eval-w)" stroke="var(--c-eval)" stroke-width="1.5"/>
+    <text x="50" y="40" class="svgm" font-size="12" fill="var(--c-eval)" letter-spacing="1.4">A · 评测与奖励</text>
+    <text x="50" y="66" font-size="15.5" font-weight="600" fill="currentColor">15 新一代评测　　11 奖励模型与在线 RL</text>
+    <text x="50" y="90" class="svgm" font-size="11.5" fill="var(--c-eval)" opacity=".85">EditBench → KRIS-Bench → PICABench　·　EditScore / EditReward</text>
+
+    <line x1="327" y1="108" x2="327" y2="158" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"/>
+    <text x="341" y="132" font-size="12.5" fill="currentColor" opacity=".72">定义什么算「编辑对」，并把它变成可优化的分数</text>
+
+    <!-- LAYER B : reasoning + RL -->
+    <rect x="34" y="162" width="586" height="80" rx="3" fill="var(--c-rl-w)" stroke="var(--c-rl)" stroke-width="1.5"/>
+    <text x="50" y="186" class="svgm" font-size="12" fill="var(--c-rl)" letter-spacing="1.4">B · 推理与强化学习</text>
+    <text x="50" y="211" font-size="15.5" font-weight="600" fill="currentColor">10 推理·RL·评测　　12 先想后做 think-then-edit</text>
+    <text x="50" y="233" class="svgm" font-size="11.5" fill="var(--c-rl)" opacity=".85">Flow-GRPO → Edit-R1 → ThinkRL-Edit</text>
+
+    <line x1="327" y1="242" x2="327" y2="286" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)"/>
+    <text x="341" y="269" font-size="12.5" fill="currentColor" opacity=".72">训练信号</text>
+
+    <!-- LAYER C : the methods -->
+    <rect x="34" y="290" width="586" height="120" rx="3" fill="var(--c-body-w)" stroke="var(--c-body)" stroke-width="1.5"/>
+    <text x="50" y="314" class="svgm" font-size="12" fill="var(--c-body)" letter-spacing="1.4">C · 编辑方法本体　2022–2024 的主战场</text>
+    <text x="50" y="341" font-size="14.5" fill="currentColor">1 训练-free　2 反演精度　4 条件控制　5 个性化　6 局部/对象　7 拖拽点控</text>
+    <text x="50" y="368" font-size="14.5" fill="currentColor">3 指令式编辑　→　8 统一多模态　→　14 2025H2–2026 编辑与统一模型</text>
+    <text x="50" y="394" class="svgm" font-size="11.5" fill="var(--c-body)" opacity=".85">112 篇　占本次归纳的 70%</text>
+
+    <path d="M180 410 L180 440" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)" fill="none"/>
+    <text x="192" y="431" font-size="12" fill="currentColor" opacity=".72">要成对训练数据</text>
+    <path d="M470 410 L470 440" stroke="currentColor" stroke-width="1.4" marker-end="url(#ar)" fill="none"/>
+    <text x="482" y="431" font-size="12" fill="currentColor" opacity=".72">跑在骨干上</text>
+
+    <!-- LAYER D : data + backbone -->
+    <rect x="34" y="444" width="278" height="94" rx="3" fill="var(--c-stack-w)" stroke="var(--c-stack)" stroke-width="1.5"/>
+    <text x="50" y="468" class="svgm" font-size="12" fill="var(--c-stack)" letter-spacing="1.4">D · 编辑数据工程</text>
+    <text x="50" y="492" font-size="14.5" font-weight="600" fill="currentColor">13 三元组从哪来</text>
+    <text x="50" y="515" class="svgm" font-size="11" fill="var(--c-stack)" opacity=".85">IP2P → UltraEdit →</text>
+    <text x="50" y="531" class="svgm" font-size="11" fill="var(--c-stack)" opacity=".85">NoHumansRequired</text>
+
+    <rect x="342" y="444" width="278" height="94" rx="3" fill="var(--c-stack-w)" stroke="var(--c-stack)" stroke-width="1.5"/>
+    <text x="358" y="468" class="svgm" font-size="12" fill="var(--c-stack)" letter-spacing="1.4">D · 生成骨干</text>
+    <text x="358" y="492" font-size="14.5" font-weight="600" fill="currentColor">9 方法赖以运行的底座</text>
+    <text x="358" y="515" class="svgm" font-size="11" fill="var(--c-stack)" opacity=".85">LDM → PixArt → SD3/RF →</text>
+    <text x="358" y="531" class="svgm" font-size="11" fill="var(--c-stack)" opacity=".85">FLUX / Qwen-Image</text>
+
+    <text x="342" y="560" font-size="12" fill="currentColor" opacity=".62">↑ 换骨干 = 全线重新标定</text>
+
+    <!-- feedback : eval failures flow back to data -->
+    <path d="M34 62 L16 62 L16 490 L30 490" stroke="var(--c-eval)" stroke-width="1.3" fill="none"
+      stroke-dasharray="4 3" marker-end="url(#arE)"/>
+    <text x="24" y="300" font-size="11.5" fill="var(--c-eval)" transform="rotate(-90 24 300)" text-anchor="middle">失败样本回流成偏好负例</text>
+
+    <!-- era brackets -->
+    <path d="M660 296 L672 296 L672 404 L660 404" stroke="var(--c-body)" stroke-width="1.5" fill="none"/>
+    <text x="684" y="341" class="svgm" font-size="12" fill="var(--c-body)">2022–2023</text>
+    <text x="684" y="360" font-size="12.5" fill="currentColor" opacity=".72">全部精力在中间层</text>
+
+    <path d="M660 450 L672 450 L672 532 L660 532" stroke="var(--c-stack)" stroke-width="1.5" fill="none"/>
+    <text x="684" y="484" class="svgm" font-size="12" fill="var(--c-stack)">2024</text>
+    <text x="684" y="503" font-size="12.5" fill="currentColor" opacity=".72">下沉到底下两层</text>
+
+    <path d="M660 22 L672 22 L672 236 L660 236" stroke="var(--c-eval)" stroke-width="1.5" fill="none"/>
+    <text x="684" y="120" class="svgm" font-size="12" fill="var(--c-eval)">2025 之后</text>
+    <text x="684" y="139" font-size="12.5" fill="currentColor" opacity=".72">上移到顶上两层</text>
+  </svg>
+  <figcaption>四层之间是「上层定义目标、下层提供能力」的关系，不是时间顺序。上面两层直到 2025 才大规模出现，但一旦出现就反过来决定下面三层怎么训——评测端定义什么算编辑对，奖励模型把这个定义变成可优化的分数，失败样本再回流成偏好负例进数据线。换生成骨干会让整条线的条件注入方式全部重新标定，2024 年 UNet→DiT 那次就是。</figcaption>
+  </figure>
+
+  <div class="wrap era">
+    <div><span class="y">2022 – 2023</span><p>怎么改图。注意力控制、反演精度、条件注入、局部编辑，全在中间层打。</p></div>
+    <div><span class="y">2024</span><p>下沉。骨干换成 MM-DiT，数据线开始工业化，编辑方法反而没有大动作。</p></div>
+    <div><span class="y">2025 之后</span><p>上移。奖励模型和评测成主战场——因为方法已经能产出「看起来对」的结果了。</p></div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">03</span><h2>十五条脉络</h2><span class="c">160 篇 · 点开看论文</span></div>
+    <p class="lede">每条线先说它独有的技术矛盾，再说转折点落在哪一篇，最后是这条线自己承认还没解决的。脉络划分是人工定的，不是聚类出来的——有些论文本可以跨线。</p>
+  </div>
+
+  <div class="tracks">
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">01</span><span class="tk-name">训练-free 扩散编辑：靠注意力和反演改图</span><span class="tk-n">14 篇</span></div>
+        <div class="tk-bar"><i style="width:70%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2021-08 ~ 2026-03　·　C 编辑方法本体</div>
+        <p class="tk-what">不训练、不微调预训练扩散模型，编辑信号只能从模型内部的注意力图、中间特征或反演轨迹里借。这些信号本来就不是为编辑优化的。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>Prompt-to-Prompt</b>——交叉注意力图已经编码了词与像素的空间绑定，控制权可以从外部掩码搬进模型内部表示。此后大多数方法都围绕注意力图的注入、引导或跨图混合展开。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>注意力图分辨率受 U-Net 瓶颈限制，编不了精细纹理和像素级边界；空间移动、计数、未见姿态直接失败——方法超不过基座能力。</p></div>
+        <div class="tk-row"><span class="lab">14 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2108.01073" target="_blank" rel="noopener"><span class="d">2021-08</span> SDEdit</a><a class="chip" href="https://arxiv.org/abs/2206.02779" target="_blank" rel="noopener"><span class="d">2022-06</span> Blended-Latent-Diffusion</a><a class="chip" href="https://arxiv.org/abs/2208.01626" target="_blank" rel="noopener"><span class="d">2022-08</span> Prompt-to-Prompt</a><a class="chip" href="https://arxiv.org/abs/2210.09276" target="_blank" rel="noopener"><span class="d">2022-10</span> Imagic</a><a class="chip" href="https://arxiv.org/abs/2210.11427" target="_blank" rel="noopener"><span class="d">2022-10</span> DiffEdit</a><a class="chip" href="https://arxiv.org/abs/2211.12572" target="_blank" rel="noopener"><span class="d">2022-11</span> Plug-and-Play</a><a class="chip" href="https://arxiv.org/abs/2302.03027" target="_blank" rel="noopener"><span class="d">2023-02</span> pix2pix-zero</a><a class="chip" href="https://arxiv.org/abs/2304.08465" target="_blank" rel="noopener"><span class="d">2023-04</span> MasaCtrl</a><a class="chip" href="https://arxiv.org/abs/2306.00986" target="_blank" rel="noopener"><span class="d">2023-06</span> Self-Guidance</a><a class="chip" href="https://arxiv.org/abs/2311.03335" target="_blank" rel="noopener"><span class="d">2023-11</span> Cross-Image-Attention</a><a class="chip" href="https://arxiv.org/abs/2311.16711" target="_blank" rel="noopener"><span class="d">2023-11</span> LEDITSpp</a><a class="chip" href="https://arxiv.org/abs/2312.02133" target="_blank" rel="noopener"><span class="d">2023-12</span> StyleAligned</a><a class="chip" href="https://arxiv.org/abs/2411.07232" target="_blank" rel="noopener"><span class="d">2024-11</span> Add-it</a><a class="chip" href="https://arxiv.org/abs/2603.29736" target="_blank" rel="noopener"><span class="d">2026-03</span> editing-manifold</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">02</span><span class="tk-name">反演精度：真实图片怎么无损映回噪声</span><span class="tk-n">9 篇</span></div>
+        <div class="tk-bar"><i style="width:45%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2022-11 ~ 2026-07　·　C 编辑方法本体</div>
+        <p class="tk-what">把真实照片精确映回模型能重建的噪声潜变量。保真、可编辑、速度三者难以同时满足。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>InfEdit</b> 的 DDCM 虚拟反演——初始样本已知时，选特殊方差参数让去噪退化成一致性采样，可以完全绕开显式反演。另一处是 RF 系列把反演修正从扩散迁到 Rectified Flow。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>VAE 压缩是硬上界：Null-text Inversion、EDICT、DirectEdit 都指出重建质量超不过自编码器本身。高 CFG 下哪个 prompt-seed 对会失败，至今无法提前预测。</p></div>
+        <div class="tk-row"><span class="lab">9 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2211.09794" target="_blank" rel="noopener"><span class="d">2022-11</span> Null-text-Inversion</a><a class="chip" href="https://arxiv.org/abs/2211.12446" target="_blank" rel="noopener"><span class="d">2022-11</span> EDICT</a><a class="chip" href="https://arxiv.org/abs/2312.04965" target="_blank" rel="noopener"><span class="d">2023-12</span> InfEdit</a><a class="chip" href="https://arxiv.org/abs/2403.14602" target="_blank" rel="noopener"><span class="d">2024-03</span> ReNoise</a><a class="chip" href="https://arxiv.org/abs/2408.00735" target="_blank" rel="noopener"><span class="d">2024-08</span> TurboEdit</a><a class="chip" href="https://arxiv.org/abs/2410.10792" target="_blank" rel="noopener"><span class="d">2024-10</span> RF-Inversion</a><a class="chip" href="https://arxiv.org/abs/2411.04746" target="_blank" rel="noopener"><span class="d">2024-11</span> RF-Solver-Edit</a><a class="chip" href="https://arxiv.org/abs/2605.02417" target="_blank" rel="noopener"><span class="d">2026-05</span> directedit</a><a class="chip" href="https://arxiv.org/abs/2607.04731" target="_blank" rel="noopener"><span class="d">2026-07</span> cfg-inversion-fail</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">03</span><span class="tk-name">指令式编辑：说人话改图，以及数据从哪来</span><span class="tk-n">18 篇</span></div>
+        <div class="tk-bar"><i style="width:90%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2022-11 ~ 2026-07　·　C 编辑方法本体</div>
+        <p class="tk-what">只给一句话和一张图，不给 mask、不做 per-image inversion，模型要同时做到「听懂改什么」和「只改该改的」。而真实成对监督数据稀缺。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p>两处。一是从纯合成数据转向真实锚点、人工标注与专家过滤管线（MagicBrush / UltraEdit / OmniEdit）——早期失败被反复归因到数据分布而不只是模型容量；二是从 CLIP 文本编码器转向 MLLM 条件建模。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>计数、空间推理、局部 grounding；自动指标与人类偏好错位——CLIP 相似度会奖励保守编辑，方向相似度在 HQ-Edit 里与人评负相关。</p></div>
+        <div class="tk-row"><span class="lab">18 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2211.09800" target="_blank" rel="noopener"><span class="d">2022-11</span> InstructPix2Pix</a><a class="chip" href="https://arxiv.org/abs/2303.09618" target="_blank" rel="noopener"><span class="d">2023-03</span> HIVE</a><a class="chip" href="https://arxiv.org/abs/2306.10012" target="_blank" rel="noopener"><span class="d">2023-06</span> MagicBrush</a><a class="chip" href="https://arxiv.org/abs/2309.03895" target="_blank" rel="noopener"><span class="d">2023-09</span> InstructDiffusion</a><a class="chip" href="https://arxiv.org/abs/2309.17102" target="_blank" rel="noopener"><span class="d">2023-09</span> MGIE</a><a class="chip" href="https://arxiv.org/abs/2311.10089" target="_blank" rel="noopener"><span class="d">2023-11</span> Emu-Edit</a><a class="chip" href="https://arxiv.org/abs/2312.06739" target="_blank" rel="noopener"><span class="d">2023-12</span> SmartEdit</a><a class="chip" href="https://arxiv.org/abs/2401.01952" target="_blank" rel="noopener"><span class="d">2024-01</span> Instruct-Imagen</a><a class="chip" href="https://arxiv.org/abs/2404.09990" target="_blank" rel="noopener"><span class="d">2024-04</span> HQ-Edit</a><a class="chip" href="https://arxiv.org/abs/2405.04007" target="_blank" rel="noopener"><span class="d">2024-05</span> SEED-Data-Edit</a><a class="chip" href="https://arxiv.org/abs/2407.05282" target="_blank" rel="noopener"><span class="d">2024-07</span> UltraEdit</a><a class="chip" href="https://arxiv.org/abs/2411.07199" target="_blank" rel="noopener"><span class="d">2024-11</span> OmniEdit</a><a class="chip" href="https://arxiv.org/abs/2411.06686" target="_blank" rel="noopener"><span class="d">2024-11</span> SeedEdit</a><a class="chip" href="https://arxiv.org/abs/2411.15738" target="_blank" rel="noopener"><span class="d">2024-11</span> AnyEdit</a><a class="chip" href="https://arxiv.org/abs/2504.17761" target="_blank" rel="noopener"><span class="d">2025-04</span> Step1X-Edit</a><a class="chip" href="https://arxiv.org/abs/2504.20690" target="_blank" rel="noopener"><span class="d">2025-04</span> ICEdit</a><a class="chip" href="https://arxiv.org/abs/2506.05083" target="_blank" rel="noopener"><span class="d">2025-06</span> SeedEdit3</a><a class="chip" href="https://arxiv.org/abs/2607.07051" target="_blank" rel="noopener"><span class="d">2026-07</span> implicit-preservation</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">04</span><span class="tk-name">条件控制：结构、身份、参考图怎么注入</span><span class="tk-n">14 篇</span></div>
+        <div class="tk-bar"><i style="width:70%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2023-02 ~ 2026-04　·　C 编辑方法本体</div>
+        <p class="tk-what">结构图、身份参考图、多参考 token 这些条件进不了文本序列，必须在冻结主干的前提下另开表示通道。空间对齐与语义对齐会互相压制。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p>两个。一是 UNet→DiT 迁移让特征加法失效，<b>OminiControl</b> 把条件变成 token 才重开统一接口；二是多条件组合暴露串扰和推理成本，EasyControl 的 KV Cache 与 care-edit 的稀疏专家指向同一判断——条件不能只被注入，还要被隔离或按需激活。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>身份保真与文本可控的权衡：IP-Adapter 明确达不到 DreamBooth 的主体一致，InstantID 的人脸嵌入耦合属性使编辑困难。DiT 条件 token 的延迟/显存没有通用压缩方案。</p></div>
+        <div class="tk-row"><span class="lab">14 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2302.05543" target="_blank" rel="noopener"><span class="d">2023-02</span> ControlNet</a><a class="chip" href="https://arxiv.org/abs/2302.08453" target="_blank" rel="noopener"><span class="d">2023-02</span> T2I-Adapter</a><a class="chip" href="https://arxiv.org/abs/2308.06721" target="_blank" rel="noopener"><span class="d">2023-08</span> IP-Adapter</a><a class="chip" href="https://arxiv.org/abs/2311.12092" target="_blank" rel="noopener"><span class="d">2023-11</span> Concept-Sliders</a><a class="chip" href="https://arxiv.org/abs/2312.04461" target="_blank" rel="noopener"><span class="d">2023-12</span> PhotoMaker</a><a class="chip" href="https://arxiv.org/abs/2401.07519" target="_blank" rel="noopener"><span class="d">2024-01</span> InstantID</a><a class="chip" href="https://arxiv.org/abs/2410.23775" target="_blank" rel="noopener"><span class="d">2024-10</span> In-Context-LoRA</a><a class="chip" href="https://arxiv.org/abs/2411.15098" target="_blank" rel="noopener"><span class="d">2024-11</span> OminiControl</a><a class="chip" href="https://arxiv.org/abs/2501.02487" target="_blank" rel="noopener"><span class="d">2025-01</span> ACEpp</a><a class="chip" href="https://arxiv.org/abs/2503.07027" target="_blank" rel="noopener"><span class="d">2025-03</span> EasyControl</a><a class="chip" href="https://arxiv.org/abs/2504.02160" target="_blank" rel="noopener"><span class="d">2025-04</span> UNO</a><a class="chip" href="https://arxiv.org/abs/2504.16915" target="_blank" rel="noopener"><span class="d">2025-04</span> DreamO</a><a class="chip" href="https://arxiv.org/abs/2603.08589" target="_blank" rel="noopener"><span class="d">2026-03</span> care-edit</a><a class="chip" href="https://arxiv.org/abs/2604.26341" target="_blank" rel="noopener"><span class="d">2026-04</span> spatialfusion</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">05</span><span class="tk-name">个性化与主体保持</span><span class="tk-n">4 篇</span></div>
+        <div class="tk-bar"><i style="width:20%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2022-08 ~ 2026-05　·　C 编辑方法本体</div>
+        <p class="tk-what">用少量参考图把主体变成可被文本调用的条件，同时不破坏原有的文本跟随能力和类别多样性。身份保持与可编辑性共享同一组参数。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>DreamBooth</b> 把防遗忘显式写成 PPL 正则——问题从「学一个主体」变成「改模型但维持类别先验」的约束优化。Custom-Diffusion 随后证明 cross-attention 的 KV 是这个约束下最划算的更新点。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>两个以上新概念不稳定（cat/dog 的 attention map 高度重叠）；严格形状与高频身份保持不足，达不到真实图像成对相似度水平。</p></div>
+        <div class="tk-row"><span class="lab">4 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2208.01618" target="_blank" rel="noopener"><span class="d">2022-08</span> Textual-Inversion</a><a class="chip" href="https://arxiv.org/abs/2208.12242" target="_blank" rel="noopener"><span class="d">2022-08</span> DreamBooth</a><a class="chip" href="https://arxiv.org/abs/2212.04488" target="_blank" rel="noopener"><span class="d">2022-12</span> Custom-Diffusion</a><a class="chip" href="https://arxiv.org/abs/2605.20807" target="_blank" rel="noopener"><span class="d">2026-05</span> decompose-subject</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">06</span><span class="tk-name">局部与对象级：抠图、补全、搬物体</span><span class="tk-n">12 篇</span></div>
+        <div class="tk-bar"><i style="width:60%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2022-11 ~ 2026-06　·　C 编辑方法本体</div>
+        <p class="tk-what">区域内按条件改、区域外像素级不变、边界自然融合——三个要求互相牵制，还会集中出现复制粘贴退化、条件被上下文淹没、编辑泄漏三类失败。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p>不是单一模型，而是从「改主干」转向<b>冻结主干 + 可训练条件分支 / 任务提示</b>，把 where（掩码、边缘、参考位置）和 what（文本、身份、任务）分开注入。SAM 把 where 从手工掩码变成模型交互，但没解决条件融合。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>细粒度计数、形状、文字/logo 渲染系统性失败；多区域、多主体或复合指令同时编辑基本没做——多数方法还是单 mask 假设。</p></div>
+        <div class="tk-row"><span class="lab">12 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2211.13227" target="_blank" rel="noopener"><span class="d">2022-11</span> Paint-by-Example</a><a class="chip" href="https://arxiv.org/abs/2212.06909" target="_blank" rel="noopener"><span class="d">2022-12</span> Imagen-Editor-EditBench</a><a class="chip" href="https://arxiv.org/abs/2304.02643" target="_blank" rel="noopener"><span class="d">2023-04</span> SAM</a><a class="chip" href="https://arxiv.org/abs/2304.06790" target="_blank" rel="noopener"><span class="d">2023-04</span> Inpaint-Anything</a><a class="chip" href="https://arxiv.org/abs/2307.09481" target="_blank" rel="noopener"><span class="d">2023-07</span> AnyDoor</a><a class="chip" href="https://arxiv.org/abs/2312.03594" target="_blank" rel="noopener"><span class="d">2023-12</span> PowerPaint</a><a class="chip" href="https://arxiv.org/abs/2403.06976" target="_blank" rel="noopener"><span class="d">2024-03</span> BrushNet</a><a class="chip" href="https://arxiv.org/abs/2406.07547" target="_blank" rel="noopener"><span class="d">2024-06</span> MimicBrush</a><a class="chip" href="https://arxiv.org/abs/2411.09703" target="_blank" rel="noopener"><span class="d">2024-11</span> MagicQuill</a><a class="chip" href="https://arxiv.org/abs/2504.15009" target="_blank" rel="noopener"><span class="d">2025-04</span> Insert-Anything</a><a class="chip" href="https://arxiv.org/abs/2604.23763" target="_blank" rel="noopener"><span class="d">2026-04</span> edit-where-you-mean</a><a class="chip" href="https://arxiv.org/abs/2606.19195" target="_blank" rel="noopener"><span class="d">2026-06</span> moebius-inpainting</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">07</span><span class="tk-name">拖拽与点控编辑</span><span class="tk-n">4 篇</span></div>
+        <div class="tk-bar"><i style="width:20%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2023-05 ~ 2024-02　·　C 编辑方法本体</div>
+        <p class="tk-what">用户只给稀疏的手柄点→目标点位移，但生成模型内部没有天然的像素坐标对应。文本编辑表达不了「把这个局部挪到那里」。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>DragonDiffusion</b>——把目标从「跟踪手柄点、优化 latent」改写成「改变中间特征对应 + 沿采样路径做梯度引导」，拖拽不再绑定 GAN inversion 和逐点优化，任务扩展到移动、缩放、外观替换。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>亚像素精度不可达；单图准备加推理十几到几十秒，做不到实时交互。<b>这条线 2026 年在 1123 篇候选里没有一篇够 4 分</b>——可能真沉寂了，也可能是检索式没覆盖到。</p></div>
+        <div class="tk-row"><span class="lab">4 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2305.10973" target="_blank" rel="noopener"><span class="d">2023-05</span> DragGAN</a><a class="chip" href="https://arxiv.org/abs/2306.14435" target="_blank" rel="noopener"><span class="d">2023-06</span> DragDiffusion</a><a class="chip" href="https://arxiv.org/abs/2307.02421" target="_blank" rel="noopener"><span class="d">2023-07</span> DragonDiffusion</a><a class="chip" href="https://arxiv.org/abs/2402.02583" target="_blank" rel="noopener"><span class="d">2024-02</span> DiffEditor</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">08</span><span class="tk-name">统一多模态：理解与生成同一个模型</span><span class="tk-n">20 篇</span></div>
+        <div class="tk-bar"><i style="width:100%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2023-12 ~ 2026-06　·　C 编辑方法本体</div>
+        <p class="tk-what">同一批参数同时做理解与生成。理解要语义抽象，生成要连续潜变量或离散码本；离散文本、连续视觉表示、不同训练目标在同一个 Transformer 里抢容量。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p>不在单一模型，而在 <b>Transfusion</b> 与 <b>BLIP3-o</b> 确立的组合——受控比较显示连续 VAE/CLIP 特征配扩散/流匹配，比把图像离散成 token 更有语义和效率优势。随后 MetaQuery、OmniGen2、UniWorld-V1 把理解骨干冻结、只训生成接口。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>理解与生成的梯度/容量冲突未消除，共享参数下生成梯度可比理解梯度大一个数量级；OCR 与文本渲染受编码器和分辨率限制。</p></div>
+        <div class="tk-row"><span class="lab">20 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2312.13286" target="_blank" rel="noopener"><span class="d">2023-12</span> Emu2</a><a class="chip" href="https://arxiv.org/abs/2404.02905" target="_blank" rel="noopener"><span class="d">2024-04</span> VAR</a><a class="chip" href="https://arxiv.org/abs/2404.14396" target="_blank" rel="noopener"><span class="d">2024-04</span> SEED-X</a><a class="chip" href="https://arxiv.org/abs/2405.09818" target="_blank" rel="noopener"><span class="d">2024-05</span> Chameleon</a><a class="chip" href="https://arxiv.org/abs/2408.11039" target="_blank" rel="noopener"><span class="d">2024-08</span> Transfusion</a><a class="chip" href="https://arxiv.org/abs/2408.12528" target="_blank" rel="noopener"><span class="d">2024-08</span> Show-o</a><a class="chip" href="https://arxiv.org/abs/2409.11340" target="_blank" rel="noopener"><span class="d">2024-09</span> OmniGen</a><a class="chip" href="https://arxiv.org/abs/2409.18869" target="_blank" rel="noopener"><span class="d">2024-09</span> Emu3</a><a class="chip" href="https://arxiv.org/abs/2412.07774" target="_blank" rel="noopener"><span class="d">2024-12</span> UniReal</a><a class="chip" href="https://arxiv.org/abs/2501.17811" target="_blank" rel="noopener"><span class="d">2025-01</span> Janus-Pro</a><a class="chip" href="https://arxiv.org/abs/2504.06256" target="_blank" rel="noopener"><span class="d">2025-04</span> MetaQuery</a><a class="chip" href="https://arxiv.org/abs/2505.09568" target="_blank" rel="noopener"><span class="d">2025-05</span> BLIP3-o</a><a class="chip" href="https://arxiv.org/abs/2505.14683" target="_blank" rel="noopener"><span class="d">2025-05</span> BAGEL</a><a class="chip" href="https://arxiv.org/abs/2506.03147" target="_blank" rel="noopener"><span class="d">2025-06</span> UniWorld-V1</a><a class="chip" href="https://arxiv.org/abs/2506.15564" target="_blank" rel="noopener"><span class="d">2025-06</span> Show-o2</a><a class="chip" href="https://arxiv.org/abs/2506.18871" target="_blank" rel="noopener"><span class="d">2025-06</span> OmniGen2</a><a class="chip" href="https://arxiv.org/abs/2506.23044" target="_blank" rel="noopener"><span class="d">2025-06</span> Ovis-U1</a><a class="chip" href="https://arxiv.org/abs/2601.02204" target="_blank" rel="noopener"><span class="d">2026-01</span> nextflow</a><a class="chip" href="https://arxiv.org/abs/2603.17044" target="_blank" rel="noopener"><span class="d">2026-03</span> ug-fight-dpo</a><a class="chip" href="https://arxiv.org/abs/2606.13289" target="_blank" rel="noopener"><span class="d">2026-06</span> hydra-x</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">09</span><span class="tk-name">生成骨干：编辑方法赖以运行的底座</span><span class="tk-n">10 篇</span></div>
+        <div class="tk-bar"><i style="width:50%;background:var(--c-stack)"></i></div>
+        <div class="tk-span">2021-12 ~ 2026-05　·　D 骨干与数据</div>
+        <p class="tk-what">骨干为了降采样成本、提文本跟随，不断压缩表示、做全局去噪、转向大 Transformer——而这些手段恰好削弱编辑需要的像素保真、局部不泄漏和多轮一致。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>SD3-RectifiedFlow</b>——MM-DiT 的双流 token 共享注意力替掉 UNet 的固定 cross-attention，参考图、文本、目标图从此能进同一个序列。此前的 LDM/CFG/PixArt 只是降本或改条件注入，还没把生成和编辑统一到同一 token 化底座。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>全局去噪导致编辑泄漏与多轮漂移——FLUX-Kontext 六轮后出现身份漂移和 artifacts；效率主张缺统一硬件口径，多数论文不披露单图延迟。</p></div>
+        <div class="tk-row"><span class="lab">10 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2112.10752" target="_blank" rel="noopener"><span class="d">2021-12</span> Latent-Diffusion</a><a class="chip" href="https://arxiv.org/abs/2207.12598" target="_blank" rel="noopener"><span class="d">2022-07</span> Classifier-Free-Guidance</a><a class="chip" href="https://arxiv.org/abs/2310.00426" target="_blank" rel="noopener"><span class="d">2023-09</span> PixArt-alpha</a><a class="chip" href="https://arxiv.org/abs/2403.03206" target="_blank" rel="noopener"><span class="d">2024-03</span> SD3-RectifiedFlow</a><a class="chip" href="https://arxiv.org/abs/2505.22705" target="_blank" rel="noopener"><span class="d">2025-05</span> HiDream-I1</a><a class="chip" href="https://arxiv.org/abs/2506.15742" target="_blank" rel="noopener"><span class="d">2025-06</span> FLUX-Kontext</a><a class="chip" href="https://arxiv.org/abs/2508.02324" target="_blank" rel="noopener"><span class="d">2025-08</span> Qwen-Image</a><a class="chip" href="https://arxiv.org/abs/2602.09268" target="_blank" rel="noopener"><span class="d">2026-02</span> rethink-global-text</a><a class="chip" href="https://arxiv.org/abs/2604.24763" target="_blank" rel="noopener"><span class="d">2026-04</span> tuna-2</a><a class="chip" href="https://arxiv.org/abs/2605.10859" target="_blank" rel="noopener"><span class="d">2026-05</span> masked-gen-transformer</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">10</span><span class="tk-name">推理、强化学习与评测</span><span class="tk-n">8 篇</span></div>
+        <div class="tk-bar"><i style="width:40%;background:var(--c-rl)"></i></div>
+        <div class="tk-span">2025-03 ~ 2025-05　·　B 推理与 RL</div>
+        <p class="tk-what">编辑不能只停在「直接执行指令」，得先完成语义、空间、知识推理再落到像素。但推理是隐式的，优化目标只能建在生成结果和人类偏好上。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>Flow-GRPO</b> / <b>DanceGRPO</b> 用 SDE 把确定性 ODE / 流匹配采样改造成可随机 rollout 的策略——推理规划或生成步骤第一次成为可训练策略，而不再只是喂给扩散模型的静态文本。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>奖励模型可靠性：T2I-R1 的单一 VQA 奖励会被 hack，DanceGRPO 只用 HPS 会产出油腻图像；自动评测相关性上限低（Complex-Edit 的 IF/IP/PQ 最高约 0.53/0.23）。</p></div>
+        <div class="tk-row"><span class="lab">8 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2503.10639" target="_blank" rel="noopener"><span class="d">2025-03</span> GoT</a><a class="chip" href="https://arxiv.org/abs/2504.02826" target="_blank" rel="noopener"><span class="d">2025-04</span> RISEBench</a><a class="chip" href="https://arxiv.org/abs/2504.13143" target="_blank" rel="noopener"><span class="d">2025-04</span> Complex-Edit</a><a class="chip" href="https://arxiv.org/abs/2505.00703" target="_blank" rel="noopener"><span class="d">2025-05</span> T2I-R1</a><a class="chip" href="https://arxiv.org/abs/2505.05470" target="_blank" rel="noopener"><span class="d">2025-05</span> Flow-GRPO</a><a class="chip" href="https://arxiv.org/abs/2505.07818" target="_blank" rel="noopener"><span class="d">2025-05</span> DanceGRPO</a><a class="chip" href="https://arxiv.org/abs/2505.16707" target="_blank" rel="noopener"><span class="d">2025-05</span> KRIS-Bench</a><a class="chip" href="https://arxiv.org/abs/2505.20275" target="_blank" rel="noopener"><span class="d">2025-05</span> ImgEdit</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">11</span><span class="tk-name">奖励模型与在线 RL（2025H2 起）</span><span class="tk-n">9 篇</span></div>
+        <div class="tk-bar"><i style="width:45%;background:var(--c-eval)"></i></div>
+        <div class="tk-span">2025-09 ~ 2026-08　·　A 评测与奖励</div>
+        <p class="tk-what">策略优化器已经不是瓶颈。奖励信号要同时做细粒度跨图比较、绝对质量校准、低方差反馈，还不能在训练中被策略反向利用。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>EditScore</b> / <b>EditReward</b> 之后——问题从「用不用 VLM」转向「跨图比较与伪影盲区」。SpatialReward 和 reward-hacking-t2i 把失败模式显式化后，路线分化成两条：给奖励加空间/伪影正则，或干脆放弃专用编辑奖励，转向冻结似然与 T2I 迁移。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>reward hacking 只能缓解不能根除，多篇只能靠提前停止、正则或选早 checkpoint 规避；细粒度执行与像素级身份保持无法被全局标量完整编码，区域级信用分配仍是 future work。</p></div>
+        <div class="tk-row"><span class="lab">9 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2509.23909" target="_blank" rel="noopener"><span class="d">2025-09</span> EditScore</a><a class="chip" href="https://arxiv.org/abs/2509.26346" target="_blank" rel="noopener"><span class="d">2025-09</span> EditReward</a><a class="chip" href="https://arxiv.org/abs/2510.16888" target="_blank" rel="noopener"><span class="d">2025-10</span> Edit-R1-UniWorld-V2</a><a class="chip" href="https://arxiv.org/abs/2601.03467" target="_blank" rel="noopener"><span class="d">2026-01</span> ThinkRL-Edit</a><a class="chip" href="https://arxiv.org/abs/2601.03468" target="_blank" rel="noopener"><span class="d">2026-01</span> reward-hacking-t2i</a><a class="chip" href="https://arxiv.org/abs/2602.07458" target="_blank" rel="noopener"><span class="d">2026-02</span> spatialreward-edit</a><a class="chip" href="https://arxiv.org/abs/2606.27608" target="_blank" rel="noopener"><span class="d">2026-06</span> qwen-image-rl</a><a class="chip" href="https://arxiv.org/abs/2607.11886" target="_blank" rel="noopener"><span class="d">2026-07</span> read-it-back</a><a class="chip" href="https://arxiv.org/abs/2608.22780" target="_blank" rel="noopener"><span class="d">2026-08</span> rl-no-edit-rewards</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">12</span><span class="tk-name">会推理再动手：think-then-edit</span><span class="tk-n">7 篇</span></div>
+        <div class="tk-bar"><i style="width:35%;background:var(--c-rl)"></i></div>
+        <div class="tk-span">2025-10 ~ 2026-06　·　B 推理与 RL</div>
+        <p class="tk-what">「想」与「改」的接口。MLLM 不被显式激活时自发发现隐含约束的召回只有 0.461；而推理一旦写成自然语言，又无法保证和像素编辑结果一致。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p>两个。<b>CoCo</b> / <b>Meta-CoT</b> 把推理从自由文本转向可执行、可奖励、可分解的中间表示（代码沙盒渲染确定性草稿；CEC Reward 直接约束「说到的」与「改到的」一致）；<b>mind-the-gap</b> 把瓶颈从「验证失败」前移到「发现失败」。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>只提高 recall 而不控制 precision，编辑计划不会自动变好；推理延迟不可忽略——ReasonEdit 四轮反思约 200 秒，ChronoEdit 标准 14B 单张约 30.4 秒。</p></div>
+        <div class="tk-row"><span class="lab">7 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2510.04290" target="_blank" rel="noopener"><span class="d">2025-10</span> ChronoEdit</a><a class="chip" href="https://arxiv.org/abs/2511.01295" target="_blank" rel="noopener"><span class="d">2025-11</span> UniREditBench</a><a class="chip" href="https://arxiv.org/abs/2511.22625" target="_blank" rel="noopener"><span class="d">2025-11</span> ReasonEdit</a><a class="chip" href="https://arxiv.org/abs/2602.02437" target="_blank" rel="noopener"><span class="d">2026-02</span> unireason</a><a class="chip" href="https://arxiv.org/abs/2603.08652" target="_blank" rel="noopener"><span class="d">2026-03</span> coco-code-cot</a><a class="chip" href="https://arxiv.org/abs/2604.24625" target="_blank" rel="noopener"><span class="d">2026-04</span> meta-cot</a><a class="chip" href="https://arxiv.org/abs/2606.15982" target="_blank" rel="noopener"><span class="d">2026-06</span> mind-the-gap</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">13</span><span class="tk-name">编辑数据工程：三元组从哪来</span><span class="tk-n">6 篇</span></div>
+        <div class="tk-bar"><i style="width:30%;background:var(--c-stack)"></i></div>
+        <div class="tk-span">2025-07 ~ 2026-06　·　D 骨干与数据</div>
+        <p class="tk-what">{指令, 源图, 编辑图} 三元组要同时满足像素级对齐、身份保持、指令遵循。人工标注不可扩展，自动生成又带分布偏置和伪正确结果。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p><b>NoHumansRequired</b> 的全自动验证栈——数据生产从「精炼已有数据集」转成「记录各阶段生存率的模块化流水线」。此后都默认先分任务类、再自动评分筛选；到 bootstrap-generator 甚至丢掉了编辑后图像这个三元组成员。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>闭源教师锁死上限（Pico-Banana 超不过 Nano-Banana）；数据量对下游的收益可能已饱和——NoHumansRequired 提升仅 +0.03 且置信区间重叠，OpenGPT-4o-Image 从 30k 扩到 40k 已有回退。</p></div>
+        <div class="tk-row"><span class="lab">6 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2507.14119" target="_blank" rel="noopener"><span class="d">2025-07</span> NoHumansRequired</a><a class="chip" href="https://arxiv.org/abs/2507.21033" target="_blank" rel="noopener"><span class="d">2025-07</span> GPT-Image-Edit-1.5M</a><a class="chip" href="https://arxiv.org/abs/2508.07607" target="_blank" rel="noopener"><span class="d">2025-08</span> X2Edit</a><a class="chip" href="https://arxiv.org/abs/2509.24900" target="_blank" rel="noopener"><span class="d">2025-09</span> OpenGPT-4o-Image</a><a class="chip" href="https://arxiv.org/abs/2510.19808" target="_blank" rel="noopener"><span class="d">2025-10</span> Pico-Banana-400K</a><a class="chip" href="https://arxiv.org/abs/2606.03911" target="_blank" rel="noopener"><span class="d">2026-06</span> bootstrap-generator</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">14</span><span class="tk-name">2025H2–2026 的编辑与统一模型</span><span class="tk-n">17 篇</span></div>
+        <div class="tk-bar"><i style="width:85%;background:var(--c-body)"></i></div>
+        <div class="tk-span">2025-08 ~ 2026-06　·　C 编辑方法本体</div>
+        <p class="tk-what">统一模型里理解要语义抽象、生成要像素重建、编辑要未编辑区像素级保持，三者对视觉表示的需求互相冲突，条件泄漏在编辑任务上被放大。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p>不是「统一序列万能」被证明有效，而是后续工作不再把编辑一致性寄托于统一目标——<b>Qwen-Image-Layered</b> 把问题从模型能力转到输出表示，用多层 RGBA 显式隔离编辑区域；<b>InternVL-U</b> 明说理解与生成不该共享同一套视觉表示。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>统一模型的理解与生成上限尚未同时达到专用模型（ARM 理解 MMMU 40.2 低于 BAGEL 55.3）；训练数据规模、GPU 成本、消融大量未披露，复现困难。</p></div>
+        <div class="tk-row"><span class="lab">17 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2508.15772" target="_blank" rel="noopener"><span class="d">2025-08</span> VAREdit</a><a class="chip" href="https://arxiv.org/abs/2509.20360" target="_blank" rel="noopener"><span class="d">2025-09</span> EditVerse</a><a class="chip" href="https://arxiv.org/abs/2509.20427" target="_blank" rel="noopener"><span class="d">2025-09</span> Seedream4</a><a class="chip" href="https://arxiv.org/abs/2509.23951" target="_blank" rel="noopener"><span class="d">2025-09</span> HunyuanImage3</a><a class="chip" href="https://arxiv.org/abs/2510.06308" target="_blank" rel="noopener"><span class="d">2025-10</span> Lumina-DiMOO</a><a class="chip" href="https://arxiv.org/abs/2510.06679" target="_blank" rel="noopener"><span class="d">2025-10</span> DreamOmni2</a><a class="chip" href="https://arxiv.org/abs/2510.08485" target="_blank" rel="noopener"><span class="d">2025-10</span> InstructX</a><a class="chip" href="https://arxiv.org/abs/2510.08532" target="_blank" rel="noopener"><span class="d">2025-10</span> Kontinuous-Kontext</a><a class="chip" href="https://arxiv.org/abs/2510.26583" target="_blank" rel="noopener"><span class="d">2025-10</span> Emu3.5</a><a class="chip" href="https://arxiv.org/abs/2511.22699" target="_blank" rel="noopener"><span class="d">2025-11</span> Z-Image</a><a class="chip" href="https://arxiv.org/abs/2512.15603" target="_blank" rel="noopener"><span class="d">2025-12</span> Qwen-Image-Layered</a><a class="chip" href="https://arxiv.org/abs/2602.13344" target="_blank" rel="noopener"><span class="d">2026-02</span> FireRed-Image-Edit</a><a class="chip" href="https://arxiv.org/abs/2602.19083" target="_blank" rel="noopener"><span class="d">2026-02</span> ChordEdit</a><a class="chip" href="https://arxiv.org/abs/2603.09877" target="_blank" rel="noopener"><span class="d">2026-03</span> internvl-u</a><a class="chip" href="https://arxiv.org/abs/2605.10730" target="_blank" rel="noopener"><span class="d">2026-05</span> Qwen-Image-2.0</a><a class="chip" href="https://arxiv.org/abs/2605.12500" target="_blank" rel="noopener"><span class="d">2026-05</span> sensenova-u1</a><a class="chip" href="https://arxiv.org/abs/2606.11188" target="_blank" rel="noopener"><span class="d">2026-06</span> arm-unified</a></div></div>
+      </div>
+    </details>
+    <details class="tk">
+      <summary>
+        <div class="tk-top"><span class="tk-no">15</span><span class="tk-name">新一代评测：物理合理性与多轮</span><span class="tk-n">8 篇</span></div>
+        <div class="tk-bar"><i style="width:40%;background:var(--c-eval)"></i></div>
+        <div class="tk-span">2025-09 ~ 2026-07　·　A 评测与奖励</div>
+        <p class="tk-what">多轮、物理合理性、跨任务一致性、光传输这些深层要求下，生成器和评估器会同时失效——生成器累积退化，而传统指标和整图 VLM 裁判要么漏检要么给反向判断。</p>
+        <div class="tk-more">转折点 · 卡在哪 · 论文</div>
+      </summary>
+      <div class="tk-body">
+        <div class="tk-row"><span class="lab">转折点</span><p>评估器本身被证明不可信之后——<b>EdiVal-Agent</b> 换 OWL-ViT 后人类一致率跌到 53.67%，<b>banana100</b> 里 21 个传统 NR-IQA 全部给后轮退化图更好或同等分数。此后不再追求更强的整图裁判，转向局部检测、HDR 真值、场景图这类外部锚点。</p></div>
+        <div class="tk-row gap"><span class="lab">还没解决的</span><p>多轮持续退化无抑制方案——Qwen-Image-Edit 多轮暴露偏差从 78.36 跌到 41.93；只诊断未治疗，几个基准都没给出能缩小差距的训练方案。</p></div>
+        <div class="tk-row"><span class="lab">8 篇</span><div class="chips"><a class="chip" href="https://arxiv.org/abs/2509.13399" target="_blank" rel="noopener"><span class="d">2025-09</span> EdiVal-Agent</a><a class="chip" href="https://arxiv.org/abs/2510.17681" target="_blank" rel="noopener"><span class="d">2025-10</span> PICABench</a><a class="chip" href="https://arxiv.org/abs/2602.08336" target="_blank" rel="noopener"><span class="d">2026-02</span> reasoning-to-pixels</a><a class="chip" href="https://arxiv.org/abs/2604.03400" target="_blank" rel="noopener"><span class="d">2026-04</span> banana100</a><a class="chip" href="https://arxiv.org/abs/2604.25072" target="_blank" rel="noopener"><span class="d">2026-04</span> beyond-accuracy</a><a class="chip" href="https://arxiv.org/abs/2605.13062" target="_blank" rel="noopener"><span class="d">2026-05</span> edit-compass</a><a class="chip" href="https://arxiv.org/abs/2606.26738" target="_blank" rel="noopener"><span class="d">2026-06</span> lighting-edit-bench</a><a class="chip" href="https://arxiv.org/abs/2607.25642" target="_blank" rel="noopener"><span class="d">2026-07</span> IIE-Survey</a></div></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">04</span><h2>反复出现的模式</h2><span class="c">跨脉络的六个共用招式</span></div>
+    <p class="lede">这六个做法在互不相干的脉络里被独立重新发明。它们不是某一篇的贡献，而是这个领域目前真正达成共识的部分——新做一件事之前先看看这里，多半已经有人踩过。</p>
+  </div>
+
+  <div class="pats">
+    <article class="pat">
+      <h3>冻结主干，只训适配器 / LoRA / 连接器</h3>
+      <p class="w">条件控制 ControlNet、T2I-Adapter、IP-Adapter、EasyControl　·　个性化 Custom-Diffusion 只更新 cross-attention 的 KV　·　局部编辑 AnyDoor、PowerPaint、BrushNet　·　统一多模态 MetaQuery、BLIP3-o、OmniGen2　·　InstructX 用 LoRA 微调 VLM 再经连接器接 DiT</p>
+      <p class="y">保留预训练先验、避免灾难遗忘，同时以很低的参数成本新开一条条件通路。</p>
+    </article>
+    <article class="pat">
+      <h3>反演轨迹缓存 + 注意力 Value / 特征注入</h3>
+      <p class="w">训练-free Prompt-to-Prompt、Plug-and-Play、MasaCtrl、Self-Guidance　·　反演精度线的 Value 注入与特征共享　·　拖拽 DragDiffusion、DragonDiffusion 缓存潜变量与自注意力 K/V　·　统一编辑 VAREdit、Qwen-Image-Layered 的源图潜变量注入</p>
+      <p class="y">去噪早期绑定源表示能保住布局与身份，后期释放才允许语义改变——结构保持与编辑自由度的折中点在时间轴上。</p>
+    </article>
+    <article class="pat">
+      <h3>VLM 当裁判或奖励，但必须给局部锚点</h3>
+      <p class="w">指令式 HQ-Edit、MGIE、ICEdit　·　RL T2I-R1、Flow-GRPO、GoT　·　奖励模型 EditScore、EditReward、read-it-back　·　推理编辑 UniREditBench、Meta-CoT　·　数据 NoHumansRequired、X2Edit　·　评测 EdiVal-Agent</p>
+      <p class="y">自然语言视觉判断能近似人类偏好且可规模化；但整图打分容易幻觉，把判断限制在检测框 ROI 或场景图事实里做原子判定才可靠。</p>
+    </article>
+    <article class="pat">
+      <h3>合成数据 + 自动过滤栈冷启动</h3>
+      <p class="w">InstructPix2Pix 用 Prompt-to-Prompt 造配对图，MagicBrush 人工补强，UltraEdit 真实锚点 + 自动区域　·　SAM 数据引擎、MimicBrush 视频帧自监督　·　NoHumansRequired、X2Edit、OpenGPT-4o-Image　·　UniREditBench 合成 100K CoT</p>
+      <p class="y">成对编辑监督天然稀缺，自动合成是唯一能规模化的路——代价是必须再加一层过滤器压住分布偏置和伪正确样本。</p>
+    </article>
+    <article class="pat">
+      <h3>分阶段训练：先对齐接口，再联合微调</h3>
+      <p class="w">统一多模态先对齐视觉接口再联合微调　·　ReasonEdit 先训 MLLM LoRA、再训 DiT、最后联合　·　UniReason 先训生成分支再全参联合　·　Meta-CoT 先 SFT 后 Flow-GRPO 且 RL 只更新生成专家　·　PixArt-α 三阶段复用</p>
+      <p class="y">早期就联合优化会造成语言先验与图像先验冲突、容量失衡；分段能保护已有能力，后期再解冻有限参数。</p>
+    </article>
+    <article class="pat">
+      <h3>组内归一化 / 自集成压低奖励方差</h3>
+      <p class="w">Flow-GRPO、DanceGRPO 的 GRPO 组内优势　·　qwen-image-rl 按 prompt 组归一化　·　Edit-R1 阈值过滤低方差组　·　read-it-back 的 sequence-level advantage　·　EditScore 的 Avg@4</p>
+      <p class="y">不同 prompt 的难度和奖励尺度差很多，组内标准化能消掉跨题噪声；自集成提高排序准确率且不额外吃显存。</p>
+    </article>
+  </div>
+</section>
+
+<section id="s5">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">05</span><h2>全领域还没解决的</h2><span class="c">六个跨脉络的硬骨头</span></div>
+    <p class="lede">这些不是某条线的遗留项，而是六条以上脉络在各自结论里同时点名的。每条都配了具体论文和数字——避免变成放之四海而皆准的空话。</p>
+
+    <div class="scrollx">
+    <table class="tbl big">
+      <thead><tr><th>问题</th><th>具体表现</th><th>为什么难</th></tr></thead>
+      <tbody>
+        <tr class="hot">
+          <td><b>空间推理、计数、组合关系与精确几何</b></td>
+          <td>Prompt-to-Prompt 无法两点换位；Imagen Editor、AnyDoor 细粒度计数与形状弱；DreamO 复杂空间关系低；FLUX-Kontext 把「移动咖啡」执行成加奶泡；HiDream GenEval Position 仅 0.60；GoT position 0.34 / attribute binding 0.27；Z-Image 物体计数 0.78</td>
+          <td>文本-图像扩散难绑定位置与数量，缺显式空间或计数监督；单图 3D 理解不足，卡在底模能力上限</td>
+        </tr>
+        <tr class="hot">
+          <td><b>自动指标 / 奖励 / 评估器与人类偏好错位，且可被 hack</b></td>
+          <td>HQ-Edit 方向相似度与人类偏好负相关；ICEdit 发现按 CLIP 判据选反而降低 GPT 分；PhotoMaker CLIP-T 与用户研究结论相反；T2I-R1 单一 VQA 奖励被 hack；DanceGRPO 只用 HPS 产出油腻图像；banana100 的传统 NR-IQA 给后轮退化图更好的分；EdiVal-Agent 换 OWL-ViT 后人类一致率 53.67%</td>
+          <td>全局标量表达不了细粒度跨图比较和像素级身份保持；奖励模型与策略同源、盲区重叠，区域级信用分配缺失</td>
+        </tr>
+        <tr>
+          <td>多轮编辑累积退化与长期一致性</td>
+          <td>MagicBrush 显示多轮误差累积；implicit-preservation 的 OCCUR-Bench 遮挡恢复绝对一致性低；FLUX-Kontext 六轮后身份漂移与 artifacts；InstructX 复杂视频编辑中段崩溃；banana100 100 轮复制持续退化，Qwen-Image-Edit 多轮暴露偏差 78.36 → 41.93</td>
+          <td>每轮条件泄漏、误差累积，没有自动权衡机制；模型难以跨轮追踪未编辑区域与身份</td>
+        </tr>
+        <tr>
+          <td>高频细节、文字渲染与身份保持受 VAE / 潜空间限制</td>
+          <td>Null-text Inversion、EDICT、DirectEdit 均指出重建无法超过 VAE 上界；SD3 的 16 通道 VAE 重建 FID 1.06；tuna-2 像素空间 rFID 差 FLUX VAE 一个量级；Chameleon tokenizer 重建上限；Janus-Pro 384×384 限制 OCR；Meta-CoT 文本编辑退化，CoCo 在 LongText-Bench 落后 GPT-4o</td>
+          <td>潜空间编码丢稠密高频信息，离散与连续表示都难以精确绑定字符与身份；底层 token 容量硬限制</td>
+        </tr>
+        <tr>
+          <td>成本与保真 / 延迟冲突，效率口径不统一</td>
+          <td>Null-text Inversion 单图 40–120 秒；Imagic 每图 7–8 分钟；DragDiffusion 36–57 秒；EasyControl 1024×1024 / 25 步 16.3 秒；EditVerse 110,822 token / 50 步约 349 秒；ThinkRL-Edit 编辑时间几乎翻倍；decompose-subject 两阶段 2 倍延迟</td>
+          <td>高保真要多步大模型，实时端侧要少步小模型；VAE 与大 MLLM 的延迟压不下去，且多数论文不披露统一硬件口径</td>
+        </tr>
+        <tr>
+          <td>合成数据偏差与闭源教师锁死上限</td>
+          <td>InstructPix2Pix 合成域偏差导致真实图泛化有限；GEdit-EN 仍低于 GPT-4o；OpenGPT-4o-Image 明确承认蒸馏上限；Pico-Banana 不能超过 Nano-Banana；NoHumansRequired 全合成带风格偏差；MimicBrush 外 ID 的 DINO-I 低于有参考掩码的 AnyDoor</td>
+          <td>高质量成对监督依赖闭源模型，自动生成有分布偏置且验证不可靠；下游最好只能逼近教师，难以超越</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="note"><b>标红的两条被最多脉络同时点名。</b>前者决定编辑能不能可靠执行，后者决定你有没有办法知道它可靠——一个模型在自动指标上变好，可能只是学会了少改一点。<span class="warn">⚠️ 源文档正文写「这七条里」，但表格只有 6 行；已按表格实际行数呈现。</span></p>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">06</span><h2>论文库全景</h2><span class="c">186 篇 · 一格一篇</span></div>
+    <p class="lede">每个小格是一篇论文，按半年堆叠，颜色是它所在的层。这张图本身就是主线的证据——青色（编辑方法）撑起 2022–2024，赭色（推理与 RL）和玫红（评测与奖励）要到 2025 才出现。点任意一格看是哪篇；点图例可以只看某一层。</p>
+
+    <div class="legend" role="group" aria-label="按层筛选">
+      <button class="lg" data-l="C" aria-pressed="true"><i style="background:var(--c-body)"></i>C 编辑方法本体 <b>112</b></button>
+      <button class="lg" data-l="D" aria-pressed="true"><i style="background:var(--c-stack)"></i>D 骨干与数据 <b>16</b></button>
+      <button class="lg" data-l="B" aria-pressed="true"><i style="background:var(--c-rl)"></i>B 推理与 RL <b>15</b></button>
+      <button class="lg" data-l="A" aria-pressed="true"><i style="background:var(--c-eval)"></i>A 评测与奖励 <b>17</b></button>
+      <button class="lg" data-l="E" aria-pressed="true"><i style="background:var(--c-out)"></i>未进 15 条脉络 <b>26</b></button>
+    </div>
+
+    <div class="chart">
+      <div class="cols" id="cols"></div>
+    </div>
+    <div class="readout" id="readout" aria-live="polite"><span class="empty">把鼠标移到任意一格上，或用 Tab 键走一遍。</span></div>
+
+    <p class="note" style="margin-top:16px"><strong>⚠️ 库内密度不等于领域热度。</strong>2026 的 38 篇是按 2025 的月均速度反推出来的配额，不是「2026 只有 38 篇值得读」。同样，2026 拿不到有意义的引用量——最早的一篇也才 8 个月。年份间的收录比例见下一节。</p>
+
+    <div class="cited">
+      <h4>成熟基线的引用量快照</h4>
+      <p class="note">只用来快速定位「哪些是已经被广泛验证过的地基」。<strong>不能当效果分</strong>：老论文天然积累更多引用，而且 Semantic Scholar 与 OpenAlex 的口径不同，相近数字不构成排名。核对日期 2026-08-29。</p>
+      <ol>
+        <li><span class="nm">ControlNet</span><span class="vn">ICCV 2023</span><span class="ct">7602</span><span class="pv">S2</span></li>
+        <li><span class="nm">IP-Adapter</span><span class="vn">仅 arXiv / 官方开源</span><span class="ct">1739</span><span class="pv">S2</span></li>
+        <li><span class="nm">InstructPix2Pix</span><span class="vn">CVPR 2023</span><span class="ct">1303</span><span class="pv">OpenAlex</span></li>
+        <li><span class="nm">FLUX.1 Kontext</span><span class="vn">arXiv 技术报告</span><span class="ct">1004</span><span class="pv">S2</span></li>
+        <li><span class="nm">Qwen-Image</span><span class="vn">arXiv 技术报告</span><span class="ct">930</span><span class="pv">S2</span></li>
+        <li><span class="nm">Paint by Example</span><span class="vn">CVPR 2023</span><span class="ct">664</span><span class="pv">S2</span></li>
+        <li><span class="nm">Null-text Inversion</span><span class="vn">CVPR 2023</span><span class="ct">657</span><span class="pv">OpenAlex</span></li>
+        <li><span class="nm">Plug-and-Play Diffusion Features</span><span class="vn">CVPR 2023</span><span class="ct">565</span><span class="pv">OpenAlex</span></li>
+        <li><span class="nm">Drag Your GAN</span><span class="vn">SIGGRAPH 2023</span><span class="ct">368</span><span class="pv">S2</span></li>
+        <li><span class="nm">Prompt-to-Prompt</span><span class="vn">仅 arXiv</span><span class="ct">367</span><span class="pv">OpenAlex</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="corpus">[["SDEdit","2021-08","SDEdit: Guided Image Synthesis and Editing with Stochastic Differential Equations","2108.01073","C","训练-free 扩散编辑"],["Latent-Diffusion","2021-12","High-Resolution Image Synthesis with Latent Diffusion Models","2112.10752","D","生成骨干"],["Blended-Latent-Diffusion","2022-06","Blended Latent Diffusion","2206.02779","C","训练-free 扩散编辑"],["Classifier-Free-Guidance","2022-07","Classifier-Free Diffusion Guidance","2207.12598","D","生成骨干"],["Prompt-to-Prompt","2022-08","Prompt-to-Prompt Image Editing with Cross Attention Control","2208.01626","C","训练-free 扩散编辑"],["Textual-Inversion","2022-08","An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion","2208.01618","C","个性化与主体保持"],["DreamBooth","2022-08","DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation","2208.12242","C","个性化与主体保持"],["Imagic","2022-10","Imagic: Text-Based Real Image Editing with Diffusion Models","2210.09276","C","训练-free 扩散编辑"],["DiffEdit","2022-10","DiffEdit: Diffusion-based semantic image editing with mask guidance","2210.11427","C","训练-free 扩散编辑"],["InstructPix2Pix","2022-11","InstructPix2Pix: Learning to Follow Image Editing Instructions","2211.09800","C","指令式编辑"],["Null-text-Inversion","2022-11","Null-text Inversion for Editing Real Images using Guided Diffusion Models","2211.09794","C","反演精度"],["EDICT","2022-11","EDICT: Exact Diffusion Inversion via Coupled Transformations","2211.12446","C","反演精度"],["Plug-and-Play","2022-11","Plug-and-Play Diffusion Features for Text-Driven Image-to-Image Translation","2211.12572","C","训练-free 扩散编辑"],["Paint-by-Example","2022-11","Paint by Example: Exemplar-based Image Editing with Diffusion Models","2211.13227","C","局部与对象级"],["Custom-Diffusion","2022-12","Multi-Concept Customization of Text-to-Image Diffusion","2212.04488","C","个性化与主体保持"],["Imagen-Editor-EditBench","2022-12","Imagen Editor and EditBench: Advancing and Evaluating Text-Guided Image Inpainting","2212.06909","C","局部与对象级"],["pix2pix-zero","2023-02","Zero-shot Image-to-Image Translation","2302.03027","C","训练-free 扩散编辑"],["ControlNet","2023-02","Adding Conditional Control to Text-to-Image Diffusion Models","2302.05543","C","条件控制"],["T2I-Adapter","2023-02","T2I-Adapter: Learning Adapters to Dig out More Controllable Ability for Text-to-Image Diffusion Models","2302.08453","C","条件控制"],["HIVE","2023-03","HIVE: Harnessing Human Feedback for Instructional Visual Editing","2303.09618","C","指令式编辑"],["SAM","2023-04","Segment Anything","2304.02643","C","局部与对象级"],["Inpaint-Anything","2023-04","Inpaint Anything: Segment Anything Meets Image Inpainting","2304.06790","C","局部与对象级"],["Rich-Text","2023-04","Expressive Text-to-Image Generation with Rich Text","2304.06720","E",""],["MasaCtrl","2023-04","MasaCtrl: Tuning-Free Mutual Self-Attention Control for Consistent Image Synthesis and Editing","2304.08465","C","训练-free 扩散编辑"],["DragGAN","2023-05","Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold","2305.10973","C","拖拽与点控编辑"],["InstructEdit","2023-05","InstructEdit: Improving Automatic Masks for Diffusion-based Image Editing With User Instructions","2305.18047","E",""],["Self-Guidance","2023-06","Diffusion Self-Guidance for Controllable Image Generation","2306.00986","C","训练-free 扩散编辑"],["MagicBrush","2023-06","MagicBrush: A Manually Annotated Dataset for Instruction-Guided Image Editing","2306.10012","C","指令式编辑"],["DragDiffusion","2023-06","DragDiffusion: Harnessing Diffusion Models for Interactive Point-based Image Editing","2306.14435","C","拖拽与点控编辑"],["DragonDiffusion","2023-07","DragonDiffusion: Enabling Drag-style Manipulation on Diffusion Models","2307.02421","C","拖拽与点控编辑"],["AnyDoor","2023-07","AnyDoor: Zero-shot Object-level Image Customization","2307.09481","C","局部与对象级"],["IP-Adapter","2023-08","IP-Adapter: Text Compatible Image Prompt Adapter for Text-to-Image Diffusion Models","2308.06721","C","条件控制"],["InstructDiffusion","2023-09","InstructDiffusion: A Generalist Modeling Interface for Vision Tasks","2309.03895","C","指令式编辑"],["MGIE","2023-09","Guiding Instruction-based Image Editing via Multimodal Large Language Models","2309.17102","C","指令式编辑"],["PixArt-alpha","2023-09","PixArt-alpha: Fast Training of Diffusion Transformer for Photorealistic Text-to-Image Synthesis","2310.00426","D","生成骨干"],["Cross-Image-Attention","2023-11","Cross-Image Attention for Zero-Shot Appearance Transfer","2311.03335","C","训练-free 扩散编辑"],["Emu-Edit","2023-11","Emu Edit: Precise Image Editing via Recognition and Generation Tasks","2311.10089","C","指令式编辑"],["Concept-Sliders","2023-11","Concept Sliders: LoRA Adaptors for Precise Control in Diffusion Models","2311.12092","C","条件控制"],["LEDITSpp","2023-11","LEDITS++: Limitless Image Editing using Text-to-Image Models","2311.16711","C","训练-free 扩散编辑"],["StyleAligned","2023-12","Style Aligned Image Generation via Shared Attention","2312.02133","C","训练-free 扩散编辑"],["PowerPaint","2023-12","A Task is Worth One Word: Learning with Task Prompts for High-Quality Versatile Image Inpainting","2312.03594","C","局部与对象级"],["InfEdit","2023-12","Inversion-Free Image Editing with Natural Language","2312.04965","C","反演精度"],["PhotoMaker","2023-12","PhotoMaker: Customizing Realistic Human Photos via Stacked ID Embedding","2312.04461","C","条件控制"],["SmartEdit","2023-12","SmartEdit: Exploring Complex Instruction-based Image Editing with Multimodal Large Language Models","2312.06739","C","指令式编辑"],["Emu2","2023-12","Generative Multimodal Models are In-Context Learners","2312.13286","C","统一多模态"],["Instruct-Imagen","2024-01","Instruct-Imagen: Image Generation with Multi-modal Instruction","2401.01952","C","指令式编辑"],["InstantID","2024-01","InstantID: Zero-shot Identity-Preserving Generation in Seconds","2401.07519","C","条件控制"],["DiffEditor","2024-02","DiffEditor: Boosting Accuracy and Flexibility on Diffusion-based Image Editing","2402.02583","C","拖拽与点控编辑"],["SD3-RectifiedFlow","2024-03","Scaling Rectified Flow Transformers for High-Resolution Image Synthesis","2403.03206","D","生成骨干"],["BrushNet","2024-03","BrushNet: A Plug-and-Play Image Inpainting Model with Decomposed Dual-Branch Diffusion","2403.06976","C","局部与对象级"],["ReNoise","2024-03","ReNoise: Real Image Inversion Through Iterative Noising","2403.14602","C","反演精度"],["VAR","2024-04","Visual Autoregressive Modeling: Scalable Image Generation via Next-Scale Prediction","2404.02905","C","统一多模态"],["HQ-Edit","2024-04","HQ-Edit: A High-Quality Dataset for Instruction-based Image Editing","2404.09990","C","指令式编辑"],["SEED-X","2024-04","SEED-X: Multimodal Models with Unified Multi-granularity Comprehension and Generation","2404.14396","C","统一多模态"],["SEED-Data-Edit","2024-05","SEED-Data-Edit Technical Report: A Hybrid Dataset for Instructional Image Editing","2405.04007","C","指令式编辑"],["Chameleon","2024-05","Chameleon: Mixed-Modal Early-Fusion Foundation Models","2405.09818","C","统一多模态"],["MimicBrush","2024-06","Zero-shot Image Editing with Reference Imitation","2406.07547","C","局部与对象级"],["UltraEdit","2024-07","UltraEdit: Instruction-based Fine-Grained Image Editing at Scale","2407.05282","C","指令式编辑"],["FLUX.1","2024-08","FLUX.1 Model Family","","E",""],["TurboEdit","2024-08","TurboEdit: Text-Based Image Editing Using Few-Step Diffusion Models","2408.00735","C","反演精度"],["Transfusion","2024-08","Transfusion: Predict the Next Token and Diffuse Images with One Multi-Modal Model","2408.11039","C","统一多模态"],["Show-o","2024-08","Show-o: One Single Transformer to Unify Multimodal Understanding and Generation","2408.12528","C","统一多模态"],["I2EBench","2024-08","I2EBench: A Comprehensive Benchmark for Instruction-based Image Editing","2408.14180","E",""],["OmniGen","2024-09","OmniGen: Unified Image Generation","2409.11340","C","统一多模态"],["Emu3","2024-09","Emu3: Next-Token Prediction is All You Need","2409.18869","C","统一多模态"],["RF-Inversion","2024-10","Semantic Image Inversion and Editing using Rectified Stochastic Differential Equations","2410.10792","C","反演精度"],["In-Context-LoRA","2024-10","In-Context LoRA for Diffusion Transformers","2410.23775","C","条件控制"],["RF-Solver-Edit","2024-11","Taming Rectified Flow for Inversion and Editing","2411.04746","C","反演精度"],["Add-it","2024-11","Add-it: Training-Free Object Insertion in Images With Pretrained Diffusion Models","2411.07232","C","训练-free 扩散编辑"],["OmniEdit","2024-11","OmniEdit: Building Image Editing Generalist Models Through Specialist Supervision","2411.07199","C","指令式编辑"],["SeedEdit","2024-11","SeedEdit: Align Image Re-Generation to Image Editing","2411.06686","C","指令式编辑"],["MagicQuill","2024-11","MagicQuill: An Intelligent Interactive Image Editing System","2411.09703","C","局部与对象级"],["OminiControl","2024-11","OminiControl: Minimal and Universal Control for Diffusion Transformer","2411.15098","C","条件控制"],["AnyEdit","2024-11","AnyEdit: Mastering Unified High-Quality Image Editing for Any Idea","2411.15738","C","指令式编辑"],["FlowChef","2024-12","FlowChef: Steering of Rectified Flow Models for Controlled Generations","2412.00100","E",""],["Grok-Aurora","2024-12","Grok (Aurora)","","E",""],["UniReal","2024-12","UniReal: Universal Image Generation and Editing via Learning Real-world Dynamics","2412.07774","C","统一多模态"],["ACEpp","2025-01","ACE++: Instruction-Based Image Creation and Editing via Context-Aware Content Filling","2501.02487","C","条件控制"],["Janus-Pro","2025-01","Janus-Pro: Unified Multimodal Understanding and Generation with Data and Model Scaling","2501.17811","C","统一多模态"],["EasyControl","2025-03","EasyControl: Adding Efficient and Flexible Control for Diffusion Transformer","2503.07027","C","条件控制"],["GoT","2025-03","GoT: Unleashing Reasoning Capability of Multimodal Large Language Model for Visual Generation and Editing","2503.10639","B","推理·RL·评测"],["UNO","2025-04","Less-to-More Generalization: Unlocking More Controllability by In-Context Generation","2504.02160","C","条件控制"],["RISEBench","2025-04","Envisioning Beyond the Pixels: Benchmarking Reasoning-Informed Visual Editing","2504.02826","B","推理·RL·评测"],["MetaQuery","2025-04","Transfer between Modalities with MetaQueries","2504.06256","C","统一多模态"],["Complex-Edit","2025-04","texttt{Complex-Edit}: CoT-Like Instruction Generation for Complexity-Controllable Image Editing Benchmark","2504.13143","B","推理·RL·评测"],["Insert-Anything","2025-04","Insert Anything: Image Insertion via In-Context Editing in DiT","2504.15009","C","局部与对象级"],["DreamO","2025-04","DreamO: A Unified Framework for Image Customization","2504.16915","C","条件控制"],["Step1X-Edit","2025-04","Step1X-Edit: A Practical Framework for General Image Editing","2504.17761","C","指令式编辑"],["ICEdit","2025-04","In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer","2504.20690","C","指令式编辑"],["HATIE","2025-05","Towards Scalable Human-aligned Benchmark for Text-guided Image Editing","2505.00502","E",""],["T2I-R1","2025-05","T2I-R1: Reinforcing Image Generation with Collaborative Semantic-level and Token-level CoT","2505.00703","B","推理·RL·评测"],["Flow-GRPO","2025-05","Flow-GRPO: Training Flow Matching Models via Online RL","2505.05470","B","推理·RL·评测"],["DanceGRPO","2025-05","DanceGRPO: Unleashing GRPO on Visual Generation","2505.07818","B","推理·RL·评测"],["BLIP3-o","2025-05","BLIP3-o: A Family of Fully Open Unified Multimodal Models-Architecture, Training and Dataset","2505.09568","C","统一多模态"],["GIE-Bench","2025-05","GIE-Bench: Towards Grounded Evaluation for Text-Guided Image Editing","2505.11493","E",""],["BAGEL","2025-05","Emerging Properties in Unified Multimodal Pretraining","2505.14683","C","统一多模态"],["Everyday-Image-Editing","2025-05","Understanding Generative AI Capabilities in Everyday Image Editing Tasks","2505.16181","E",""],["KRIS-Bench","2025-05","KRIS-Bench: Benchmarking Next-Level Intelligent Image Editing Models","2505.16707","B","推理·RL·评测"],["DICE","2025-05","What Changed? Detecting and Evaluating Instruction-Guided Image Edits with Multimodal Large Language Models","2505.20405","E",""],["ImgEdit","2025-05","ImgEdit: A Unified Image Editing Dataset and Benchmark","2505.20275","B","推理·RL·评测"],["HiDream-I1","2025-05","HiDream-I1: A High-Efficient Image Generative Foundation Model with Sparse Diffusion Transformer","2505.22705","D","生成骨干"],["RefEdit","2025-06","RefEdit: A Benchmark and Method for Improving Instruction-based Image Editing Model on Referring Expressions","2506.03448","E",""],["UniWorld-V1","2025-06","UniWorld-V1: High-Resolution Semantic Encoders for Unified Visual Understanding and Generation","2506.03147","C","统一多模态"],["SeedEdit3","2025-06","SeedEdit 3.0: Fast and High-Quality Generative Image Editing","2506.05083","C","指令式编辑"],["BPM","2025-06","Balancing Preservation and Modification: A Region and Semantic Aware Metric for Instruction-Based Image Editing","2506.13827","E",""],["ComplexBench-Edit","2025-06","ComplexBench-Edit: Benchmarking Complex Instruction-Driven Image Editing via Compositional Dependencies","2506.12830","E",""],["FLUX-Kontext","2025-06","FLUX.1 Kontext: Flow Matching for In-Context Image Generation and Editing in Latent Space","2506.15742","D","生成骨干"],["Show-o2","2025-06","Show-o2: Improved Native Unified Multimodal Models","2506.15564","C","统一多模态"],["OmniGen2","2025-06","OmniGen2: Towards Instruction-Aligned Multimodal Generation","2506.18871","C","统一多模态"],["Ovis-U1","2025-06","Ovis-U1 Technical Report","2506.23044","C","统一多模态"],["NoHumansRequired","2025-07","NoHumansRequired: Autonomous High-Quality Image Editing Triplet Mining","2507.14119","D","编辑数据工程"],["LMM4Edit","2025-07","LMM4Edit: Benchmarking and Evaluating Multimodal Image Editing with LMMs","2507.16193","E",""],["GPT-Image-Edit-1.5M","2025-07","GPT-IMAGE-EDIT-1.5M: A Million-Scale, GPT-Generated Image Dataset","2507.21033","D","编辑数据工程"],["Qwen-Image","2025-08","Qwen-Image Technical Report","2508.02324","D","生成骨干"],["X2Edit","2025-08","X2Edit: Revisiting Arbitrary-Instruction Image Editing through Self-Constructed Data and Task-Aware Representation Learning","2508.07607","D","编辑数据工程"],["VAREdit","2025-08","Visual Autoregressive Modeling for Instruction-Guided Image Editing","2508.15772","C","2025H2–2026 编辑与统一模型"],["EdiVal-Agent","2025-09","EdiVal-Agent: An Object-Centric Framework for Automated, Fine-Grained Evaluation of Multi-Turn Editing","2509.13399","A","新一代评测"],["EditVerse","2025-09","EditVerse: Unifying Image and Video Editing and Generation with In-Context Learning","2509.20360","C","2025H2–2026 编辑与统一模型"],["Seedream4","2025-09","Seedream 4.0: Toward Next-generation Multimodal Image Generation","2509.20427","C","2025H2–2026 编辑与统一模型"],["EditScore","2025-09","EditScore: Unlocking Online RL for Image Editing via High-Fidelity Reward Modeling","2509.23909","A","奖励模型与在线 RL"],["HunyuanImage3","2025-09","HunyuanImage 3.0 Technical Report","2509.23951","C","2025H2–2026 编辑与统一模型"],["OpenGPT-4o-Image","2025-09","OpenGPT-4o-Image: A Comprehensive Dataset for Advanced Image Generation and Editing","2509.24900","D","编辑数据工程"],["EditReward","2025-09","EditReward: A Human-Aligned Reward Model for Instruction-Guided Image Editing","2509.26346","A","奖励模型与在线 RL"],["ChronoEdit","2025-10","ChronoEdit: Towards Temporal Reasoning for Image Editing and World Simulation","2510.04290","B","think-then-edit"],["Lumina-DiMOO","2025-10","Lumina-DiMOO: An Omni Diffusion Large Language Model for Multi-Modal Generation and Understanding","2510.06308","C","2025H2–2026 编辑与统一模型"],["DreamOmni2","2025-10","DreamOmni2: Multimodal Instruction-based Editing and Generation","2510.06679","C","2025H2–2026 编辑与统一模型"],["InstructX","2025-10","InstructX: Towards Unified Visual Editing with MLLM Guidance","2510.08485","C","2025H2–2026 编辑与统一模型"],["Kontinuous-Kontext","2025-10","Kontinuous Kontext: Continuous Strength Control for Instruction-based Image Editing","2510.08532","C","2025H2–2026 编辑与统一模型"],["Edit-R1-UniWorld-V2","2025-10","Uniworld-V2: Reinforce Image Editing with Diffusion Negative-aware Finetuning and MLLM Implicit Feedback","2510.16888","A","奖励模型与在线 RL"],["PICABench","2025-10","PICABench: How Far Are We from Physically Realistic Image Editing?","2510.17681","A","新一代评测"],["Pico-Banana-400K","2025-10","Pico-Banana-400K: A Large-Scale Dataset for Text-Guided Image Editing","2510.19808","D","编辑数据工程"],["Emu3.5","2025-10","Emu3.5: Native Multimodal Models are World Learners","2510.26583","C","2025H2–2026 编辑与统一模型"],["UniREditBench","2025-11","UniREditBench: A Unified Reasoning-based Image Editing Benchmark","2511.01295","B","think-then-edit"],["ReasonEdit","2025-11","ReasonEdit: Towards Reasoning-Enhanced Image Editing Models","2511.22625","B","think-then-edit"],["Z-Image","2025-11","Z-Image: An Efficient Image Generation Foundation Model with Single-Stream Diffusion Transformer","2511.22699","C","2025H2–2026 编辑与统一模型"],["WiseEdit","2025-12","WiseEdit: Benchmarking Cognition- and Creativity-Informed Image Editing","2512.00387","E",""],["I2I-Bench","2025-12","I2I-Bench: A Comprehensive Benchmark Suite for Image-to-Image Editing Models","2512.04660","E",""],["Qwen-Image-Edit-2511","2025-12","Qwen-Image-Edit-2511","","E",""],["Qwen-Image-Layered","2025-12","Qwen-Image-Layered: Towards Inherent Editability via Layer Decomposition","2512.15603","C","2025H2–2026 编辑与统一模型"],["nextflow","2026-01","NextFlow: Unified Sequential Modeling Activates Multimodal Understanding and Generation","2601.02204","C","统一多模态"],["ThinkRL-Edit","2026-01","ThinkRL-Edit: Thinking in Reinforcement Learning for Reasoning-Centric Image Editing","2601.03467","A","奖励模型与在线 RL"],["reward-hacking-t2i","2026-01","Understanding Reward Hacking in Text-to-Image Reinforcement Learning","2601.03468","A","奖励模型与在线 RL"],["VIBE","2026-02","How Well Do Models Follow Visual Instructions? VIBE: A Systematic Benchmark for Visual Instruction-Driven Image Editing","2602.01851","E",""],["unireason","2026-02","UniReason 1.0: A Unified Reasoning Framework for World Knowledge Aligned Image Generation and Editing","2602.02437","B","think-then-edit"],["spatialreward-edit","2026-02","SpatialReward: Bridging the Perception Gap in Online RL for Image Editing via Explicit Spatial Reasoning","2602.07458","A","奖励模型与在线 RL"],["reasoning-to-pixels","2026-02","From Reasoning to Pixels: Benchmarking the Alignment Gap in Unified Multimodal Models","2602.08336","A","新一代评测"],["rethink-global-text","2026-02","Rethinking Global Text Conditioning in Diffusion Transformers","2602.09268","D","生成骨干"],["FireRed-Image-Edit","2026-02","FireRed-Image-Edit-1.0 Technical Report","2602.13344","C","2025H2–2026 编辑与统一模型"],["ChordEdit","2026-02","ChordEdit: One-Step Low-Energy Transport for Image Editing","2602.19083","C","2025H2–2026 编辑与统一模型"],["care-edit","2026-03","CARE-Edit: Condition-Aware Routing of Experts for Contextual Image Editing","2603.08589","C","条件控制"],["coco-code-cot","2026-03","CoCo: Code as CoT for Text-to-Image Preview and Rare Concept Generation","2603.08652","B","think-then-edit"],["internvl-u","2026-03","InternVL-U: Democratizing Unified Multimodal Models for Understanding, Reasoning, Generation and Editing","2603.09877","C","2025H2–2026 编辑与统一模型"],["Omni-IIE-Bench","2026-03","Omni IIE Bench: Benchmarking the Practical Capabilities of Image Editing Models","2603.16944","E",""],["ug-fight-dpo","2026-03","Do Understanding and Generation Fight? A Diagnostic Study of DPO for Unified Multimodal Models","2603.17044","C","统一多模态"],["TIEdit-EditProbe","2026-03","Evaluating Image Editing with LLMs: A Comprehensive Benchmark and Intermediate-Layer Probing Approach","2603.19775","E",""],["GEditBench-v2","2026-03","GEditBench v2: A Human-Aligned Benchmark for General Image Editing","2603.28547","E",""],["editing-manifold","2026-03","Editing on the Generative Manifold: A Theoretical and Empirical Study of General Diffusion-Based Image Editing Trade-offs","2603.29736","C","训练-free 扩散编辑"],["banana100","2026-04","Banana100: Breaking NR-IQA Metrics by 100 Iterative Image Replications with Nano Banana Pro","2604.03400","A","新一代评测"],["GPT-Image-2","2026-04","GPT Image 2","","E",""],["GSI-Bench","2026-04","Exploring Spatial Intelligence from a Generative Perspective","2604.20570","E",""],["edit-where-you-mean","2026-04","Edit Where You Mean: Region-Aware Adapter Injection for Mask-Free Local Image Editing","2604.23763","C","局部与对象级"],["beyond-accuracy","2026-04","Beyond Accuracy: Benchmarking Cross-Task Consistency in Unified Multimodal Models","2604.25072","A","新一代评测"],["meta-cot","2026-04","Meta-CoT: Enhancing Granularity and Generalization in Image Editing","2604.24625","B","think-then-edit"],["tuna-2","2026-04","Tuna-2: Pixel Embeddings Beat Vision Encoders for Multimodal Understanding and Generation","2604.24763","D","生成骨干"],["spatialfusion","2026-04","SpatialFusion: Endowing Unified Image Generation with Intrinsic 3D Geometric Awareness","2604.26341","C","条件控制"],["directedit","2026-05","DirectEdit: Step-Level Accurate Inversion for Flow-Based Image Editing","2605.02417","C","反演精度"],["Qwen-Image-2.0","2026-05","Qwen-Image-2.0 Technical Report","2605.10730","C","2025H2–2026 编辑与统一模型"],["masked-gen-transformer","2026-05","Masked Generative Transformer Is What You Need for Image Editing","2605.10859","D","生成骨干"],["sensenova-u1","2026-05","SenseNova-U1: Unifying Multimodal Understanding and Generation with NEO-unify Architecture","2605.12500","C","2025H2–2026 编辑与统一模型"],["edit-compass","2026-05","Edit-Compass &amp; EditReward-Compass: A Unified Benchmark for Image Editing and Reward Modeling","2605.13062","A","新一代评测"],["decompose-subject","2026-05","Decomposing Subject-Driven Image Generation via Intermediate Structural Prediction","2605.20807","C","个性化与主体保持"],["PaintBench","2026-05","PaintBench: Deterministic Evaluation of Precise Visual Editing","2606.00188","E",""],["Inter-Edit","2026-06","Inter-Edit: First Benchmark for Interactive Instruction-Based Image Editing","","E",""],["bootstrap-generator","2026-06","Bootstrap Your Generator: Unpaired Visual Editing with Flow Matching","2606.03911","D","编辑数据工程"],["arm-unified","2026-06","ARM: An AutoRegressive Large Multimodal Model with Unified Discrete Representations","2606.11188","C","2025H2–2026 编辑与统一模型"],["hydra-x","2026-06","HYDRA-X: Native Unified Multimodal Models with Holistic Visual Tokenizers","2606.13289","C","统一多模态"],["mind-the-gap","2026-06","Mind the Gap: Diagnosing Constraint Discovery Failures in Text-in-Image Editing","2606.15982","B","think-then-edit"],["moebius-inpainting","2026-06","Moebius: 0.2B Lightweight Image Inpainting Framework with 10B-Level Performance","2606.19195","C","局部与对象级"],["lighting-edit-bench","2026-06","Do Image Editing Models Understand Lighting?","2606.26738","A","新一代评测"],["qwen-image-rl","2026-06","Qwen-Image-2.0-RL Technical Report","2606.27608","A","奖励模型与在线 RL"],["cfg-inversion-fail","2026-07","When Does High-CFG Diffusion Inversion Fail? A Controlled Study of Prompt--Latent Interactions","2607.04731","C","反演精度"],["implicit-preservation","2026-07","Making Implicit Preservation Intent Explicit in Conversational Image Editing","2607.07051","C","指令式编辑"],["read-it-back","2026-07","Read It Back: Pretrained MLLMs Are Zero-Shot Reward Models for Text-to-Image Generation","2607.11886","A","奖励模型与在线 RL"],["IIE-Survey","2026-07","Instruction-based Image Editing: A Survey on Data, Models, Evaluation, and Applications","2607.25642","A","新一代评测"],["CPI-Bench","2026-08","CPI-Bench: A Comprehensive, Practical and Intelligent Benchmark for Real-World Image Editing","2608.14546","E",""],["rl-no-edit-rewards","2026-08","Can We Perform Online RL for Image Editing without Editing Rewards?","2608.22780","A","奖励模型与在线 RL"]]</script>
+
+<section id="s7">
+  <div class="wrap">
+    <div class="eyebrow"><span class="n">07</span><h2>可信度边界</h2><span class="c">这页哪里靠谱、哪里不靠谱</span></div>
+    <p class="lede">这一节不是免责声明，是使用说明。上面所有结论都来自 <code>总结分析.md</code>（源文档核对日期 2026-08-28），本页没有回到 PDF 原文重新核对每一条论断——只重算了论文密度并与源文档表格逐格比对，结果一致。</p>
+
+    <div class="scrollx">
+    <table class="tbl" style="margin-top:22px">
+      <thead><tr><th>年份</th><th style="text-align:right">库里收了</th><th style="text-align:right">arXiv 命中</th><th style="text-align:right">收录比例</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>2022</td><td class="num">14</td><td class="num">96</td><td class="num">15%</td><td class="you">—</td></tr>
+        <tr><td>2023</td><td class="num">27</td><td class="num">228</td><td class="num">12%</td><td class="you">—</td></tr>
+        <tr><td>2024</td><td class="num">28</td><td class="num">289</td><td class="num">10%</td><td class="you">—</td></tr>
+        <tr><td>2025</td><td class="num">51</td><td class="num">428</td><td class="num">12%</td><td class="you">—</td></tr>
+        <tr><td>2026</td><td class="num">38</td><td class="num">392</td><td class="num">10%</td><td class="you">只统计到 8 月；其中 33 篇由模型从 1123 篇候选里选出</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">分母是 arXiv 上 <code>abs:"image editing" AND cat:cs.CV</code> 的命中数（2026-08-28 实查）。分母里有大量边缘论文，所以这个比例<strong>只能做年份间横向对比</strong>，不代表「漏了九成」。另有 2021 年的 SDEdit 与 Latent-Diffusion 两篇，因为后面几乎所有工作都建立在它们上面。</p>
+
+    <div class="lim">
+      <div><div class="k">页面 186 篇，归纳只覆盖 160 篇</div><div class="v">这 26 篇<strong>都写了解读，缺的是「被归纳」这一步，不是「被读」这一步</strong>。<code>总结分析.md</code> 与 <code>INDEX.md</code> 在 2026-08-28 16:36 封版（160 篇、15 条脉络）；这 26 个目录是次日 10:01–10:47 才建的，目的是核 Lark Wiki《Image Edit领域论文调研》里每一条有没有权威背书，不是补脉络，补完也没有回头重跑归纳。<br>模板也是两套：21 篇用的是 8–9 节的「核验笔记」（一句话结论 / 局限与未证实主张 / 发表与影响信息 / 一手来源），结构上不产出归纳需要的「放回研究脉络」那一节；只有 5 篇（FlowChef、HATIE、I2I-Bench、InstructEdit、Rich-Text）用了和那 160 篇同样的 11 节深读模板，纯粹赶不上封版时间。<br>26 篇里 16 个标题直接写着 benchmark 或 evaluation（宽口径加上 GSI-Bench 是 17 个）；另有 4 个（FLUX.1、Grok-Aurora、GPT-Image-2、Qwen-Image-Edit-2511）目录里没有 <code>paper.pdf</code>——它们本来就没有独立论文，只有官方模型卡，笔记只有一两千字，写的是「为什么不能把产品说明当论文结论」。<br>并进来会把 <b>A 评测与奖励</b> 那层从 17 篇推到 30 篇以上，主线里「2025 之后上移到评测」的斜率只会更陡，不会反转。<br>名单：BPM、CPI-Bench、ComplexBench-Edit、DICE、Everyday-Image-Editing、FLUX.1、FlowChef、GEditBench-v2、GIE-Bench、GPT-Image-2、GSI-Bench、Grok-Aurora、HATIE、I2EBench、I2I-Bench、InstructEdit、Inter-Edit、LMM4Edit、Omni-IIE-Bench、PaintBench、Qwen-Image-Edit-2511、RefEdit、Rich-Text、TIEdit-EditProbe、VIBE、WiseEdit</div></div>
+      <div><div class="k">2026 靠模型筛选</div><div class="v">15 条检索式抓到 1123 篇去重结果 → 关键词预筛 410 篇 → DeepSeek 逐篇对着 15 条脉络打 1–5 分，111 篇拿到 ≥4 分 → 同一模型横向比选出 33 篇入库。两道筛都是模型打分，人只定标准和脉络配额，会漏掉「摘要写得平淡但实际重要」的工作。</div></div>
+      <div><div class="k">两条脉络 2026 年收 0 篇</div><div class="v">拖拽与点控编辑、以及不带奖励模型的那类 RL 编辑，在 1123 篇里没有一篇够 4 分。<strong>可能真沉寂了，也可能是检索式没覆盖到——未验证。</strong></div></div>
+      <div><div class="k">图表信息全部丢失</div><div class="v">只有 pypdf 抽出的文字进了模型。示意图、定性对比图一律读不到，所以本页任何关于「视觉效果」的说法都是转述论文的文字描述，不是看图得出的。</div></div>
+      <div><div class="k">公式与枝节可能失真</div><div class="v">pypdf 常丢下标、希腊字母、矩阵记号；已发现一例事实错误——Imagic 那篇把 Imagen / SD 说成「ImageNet 预训练模型基础」，不准确。公式一律以原 PDF 为准。</div></div>
+      <div><div class="k">数字溯源 5.3% 未命中</div><div class="v">9214 个数字里 485 个没能在抽取文本里直接匹配。逐篇看只有 2 篇未命中率超过 25%（Kontinuous-Kontext 28.2%、Bootstrap-Your-Generator 27.5%），两篇手工核过全是脚本误报（pypdf 把表格单元格粘成 <code>6.696.932.17</code>）。累计手工抽查 8 篇无一例真错，但<strong>没有全量核完</strong>。</div></div>
+      <div><div class="k">没有交叉复核</div><div class="v">每篇解读只生成一次，横向归纳也只跑了一遍，没有第二个模型独立验证。脉络划分是人工定的、不是聚类出来的，有些论文本可以跨线。</div></div>
+      <div><div class="k">不含论文外信息</div><div class="v">按 <code>prompt.md</code> 的规定，160 篇解读里都不写引用量、社区评价和后续产品。第 06 节那张引用量快照来自另一份核查清单（2026-08-29），与解读内容互相独立。</div></div>
+    </div>
+
+    <p class="safe"><b>可以放心的：</b>160 个 arXiv ID 全部实抓过 <code>arxiv.org/abs</code> 比对 citation_title 和 citation_date，没有编造的论文。160 篇解读结构完整（11 节齐全）、PDF 全部可解析、篇幅全部 ≥6500 中文字。</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>素材：github.com/romangic/image_edit_paper</span>
+  <span>源文档核对 2026-08-28 · 引用量快照 2026-08-29 · 本页 2026-08-30</span>
+  <span>186 篇笔记 · 160 篇进归纳 · 15 条脉络</span>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var LC={C:'--c-body',D:'--c-stack',B:'--c-rl',A:'--c-eval',E:'--c-out'};
+  var LN={C:'C 编辑方法本体',D:'D 骨干与数据',B:'B 推理与 RL',A:'A 评测与奖励',E:'未进 15 条脉络'};
+  var ORD={C:0,D:1,B:2,A:3,E:4};
+  var data=JSON.parse(document.getElementById('corpus').textContent);
+  var cols=document.getElementById('cols'), ro=document.getElementById('readout');
+
+  function half(ym){var a=ym.split('-');return a[0]+'H'+(+a[1]<=6?1:2);}
+  var order=[], groups={};
+  data.forEach(function(r,i){
+    var h=half(r[1]);
+    if(!groups[h]){groups[h]=[];order.push(h);}
+    groups[h].push(i);
+  });
+  order.sort();
+
+  order.forEach(function(h){
+    var idx=groups[h].slice().sort(function(a,b){
+      var d=ORD[data[a][4]]-ORD[data[b][4]]; return d||(data[a][1]<data[b][1]?-1:1);
+    });
+    var col=document.createElement('div'); col.className='col';
+    var n=document.createElement('div'); n.className='xn'; n.textContent=idx.length; col.appendChild(n);
+    var cells=document.createElement('div'); cells.className='cells';
+    idx.forEach(function(i){
+      var r=data[i];
+      var b=document.createElement('button');
+      b.className='cell'; b.type='button'; b.dataset.i=i; b.dataset.l=r[4];
+      b.style.background='var('+LC[r[4]]+')';
+      b.setAttribute('aria-label',r[0]+'，'+r[1]);
+      cells.appendChild(b);
+    });
+    col.appendChild(cells);
+    var x=document.createElement('div'); x.className='xl';
+    x.innerHTML=h.replace(/^\d\d(\d\d)H(\d)$/,'$1<span style="opacity:.6">H$2</span>');
+    col.appendChild(x);
+    cols.appendChild(col);
+  });
+
+  function show(i){
+    var r=data[i];
+    var link=r[3]?'<a href="https://arxiv.org/abs/'+r[3]+'" target="_blank" rel="noopener">arXiv '+r[3]+' ↗</a>':'无独立论文';
+    ro.innerHTML='<span class="rk">'+r[0]+'</span>'+
+      '<span class="rt">'+r[2].replace(/</g,'&lt;')+'</span>'+
+      '<span class="rm"><span>'+r[1]+'</span><span>'+(r[5]||'—')+'</span><span>'+LN[r[4]]+'</span>'+link+'</span>';
+  }
+  cols.addEventListener('mouseover',function(e){var c=e.target.closest('.cell');if(c)show(+c.dataset.i);});
+  cols.addEventListener('focusin',function(e){var c=e.target.closest('.cell');if(c)show(+c.dataset.i);});
+  cols.addEventListener('click',function(e){var c=e.target.closest('.cell');if(c)show(+c.dataset.i);});
+
+  var off={};
+  document.querySelectorAll('.lg').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var l=btn.dataset.l, on=btn.getAttribute('aria-pressed')==='true';
+      btn.setAttribute('aria-pressed',on?'false':'true'); off[l]=on;
+      cols.querySelectorAll('.cell').forEach(function(c){
+        c.classList.toggle('dim',!!off[c.dataset.l]);
+      });
+    });
+  });
+
+  var links={};
+  document.querySelectorAll('.rail a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        for(var k in links)links[k].classList.remove('on');
+        if(links[e.target.id])links[e.target.id].classList.add('on');
+      }
+    });
+  },{rootMargin:'-15% 0px -70% 0px'});
+  document.querySelectorAll('section[id]').forEach(function(s){io.observe(s);});
+})();
+</script>

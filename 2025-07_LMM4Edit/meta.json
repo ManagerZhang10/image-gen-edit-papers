@@ -1,0 +1,23 @@
+{
+  "arxiv_id": "2507.16193",
+  "short": "LMM4Edit",
+  "date": "2025/07/22",
+  "title": "LMM4Edit: Benchmarking and Evaluating Multimodal Image Editing with LMMs",
+  "url": "https://arxiv.org/abs/2507.16193",
+  "cn_chars": 2544,
+  "publication": {
+    "status": "published",
+    "venue": "ACM Multimedia 2025",
+    "venue_type": "conference",
+    "first_public_date": "2025-07-22",
+    "formal_publication_date": "2025-10",
+    "doi": "10.1145/3746027.3755294",
+    "official_url": "https://doi.org/10.1145/3746027.3755294"
+  },
+  "impact": {
+    "citation_count": 23,
+    "provider": "Semantic Scholar",
+    "provider_url": "https://www.semanticscholar.org/paper/5acc80513f4b692a2192caeb346cb6f8794a0370",
+    "checked_at": "2026-08-29"
+  }
+}

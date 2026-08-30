@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2603.19775",
+  "short": "TIEdit-EditProbe",
+  "date": "2026/03/20",
+  "title": "Evaluating Image Editing with LLMs: A Comprehensive Benchmark and Intermediate-Layer Probing Approach",
+  "url": "https://arxiv.org/abs/2603.19775",
+  "cn_chars": 2864,
+  "publication": {
+    "status": "published",
+    "venue": "Displays, Volume 94",
+    "venue_type": "journal",
+    "first_public_date": "2026-03-20",
+    "formal_publication_date": "2026-09",
+    "article_number": "103494",
+    "doi": "10.1016/j.displa.2026.103494",
+    "official_url": "https://www.sciencedirect.com/science/article/pii/S0141938226001575"
+  },
+  "impact": {
+    "citation_count": 2,
+    "provider": "Semantic Scholar",
+    "provider_url": "https://www.semanticscholar.org/paper/9aeb4cce6dbf8ce5daa72c7859fa6b9eeddf2982",
+    "checked_at": "2026-08-29"
+  }
+}

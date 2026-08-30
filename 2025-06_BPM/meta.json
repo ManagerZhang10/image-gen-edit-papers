@@ -1,0 +1,24 @@
+{
+  "arxiv_id": "2506.13827",
+  "short": "BPM",
+  "date": "2025/06/15",
+  "title": "Balancing Preservation and Modification: A Region and Semantic Aware Metric for Instruction-Based Image Editing",
+  "url": "https://arxiv.org/abs/2506.13827",
+  "cn_chars": 2528,
+  "publication": {
+    "status": "published",
+    "venue": "ICML 2025",
+    "venue_type": "conference",
+    "first_public_date": "2025-06-15",
+    "formal_publication_date": "2025-07-13/2025-07-19",
+    "series": "PMLR 267",
+    "pages": "36576-36596",
+    "official_url": "https://proceedings.mlr.press/v267/li25dh.html"
+  },
+  "impact": {
+    "citation_count": 8,
+    "provider": "Semantic Scholar",
+    "provider_url": "https://www.semanticscholar.org/paper/611397e8cb8184a3c29cf0e06a168bb01e45789a",
+    "checked_at": "2026-08-29"
+  }
+}
