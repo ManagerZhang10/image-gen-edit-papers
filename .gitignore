@@ -8,6 +8,7 @@ _work/*
 !_work/*/
 !_work/*.py
 !_work/README.md
+!_work/pdf_link_check.json
 _work/*/*
 !_work/*/*.py
 

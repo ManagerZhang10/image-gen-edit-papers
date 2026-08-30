@@ -23,6 +23,9 @@ import time
 import urllib.error
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pdf_sources import pdf_url          # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UA = "image_edit_paper/1.0 (https://github.com/romangic/image_edit_paper)"
 DELAY = 3.0
@@ -35,14 +38,6 @@ def paper_dirs():
     )
 
 
-def pdf_url(meta):
-    """meta.json → PDF 直链。没有可下载来源时返回 None。"""
-    if meta.get("arxiv_id"):
-        return f"https://arxiv.org/pdf/{meta['arxiv_id']}"
-    url = meta.get("url") or ""
-    if "openaccess.thecvf.com" in url and url.endswith(".html"):
-        return url.replace("/html/", "/papers/")[: -len(".html")] + ".pdf"
-    return None
 
 
 def download(url, dest):
@@ -70,7 +65,7 @@ def main():
             skipped.append((d, "没有 meta.json"))
             continue
         meta = json.load(open(meta_path, encoding="utf-8"))
-        src = pdf_url(meta)
+        src = pdf_url(meta, d)
         if not src:
             skipped.append((d, "无独立论文，按设计不放 paper.pdf"))
             continue
