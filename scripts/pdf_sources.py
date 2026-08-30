@@ -17,18 +17,21 @@ OVERRIDES = {
     # 裸链 https://arxiv.org/pdf/2603.17044 稳定返回 404（复测 2 次），
     # 带版本号的 v1 正常，且与本地 sha256 一致。
     "2026-03_ug-fight-dpo": "https://arxiv.org/pdf/2603.17044v1",
+    # arXiv v1 是 15 页 4,016,508 字节的预印本；本库解读依据的本地副本是
+    # 10 页 1,739,117 字节，PDF 元数据写着 /Subject: IEEE International
+    # Conference on Computer Vision、/Producer: pikepdf——即 ICCV 2025
+    # proceedings 版。CVF 这条与本地 sha256 完全一致（2026-08-30 实拉比对）。
+    "2025-05_DICE":
+        "https://openaccess.thecvf.com/content/ICCV2025/papers/"
+        "Baraldi_What_Changed_Detecting_and_Evaluating_Instruction-Guided_"
+        "Image_Edits_with_Multimodal_ICCV_2025_paper.pdf",
 }
 
 # 链接指向的论文没错（标题、作者、日期、版本数都核过），但渲染版本和本库
 # 解读所依据的本地副本不是同一份。给链接，但必须在文档里标出来。
-RENDITION_DIFFERS = {
-    "2025-05_DICE": (
-        "arXiv 只有 v1，标题/作者/日期与本库一致；但 arXiv 版 15 页 "
-        "4,016,508 字节，本库解读依据的本地副本 10 页 1,739,117 字节，"
-        "少了附录且没有 arXiv 页边戳。本地副本的来源已无法追溯（未验证）。"
-        "读这篇以 arXiv 版为准。"
-    ),
-}
+# 2026-08-30 起为空：原先唯一一条 2025-05_DICE 已定位到 ICCV proceedings 版，
+# 移入 OVERRIDES。这个机制保留，下次再遇到同类情况直接往这里加。
+RENDITION_DIFFERS = {}
 
 
 def pdf_url(meta, dirname=None):

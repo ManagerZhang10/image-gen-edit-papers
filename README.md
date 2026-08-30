@@ -3,18 +3,18 @@
 [![papers](https://img.shields.io/badge/papers-186-2b7489)](#附二全量清单186-项每项一条核验过的原文直链)
 [![notes](https://img.shields.io/badge/notes-1.23M_CJK_chars-4c9a2a)](#4-两批笔记格式和验收口径都不一样)
 [![coverage](https://img.shields.io/badge/coverage-2021.08_--_2026.08-e07b39)](#2-五年读下来的结论)
-[![links](https://img.shields.io/badge/source_links-181%2F186_byte--verified-1f883d)](#附二全量清单186-项每项一条核验过的原文直链)
+[![links](https://img.shields.io/badge/source_links-182%2F186_byte--verified-1f883d)](#附二全量清单186-项每项一条核验过的原文直链)
 [![license](https://img.shields.io/badge/license-CC_BY_4.0-777777)](LICENSE)
 
-**186 篇图像编辑论文的中文深读笔记，2021-08 → 2026-08，合计 1,231,636 个汉字。**
-每篇笔记都配一条核验过的原文直链——181 条与写笔记时用的本地 PDF 逐字节比对一致，1 条渲染版本存疑已标注，4 项确实没有独立论文。
+**186 篇图像编辑论文的中文深读笔记，2021-08 → 2026-08，合计 1,231,793 个汉字。**
+每篇笔记都配一条核验过的原文直链——182 条与写笔记时用的本地 PDF 逐字节比对一致，4 项确实没有独立论文、给官方来源。
 
 *186 in-depth Chinese reading notes on image-editing papers (Aug 2021 – Aug 2026, 1.23M CJK characters). Every source link is byte-verified against the exact PDF the note was written from — see [附二](#附二全量清单186-项每项一条核验过的原文直链).*
 
 > **读者**：要系统补齐图像编辑技术脉络的算法同学，或者要为某个具体方案（人像编辑、身份保持、局部保持、评测选型）找证据的人
 > **目标**：读完这页知道该从哪儿进去、每篇笔记能替代什么、哪些结论可以直接拿去做决策、哪些必须回原文
 > **元信息**：186 项 · 2021-08 ～ 2026-08 · 约 123 万中文字 · 维护者 [@ManagerYu10](https://github.com/ManagerYu10)
-> **原文直链**：[附二](#附二全量清单186-项每项一条核验过的原文直链)有全部 186 项的直链——181 条 PDF 与本地副本逐字节对过，1 条标注版本存疑，4 项无独立论文给官方来源
+> **原文直链**：[附二](#附二全量清单186-项每项一条核验过的原文直链)有全部 186 项的直链——182 条 PDF 与本地副本逐字节对过，4 项无独立论文给官方来源
 > **授权**：[CC BY 4.0](LICENSE)——署名即可自由转载、改写、商用
 > **最后核对**：2026-08-30
 
@@ -210,31 +210,45 @@ python3 scripts/verify_pdf_links.py 2023-02_ControlNet # 只核一条
 | 环节 | 怎么验的 | 结果 |
 | --- | --- | --- |
 | arXiv ID | 逐个实抓 `arxiv.org/abs`，比对 `citation_title` 与 `citation_date` | 第一批 160/160 吻合；2026 筛选轮 111/111 命中 |
-| 结构完整 | 机器检查 H1、11 个二级标题、结尾 `<!-- COMPLETE -->` | 第一批 160/160 通过（第二批不适用这套检查） |
+| 原文直链 | HTTP Range 拉前 4 字节 + 比对远端总字节数与本地 `paper.pdf` | 182/182 逐字节一致，0 个版本存疑（[核验记录](docs/review/PDF直链_2026-08-30.md)） |
+| 结构完整 | 机器检查 H1、二级标题、结尾 `<!-- COMPLETE -->` | 第一批 160 篇通过：158 篇是标准 11 节；Complex-Edit 和 KRIS-Bench 各 19 个二级标题（11 节 + 第二批那套 benchmark 格式的 6 个无编号小节 + §12 §13）。另有 14 篇在 2026-08-29 追加了 `## 本轮决策核验补充` 一节。第二批不适用这套检查 |
 | PDF 可解析 | 大小 + pypdf 解析 | 182/182 存在且可解析 |
-| 数字溯源 | 笔记里每个数字回 PDF 抽取文本比对 | 9214 个数字中 485 个未直接匹配（5.3%），逐篇看只有 2 篇超过 25%，两篇手工核过全是脚本误报 |
+| 数字溯源 | 笔记里每个数字回 PDF 抽取文本比对，未匹配的逐条分类、待核项人工翻原文 | **全量走完**：182 篇 / 9,987 个数字 / 460 个未直接匹配（4.6%）。50 条待核逐条核过，查出 3 处真错已改（[核验记录](docs/review/数字溯源_2026-08-30.md)） |
 | venue / 引用量 | 55 个载体（对应 43 个目录）逐项查官方 proceedings、作者项目页、OpenAlex | 结果在 [`docs/review/`](docs/review/) 四份 manifest；其中 29 个目录的 `meta.json` 内联了这份记录 |
 
-那 5.3% 未匹配是怎么回事：pypdf 会把表格单元格粘成一串（原文 `6.696.932.17` 实为 6.69 / 6.93 / 2.17），或把 `110K` 当成一个 token，正则匹配不上。累计手工抽查 8 篇没发现编造的数字，**但没有全量核完**。
+460 个未匹配的去向（**未匹配 ≠ 写错**）：
+
+| 分类 | 条数 | 是什么 |
+| --- | ---: | --- |
+| 抽取粘连 | 193 | pypdf 把表格单元格粘成一串（`50.861177.7316`）或粘在单词上（`includes1,099,964image`），正则对不上 |
+| 精度差异 | 158 | 原文有个数与它差 <0.5%，四舍五入或抽取掉精度 |
+| 自述推算 | 28 | 解读自己写明了"推断/估算/换算"，如「100 步反演 + 100 步重建 + 100 步编辑 = 300 次前向」 |
+| 外部知识 | 31 | SD 1.5 / A100 / DDIM 这类底座常识 |
+| **待核** | **50** | 以上都不是，**已逐条翻原文核完** |
 
 ### ⚠️ 已知会出错的地方
 
 | 局限 | 说明 |
 | --- | --- |
-| 只读得到文字 | 图表、示意图、定性对比图没有进入模型，纯图里的信息解读不到 |
+| 只读得到文字 | 图表、示意图、定性对比图没有进入模型，纯图里的信息解读不到。**已知两处受此影响**：ICEdit 的 76.2（出自 Fig 8）、UniREditBench 的 4,638 / 6,085（出自 Fig 5b），正文无法核实，标为未验证 |
 | 公式符号会丢 | PDF 抽取常丢下标、希腊字母和矩阵记号，**公式细节一律以 PDF 为准** |
-| 枝节描述可能出错 | 已发现一例：Imagic 那篇把 Imagen/SD 说成「ImageNet 预训练模型基础」，不准确。数字溯源查不出这类错 |
+| 枝节描述可能出错 | 数字溯源查不出这类错，只能靠人工。已发现并修掉一例：Imagic 那篇写「Imagen 和 SD 都是 ImageNet 预训练模型基础」，而 `ImageNet` 在原文出现 **0 次**（2026-08-30 已换成原文实际写的架构差异；全库 24 篇提 ImageNet 的解读逐篇比对过，只有这篇是凭空的） |
 | 未做交叉复核 | 每篇只生成一次（偏短的做过扩写），没有第二个模型独立复核结论 |
-| 不含论文外信息 | 按 [prompt.md](docs/prompt.md) 刻意不写后续工作、社区评价。引用量只在 `meta.json` 和 `docs/review/` 里，不进正文 |
+| 不含论文外信息 | 按 [prompt.md](docs/prompt.md) 刻意不写后续工作、社区评价。**这条被违反过一次**：RISEBench 的解读把 WISE 的「知识图谱 / 800 样本」当成原文内容写，而 WISE 在 RISEBench 里只出现在参考文献（2026-08-30 已改成明标"论文外信息"） |
 | 2026 的选题是模型判断 | 2026 那 38 篇里 33 篇是 DeepSeek 从 1123 篇检索结果里筛的，人工只定了标准和配额。**只由 2026 论文支撑的结论，用之前先看 [总结分析.md](docs/总结分析.md) §5** |
 
-### 已知的三处对不上（2026-08-30 核）
+### 2026-08-30 这轮补掉了什么
 
-| 现象 | 实际情况 |
+上一版这里列着三处"已知对不上"和一个没做完的数字溯源。都补了：
+
+| 原来的问题 | 现在 |
 | --- | --- |
-| 14 个目录的 `meta.json` 里 `cn_chars` 比 `解读.md` 实际字数少 88～141 字 | 这 14 篇在 2026-08-29 那轮被追加了 `## 本轮决策核验补充（2026-08-29）` 一节，`cn_chars` 没跟着更新。正文没被改写，只是多了追加节 |
-| [INDEX.md](docs/INDEX.md) §2 写「160 篇字数落在 6502–8830」 | 受上一条影响，实际上限已是 8943（MGIE）。区间没被截断，只是统计口径早于追加节 |
-| [总结分析.md](docs/总结分析.md) §4 正文写「这七条里」，但表里只有 6 行 | 计数写错，**已于 2026-08-30 改成「这六条里」**。表格内容没动，六条未解问题本身是对的 |
+| 数字溯源只覆盖 168 篇，"手工抽查 8 篇，但没有全量核完" | 补抽 13 篇缺失的抽取文本，又修掉一个漏抽（Inter-Edit 没有 arXiv ID，被按 `arxiv_id` 命名的脚本整篇跳过），覆盖到 **182 篇**——余下 4 篇是无独立论文的核验笔记，本来就没有原文可比对。50 条待核全部人工核完 |
+| 14 个目录的 `meta.json` 里 `cn_chars` 比 `解读.md` 实际少 88～141 字 | 2026-08-29 那轮追加 `## 本轮决策核验补充` 一节时没同步计数。写了 [`_work/sync_cnchars.py`](_work/sync_cnchars.py) 一次对齐 `meta.json` 与 INDEX 表格，可重复跑（顺带发现另有 5 个目录——4 项无独立论文的加上 FlowChef——`meta.json` 里**根本没有 `cn_chars` 字段**，一并补上） |
+| [INDEX.md](docs/INDEX.md) §2 写「字数落在 6502–8830」 | 全量重数，实际是 **6502–8943**（上限是 MGIE）。已改 |
+| [总结分析.md](docs/总结分析.md) §4 写「这七条里」但表里只有 6 行 | 已改成「这六条里」。表格内容没动 |
+| `2025-05_DICE` 的 PDF 链接标着"渲染版本存疑" | 本地 PDF 元数据（`/Producer: pikepdf`、`/Subject: IEEE International Conference on Computer Vision`）指向 ICCV 2025 proceedings 版；CVF 那份实拉下来 sha256 与本地完全一致。已换链接，版本存疑清零 |
+| 数字溯源脚本本身有 4 个 bug | 逗号吞并造出幻数、`normalize()` 三条规则互相破坏、`meta['arxiv_id']` 在第二批直接 KeyError、没有 arXiv ID 的目录整篇被跳过。都已修 |
 
 ---
 
@@ -288,22 +302,20 @@ python3 scripts/verify_pdf_links.py 2023-02_ControlNet # 只核一条
 
 第四项才是关键：前三项只能证明链接活着，只有和本地那份对上字节数，才能证明它就是写出这篇 `解读.md` 的那个 PDF。
 
-**2026-08-30 全量跑下来的结果**：186 项里 **181 条四项全过**，4 项没有独立论文（给官方来源），1 项存疑。
-这轮核验实际揪出了 3 条错链，全部已修：
+**2026-08-30 全量跑下来的结果**：186 项里 **182 条四项全过**，4 项没有独立论文（给官方来源），**0 项存疑**。
+明细见 [`docs/review/PDF直链_2026-08-30.md`](docs/review/PDF直链_2026-08-30.md)。这轮核验揪出 3 条默认规则会拿错的链接，全部已修：
 
-| 条目 | 原来的链接错在哪 | 现在给的 | 怎么确认的 |
+| 条目 | 默认规则会拿到什么 | 现在给的 | 怎么确认的 |
 | --- | --- | --- | --- |
-| [FlowChef](papers/2024-12_FlowChef/解读.md) | arXiv `2412.00100` 已改题为 *Steering Rectified Flow Models in the Vector Field for Controlled Image Generation* 并大幅改写（13.9 MB），和本库读的不是一份 | ICCV 2025 proceedings 版 | sha256 与本地一致，且与 `meta.json` 里记的 `paper_sha256` 一致 |
-| [ug-fight-dpo](papers/2026-03_ug-fight-dpo/解读.md) | 裸链 `arxiv.org/pdf/2603.17044` 稳定 404（复测 2 次） | 带版本号的 `…/2603.17044v1` | sha256 与本地一致 |
-| [DICE](papers/2025-05_DICE/解读.md) ⚠️ | —— | arXiv v1，**但标了 ⚠️** | 见下 |
+| [FlowChef](papers/2024-12_FlowChef/解读.md) | arXiv `2412.00100` 已改题为 *Steering Rectified Flow Models in the Vector Field for Controlled Image Generation* 并大幅改写（13,933,891 字节），和本库读的不是一份 | ICCV 2025 proceedings 版（7,278,431 字节） | sha256 与本地一致，且与 `meta.json` 里记的 `paper_sha256` 一致 |
+| [ug-fight-dpo](papers/2026-03_ug-fight-dpo/解读.md) | 裸链 `arxiv.org/pdf/2603.17044` 稳定 404（复测 2 次） | 带版本号的 `…/2603.17044v1`（565,863 字节） | 字节数与本地一致 |
+| [DICE](papers/2025-05_DICE/解读.md) | arXiv v1 是 15 页 4,016,508 字节的预印本，本地副本是 10 页 1,739,117 字节 | ICCV 2025 proceedings 版 | 本地 PDF 元数据写着 `/Producer: pikepdf 9.11.0`、`/Subject: IEEE International Conference on Computer Vision`，据此定位到 CVF 版；实拉下来 sha256 `3148fc36…c765a570` 与本地完全一致 |
 
-⚠️ **DICE 这一条要单独说。**arXiv 上只有 v1，标题、作者、日期都和本库对得上，链接指向的论文没错；
-但 arXiv 版是 15 页 4,016,508 字节，而本库解读所依据的本地副本是 10 页 1,739,117 字节，少了附录、也没有 arXiv 页边戳。
-**本地那份从哪来的已经追不到了（未验证）**，两者逐页文字无一页相同（排版不同）。读这篇请以 arXiv 版为准，
-并注意解读可能没覆盖到 arXiv 版多出来的那 5 页。
+DICE 这条上一版标着 ⚠️「本地那份从哪来的已经追不到了」，2026-08-30 追到了，⚠️ 已撤销。
+[`scripts/pdf_sources.py`](scripts/pdf_sources.py) 里的 `RENDITION_DIFFERS`（专放"论文没错但渲染版本对不上"的条目）现在是空的。
 
 表里的**解读字数**是 2026-08-30 当场从 `解读.md` 数的（口径与 `meta.json` 的 `cn_chars` 相同：U+4E00–U+9FFF），
-所以不受 [§6](#6-可信度边界什么能当依据什么不能) 里那 14 个 `cn_chars` 过期的影响。要复算：`python3 scripts/verify_pdf_links.py`。
+不读 `meta.json`，所以忘了同步计数也不会串。要复算表格：`python3 _work/gen_paper_table.py`；要复算链接：`python3 scripts/verify_pdf_links.py`。
 
 | 时间 | 简称（→ 解读） | 论文标题 | 原文 | 解读字数 |
 | --- | --- | --- | --- | ---: |
@@ -315,7 +327,7 @@ python3 scripts/verify_pdf_links.py 2023-02_ControlNet # 只核一条
 | 2022-08-02 | [Prompt-to-Prompt](papers/2022-08_Prompt-to-Prompt/解读.md) | Prompt-to-Prompt Image Editing with Cross Attention Control | [PDF](https://arxiv.org/pdf/2208.01626) | 7138 |
 | 2022-08-02 | [Textual-Inversion](papers/2022-08_Textual-Inversion/解读.md) | An Image is Worth One Word: Personalizing Text-to-Image Generation using Textual Inversion | [PDF](https://arxiv.org/pdf/2208.01618) | 6900 |
 | 2022-10-20 | [DiffEdit](papers/2022-10_DiffEdit/解读.md) | DiffEdit: Diffusion-based semantic image editing with mask guidance | [PDF](https://arxiv.org/pdf/2210.11427) | 7215 |
-| 2022-10-17 | [Imagic](papers/2022-10_Imagic/解读.md) | Imagic: Text-Based Real Image Editing with Diffusion Models | [PDF](https://arxiv.org/pdf/2210.09276) | 7049 |
+| 2022-10-17 | [Imagic](papers/2022-10_Imagic/解读.md) | Imagic: Text-Based Real Image Editing with Diffusion Models | [PDF](https://arxiv.org/pdf/2210.09276) | 7136 |
 | 2022-11-22 | [EDICT](papers/2022-11_EDICT/解读.md) | EDICT: Exact Diffusion Inversion via Coupled Transformations | [PDF](https://arxiv.org/pdf/2211.12446) | 6614 |
 | 2022-11-17 | [InstructPix2Pix](papers/2022-11_InstructPix2Pix/解读.md) | InstructPix2Pix: Learning to Follow Image Editing Instructions | [PDF](https://arxiv.org/pdf/2211.09800) | 7603 |
 | 2022-11-17 | [Null-text-Inversion](papers/2022-11_Null-text-Inversion/解读.md) | Null-text Inversion for Editing Real Images using Guided Diffusion Models | [PDF](https://arxiv.org/pdf/2211.09794) | 7202 |
@@ -393,12 +405,12 @@ python3 scripts/verify_pdf_links.py 2023-02_ControlNet # 只核一条
 | 2025-04-29 | [ICEdit](papers/2025-04_ICEdit/解读.md) | In-Context Edit: Enabling Instructional Image Editing with In-Context Generation in Large Scale Diffusion Transformer | [PDF](https://arxiv.org/pdf/2504.20690) | 6865 |
 | 2025-04-21 | [Insert-Anything](papers/2025-04_Insert-Anything/解读.md) | Insert Anything: Image Insertion via In-Context Editing in DiT | [PDF](https://arxiv.org/pdf/2504.15009) | 6580 |
 | 2025-04-08 | [MetaQuery](papers/2025-04_MetaQuery/解读.md) | Transfer between Modalities with MetaQueries | [PDF](https://arxiv.org/pdf/2504.06256) | 7502 |
-| 2025-04-03 | [RISEBench](papers/2025-04_RISEBench/解读.md) | Envisioning Beyond the Pixels: Benchmarking Reasoning-Informed Visual Editing | [PDF](https://arxiv.org/pdf/2504.02826) | 7847 |
+| 2025-04-03 | [RISEBench](papers/2025-04_RISEBench/解读.md) | Envisioning Beyond the Pixels: Benchmarking Reasoning-Informed Visual Editing | [PDF](https://arxiv.org/pdf/2504.02826) | 7917 |
 | 2025-04-24 | [Step1X-Edit](papers/2025-04_Step1X-Edit/解读.md) | Step1X-Edit: A Practical Framework for General Image Editing | [PDF](https://arxiv.org/pdf/2504.17761) | 7396 |
 | 2025-04-02 | [UNO](papers/2025-04_UNO/解读.md) | Less-to-More Generalization: Unlocking More Controllability by In-Context Generation | [PDF](https://arxiv.org/pdf/2504.02160) | 7202 |
 | 2025-05-20 | [BAGEL](papers/2025-05_BAGEL/解读.md) | Emerging Properties in Unified Multimodal Pretraining | [PDF](https://arxiv.org/pdf/2505.14683) | 7170 |
 | 2025-05-14 | [BLIP3-o](papers/2025-05_BLIP3-o/解读.md) | BLIP3-o: A Family of Fully Open Unified Multimodal Models-Architecture, Training and Dataset | [PDF](https://arxiv.org/pdf/2505.09568) | 6887 |
-| 2025-05-26 | [DICE](papers/2025-05_DICE/解读.md) | What Changed? Detecting and Evaluating Instruction-Guided Image Edits with Multimodal Large Language Models | [PDF](https://arxiv.org/pdf/2505.20405) ⚠️ | 3306 |
+| 2025-05-26 | [DICE](papers/2025-05_DICE/解读.md) | What Changed? Detecting and Evaluating Instruction-Guided Image Edits with Multimodal Large Language Models | [PDF](https://openaccess.thecvf.com/content/ICCV2025/papers/Baraldi_What_Changed_Detecting_and_Evaluating_Instruction-Guided_Image_Edits_with_Multimodal_ICCV_2025_paper.pdf) | 3306 |
 | 2025-05-12 | [DanceGRPO](papers/2025-05_DanceGRPO/解读.md) | DanceGRPO: Unleashing GRPO on Visual Generation | [PDF](https://arxiv.org/pdf/2505.07818) | 7294 |
 | 2025-05-22 | [Everyday-Image-Editing](papers/2025-05_Everyday-Image-Editing/解读.md) | Understanding Generative AI Capabilities in Everyday Image Editing Tasks | [PDF](https://arxiv.org/pdf/2505.16181) | 2986 |
 | 2025-05-08 | [Flow-GRPO](papers/2025-05_Flow-GRPO/解读.md) | Flow-GRPO: Training Flow Matching Models via Online RL | [PDF](https://arxiv.org/pdf/2505.05470) | 6502 |

@@ -19,3 +19,6 @@ _work/*/*
 严重事实错误_待Review_临时.md
 
 .DS_Store
+
+# 根目录下的 .html 是本地可视化草稿，不属于论文库内容（docs/主线.html 是正式产物，已跟踪）
+/*.html

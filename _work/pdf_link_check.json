@@ -997,13 +997,13 @@
   {
    "dir": "2025-05_DICE",
    "short": "DICE",
-   "url": "https://arxiv.org/pdf/2505.20405",
+   "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Baraldi_What_Changed_Detecting_and_Evaluating_Instruction-Guided_Image_Edits_with_Multimodal_ICCV_2025_paper.pdf",
    "local_bytes": 1739117,
    "http": 206,
    "content_type": "application/pdf",
    "magic": "%PDF",
-   "remote_bytes": 4016508,
-   "status": "MISMATCH"
+   "remote_bytes": 1739117,
+   "status": "OK"
   },
   {
    "dir": "2025-05_DanceGRPO",

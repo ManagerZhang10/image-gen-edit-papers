@@ -34,7 +34,7 @@ for d in dirs:
     short = m.get("short") or d
     title = (m.get("title") or "").replace("|", r"\|").strip()
     # 字数当场从 解读.md 数（口径同 meta.json 的 cn_chars：U+4E00–U+9FFF），
-    # 这样不受 14 个目录 cn_chars 过期的影响
+    # 不读 meta.json，这样即使忘了跑 _work/sync_cnchars.py 也不会出错
     body = io.open(os.path.join(PAPERS, d, "解读.md"), encoding="utf-8").read()
     cn = len(re.findall(r"[\u4e00-\u9fff]", body))
     # Grok-Aurora 的 meta.json 没有 date，退回目录名里的年月

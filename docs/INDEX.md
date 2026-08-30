@@ -254,10 +254,13 @@
 
 ## 2. 可信度边界
 
-下面这段只针对 §1 和 §3 里的 **160 篇 11 节深读**；§4 那 26 项走的是另一套验收口径。
+下面这段只针对 §1 和 §3 里的 **160 篇标准深读**；§4 那 26 项走的是另一套验收口径。
 
-160 个 arXiv ID 全部实抓 `arxiv.org/abs` 比对过标题与日期；160 篇解读结构完整、篇幅达标、PDF 全部可解析。
-（篇幅区间原记为 6502–8830，其中 14 篇在 2026-08-29 被追加了「本轮决策核验补充」一节，实际上限已是 8943。）
+160 个 arXiv ID 全部实抓 `arxiv.org/abs` 比对过标题与日期；160 篇 PDF 全部可解析，篇幅全部达标。
+篇幅区间 6502–8943 汉字（2026-08-30 全量重数，口径 U+4E00–U+9FFF）。
+结构上 158 篇是标准 11 节；Complex-Edit 和 KRIS-Bench 这两篇 benchmark 各有 19 个二级标题——
+标准 11 节之后接了第二批那套 benchmark 格式的 6 个无编号小节（一句话结论 / 问题与动机 / 方法与数据构造 /
+评测设计与指标 / 关键结果 / 局限），再补 §12 决策意义、§13 一手来源。
 **但 2026 的 38 篇里有 33 篇是模型从 1123 篇候选里筛出来的，人工只定了标准**，还有图表信息丢失、公式失真等已知问题——
 详见 [总结分析.md](总结分析.md) 第 5 节，用之前先看那一节。
 
@@ -272,31 +275,31 @@
 | 2022-08-02 | [Prompt-to-Prompt](../papers/2022-08_Prompt-to-Prompt/解读.md) | [2208.01626](https://arxiv.org/abs/2208.01626) | 7138 |
 | 2022-08-02 | [Textual-Inversion](../papers/2022-08_Textual-Inversion/解读.md) | [2208.01618](https://arxiv.org/abs/2208.01618) | 6900 |
 | 2022-08-25 | [DreamBooth](../papers/2022-08_DreamBooth/解读.md) | [2208.12242](https://arxiv.org/abs/2208.12242) | 6553 |
-| 2022-10-17 | [Imagic](../papers/2022-10_Imagic/解读.md) | [2210.09276](https://arxiv.org/abs/2210.09276) | 7049 |
+| 2022-10-17 | [Imagic](../papers/2022-10_Imagic/解读.md) | [2210.09276](https://arxiv.org/abs/2210.09276) | 7136 |
 | 2022-10-20 | [DiffEdit](../papers/2022-10_DiffEdit/解读.md) | [2210.11427](https://arxiv.org/abs/2210.11427) | 7215 |
 | 2022-11-17 | [InstructPix2Pix](../papers/2022-11_InstructPix2Pix/解读.md) | [2211.09800](https://arxiv.org/abs/2211.09800) | 7603 |
-| 2022-11-17 | [Null-text-Inversion](../papers/2022-11_Null-text-Inversion/解读.md) | [2211.09794](https://arxiv.org/abs/2211.09794) | 7079 |
+| 2022-11-17 | [Null-text-Inversion](../papers/2022-11_Null-text-Inversion/解读.md) | [2211.09794](https://arxiv.org/abs/2211.09794) | 7202 |
 | 2022-11-22 | [EDICT](../papers/2022-11_EDICT/解读.md) | [2211.12446](https://arxiv.org/abs/2211.12446) | 6614 |
 | 2022-11-22 | [Plug-and-Play](../papers/2022-11_Plug-and-Play/解读.md) | [2211.12572](https://arxiv.org/abs/2211.12572) | 7284 |
-| 2022-11-23 | [Paint-by-Example](../papers/2022-11_Paint-by-Example/解读.md) | [2211.13227](https://arxiv.org/abs/2211.13227) | 7457 |
+| 2022-11-23 | [Paint-by-Example](../papers/2022-11_Paint-by-Example/解读.md) | [2211.13227](https://arxiv.org/abs/2211.13227) | 7577 |
 | 2022-12-08 | [Custom-Diffusion](../papers/2022-12_Custom-Diffusion/解读.md) | [2212.04488](https://arxiv.org/abs/2212.04488) | 7128 |
 | 2022-12-13 | [Imagen-Editor-EditBench](../papers/2022-12_Imagen-Editor-EditBench/解读.md) | [2212.06909](https://arxiv.org/abs/2212.06909) | 8394 |
 | 2023-02-06 | [pix2pix-zero](../papers/2023-02_pix2pix-zero/解读.md) | [2302.03027](https://arxiv.org/abs/2302.03027) | 6692 |
-| 2023-02-10 | [ControlNet](../papers/2023-02_ControlNet/解读.md) | [2302.05543](https://arxiv.org/abs/2302.05543) | 7802 |
+| 2023-02-10 | [ControlNet](../papers/2023-02_ControlNet/解读.md) | [2302.05543](https://arxiv.org/abs/2302.05543) | 7943 |
 | 2023-02-16 | [T2I-Adapter](../papers/2023-02_T2I-Adapter/解读.md) | [2302.08453](https://arxiv.org/abs/2302.08453) | 7127 |
 | 2023-03-16 | [HIVE](../papers/2023-03_HIVE/解读.md) | [2303.09618](https://arxiv.org/abs/2303.09618) | 7788 |
 | 2023-04-05 | [SAM](../papers/2023-04_SAM/解读.md) | [2304.02643](https://arxiv.org/abs/2304.02643) | 6768 |
 | 2023-04-13 | [Inpaint-Anything](../papers/2023-04_Inpaint-Anything/解读.md) | [2304.06790](https://arxiv.org/abs/2304.06790) | 8149 |
 | 2023-04-17 | [MasaCtrl](../papers/2023-04_MasaCtrl/解读.md) | [2304.08465](https://arxiv.org/abs/2304.08465) | 6562 |
-| 2023-05-18 | [DragGAN](../papers/2023-05_DragGAN/解读.md) | [2305.10973](https://arxiv.org/abs/2305.10973) | 6889 |
+| 2023-05-18 | [DragGAN](../papers/2023-05_DragGAN/解读.md) | [2305.10973](https://arxiv.org/abs/2305.10973) | 7007 |
 | 2023-06-01 | [Self-Guidance](../papers/2023-06_Self-Guidance/解读.md) | [2306.00986](https://arxiv.org/abs/2306.00986) | 7259 |
 | 2023-06-16 | [MagicBrush](../papers/2023-06_MagicBrush/解读.md) | [2306.10012](https://arxiv.org/abs/2306.10012) | 7080 |
 | 2023-06-26 | [DragDiffusion](../papers/2023-06_DragDiffusion/解读.md) | [2306.14435](https://arxiv.org/abs/2306.14435) | 7065 |
 | 2023-07-05 | [DragonDiffusion](../papers/2023-07_DragonDiffusion/解读.md) | [2307.02421](https://arxiv.org/abs/2307.02421) | 7518 |
 | 2023-07-18 | [AnyDoor](../papers/2023-07_AnyDoor/解读.md) | [2307.09481](https://arxiv.org/abs/2307.09481) | 7129 |
-| 2023-08-13 | [IP-Adapter](../papers/2023-08_IP-Adapter/解读.md) | [2308.06721](https://arxiv.org/abs/2308.06721) | 7261 |
+| 2023-08-13 | [IP-Adapter](../papers/2023-08_IP-Adapter/解读.md) | [2308.06721](https://arxiv.org/abs/2308.06721) | 7379 |
 | 2023-09-07 | [InstructDiffusion](../papers/2023-09_InstructDiffusion/解读.md) | [2309.03895](https://arxiv.org/abs/2309.03895) | 6804 |
-| 2023-09-29 | [MGIE](../papers/2023-09_MGIE/解读.md) | [2309.17102](https://arxiv.org/abs/2309.17102) | 8830 |
+| 2023-09-29 | [MGIE](../papers/2023-09_MGIE/解读.md) | [2309.17102](https://arxiv.org/abs/2309.17102) | 8943 |
 | 2023-09-30 | [PixArt-alpha](../papers/2023-09_PixArt-alpha/解读.md) | [2310.00426](https://arxiv.org/abs/2310.00426) | 6861 |
 | 2023-11-06 | [Cross-Image-Attention](../papers/2023-11_Cross-Image-Attention/解读.md) | [2311.03335](https://arxiv.org/abs/2311.03335) | 7423 |
 | 2023-11-16 | [Emu-Edit](../papers/2023-11_Emu-Edit/解读.md) | [2311.10089](https://arxiv.org/abs/2311.10089) | 6854 |
@@ -315,7 +318,7 @@
 | 2024-03-11 | [BrushNet](../papers/2024-03_BrushNet/解读.md) | [2403.06976](https://arxiv.org/abs/2403.06976) | 6745 |
 | 2024-03-21 | [ReNoise](../papers/2024-03_ReNoise/解读.md) | [2403.14602](https://arxiv.org/abs/2403.14602) | 6706 |
 | 2024-04-03 | [VAR](../papers/2024-04_VAR/解读.md) | [2404.02905](https://arxiv.org/abs/2404.02905) | 8136 |
-| 2024-04-15 | [HQ-Edit](../papers/2024-04_HQ-Edit/解读.md) | [2404.09990](https://arxiv.org/abs/2404.09990) | 7101 |
+| 2024-04-15 | [HQ-Edit](../papers/2024-04_HQ-Edit/解读.md) | [2404.09990](https://arxiv.org/abs/2404.09990) | 7232 |
 | 2024-04-22 | [SEED-X](../papers/2024-04_SEED-X/解读.md) | [2404.14396](https://arxiv.org/abs/2404.14396) | 6648 |
 | 2024-05-07 | [SEED-Data-Edit](../papers/2024-05_SEED-Data-Edit/解读.md) | [2405.04007](https://arxiv.org/abs/2405.04007) | 6626 |
 | 2024-05-16 | [Chameleon](../papers/2024-05_Chameleon/解读.md) | [2405.09818](https://arxiv.org/abs/2405.09818) | 8109 |
@@ -331,7 +334,7 @@
 | 2024-11-07 | [RF-Solver-Edit](../papers/2024-11_RF-Solver-Edit/解读.md) | [2411.04746](https://arxiv.org/abs/2411.04746) | 7204 |
 | 2024-11-11 | [Add-it](../papers/2024-11_Add-it/解读.md) | [2411.07232](https://arxiv.org/abs/2411.07232) | 7033 |
 | 2024-11-11 | [OmniEdit](../papers/2024-11_OmniEdit/解读.md) | [2411.07199](https://arxiv.org/abs/2411.07199) | 7402 |
-| 2024-11-11 | [SeedEdit](../papers/2024-11_SeedEdit/解读.md) | [2411.06686](https://arxiv.org/abs/2411.06686) | 7512 |
+| 2024-11-11 | [SeedEdit](../papers/2024-11_SeedEdit/解读.md) | [2411.06686](https://arxiv.org/abs/2411.06686) | 7623 |
 | 2024-11-14 | [MagicQuill](../papers/2024-11_MagicQuill/解读.md) | [2411.09703](https://arxiv.org/abs/2411.09703) | 7389 |
 | 2024-11-22 | [OminiControl](../papers/2024-11_OminiControl/解读.md) | [2411.15098](https://arxiv.org/abs/2411.15098) | 6543 |
 | 2024-11-24 | [AnyEdit](../papers/2024-11_AnyEdit/解读.md) | [2411.15738](https://arxiv.org/abs/2411.15738) | 7500 |
@@ -341,35 +344,35 @@
 | 2025-03-10 | [EasyControl](../papers/2025-03_EasyControl/解读.md) | [2503.07027](https://arxiv.org/abs/2503.07027) | 7188 |
 | 2025-03-13 | [GoT](../papers/2025-03_GoT/解读.md) | [2503.10639](https://arxiv.org/abs/2503.10639) | 7356 |
 | 2025-04-02 | [UNO](../papers/2025-04_UNO/解读.md) | [2504.02160](https://arxiv.org/abs/2504.02160) | 7202 |
-| 2025-04-03 | [RISEBench](../papers/2025-04_RISEBench/解读.md) | [2504.02826](https://arxiv.org/abs/2504.02826) | 7847 |
+| 2025-04-03 | [RISEBench](../papers/2025-04_RISEBench/解读.md) | [2504.02826](https://arxiv.org/abs/2504.02826) | 7917 |
 | 2025-04-08 | [MetaQuery](../papers/2025-04_MetaQuery/解读.md) | [2504.06256](https://arxiv.org/abs/2504.06256) | 7502 |
-| 2025-04-17 | [Complex-Edit](../papers/2025-04_Complex-Edit/解读.md) | [2504.13143](https://arxiv.org/abs/2504.13143) | 7658 |
+| 2025-04-17 | [Complex-Edit](../papers/2025-04_Complex-Edit/解读.md) | [2504.13143](https://arxiv.org/abs/2504.13143) | 8329 |
 | 2025-04-21 | [Insert-Anything](../papers/2025-04_Insert-Anything/解读.md) | [2504.15009](https://arxiv.org/abs/2504.15009) | 6580 |
 | 2025-04-23 | [DreamO](../papers/2025-04_DreamO/解读.md) | [2504.16915](https://arxiv.org/abs/2504.16915) | 7727 |
-| 2025-04-24 | [Step1X-Edit](../papers/2025-04_Step1X-Edit/解读.md) | [2504.17761](https://arxiv.org/abs/2504.17761) | 7282 |
-| 2025-04-29 | [ICEdit](../papers/2025-04_ICEdit/解读.md) | [2504.20690](https://arxiv.org/abs/2504.20690) | 6746 |
+| 2025-04-24 | [Step1X-Edit](../papers/2025-04_Step1X-Edit/解读.md) | [2504.17761](https://arxiv.org/abs/2504.17761) | 7396 |
+| 2025-04-29 | [ICEdit](../papers/2025-04_ICEdit/解读.md) | [2504.20690](https://arxiv.org/abs/2504.20690) | 6865 |
 | 2025-05-01 | [T2I-R1](../papers/2025-05_T2I-R1/解读.md) | [2505.00703](https://arxiv.org/abs/2505.00703) | 6876 |
 | 2025-05-08 | [Flow-GRPO](../papers/2025-05_Flow-GRPO/解读.md) | [2505.05470](https://arxiv.org/abs/2505.05470) | 6502 |
 | 2025-05-12 | [DanceGRPO](../papers/2025-05_DanceGRPO/解读.md) | [2505.07818](https://arxiv.org/abs/2505.07818) | 7294 |
 | 2025-05-14 | [BLIP3-o](../papers/2025-05_BLIP3-o/解读.md) | [2505.09568](https://arxiv.org/abs/2505.09568) | 6887 |
 | 2025-05-20 | [BAGEL](../papers/2025-05_BAGEL/解读.md) | [2505.14683](https://arxiv.org/abs/2505.14683) | 7170 |
-| 2025-05-22 | [KRIS-Bench](../papers/2025-05_KRIS-Bench/解读.md) | [2505.16707](https://arxiv.org/abs/2505.16707) | 6892 |
+| 2025-05-22 | [KRIS-Bench](../papers/2025-05_KRIS-Bench/解读.md) | [2505.16707](https://arxiv.org/abs/2505.16707) | 7494 |
 | 2025-05-26 | [ImgEdit](../papers/2025-05_ImgEdit/解读.md) | [2505.20275](https://arxiv.org/abs/2505.20275) | 7451 |
 | 2025-05-28 | [HiDream-I1](../papers/2025-05_HiDream-I1/解读.md) | [2505.22705](https://arxiv.org/abs/2505.22705) | 7337 |
 | 2025-06-03 | [UniWorld-V1](../papers/2025-06_UniWorld-V1/解读.md) | [2506.03147](https://arxiv.org/abs/2506.03147) | 6657 |
-| 2025-06-05 | [SeedEdit3](../papers/2025-06_SeedEdit3/解读.md) | [2506.05083](https://arxiv.org/abs/2506.05083) | 7545 |
-| 2025-06-17 | [FLUX-Kontext](../papers/2025-06_FLUX-Kontext/解读.md) | [2506.15742](https://arxiv.org/abs/2506.15742) | 8553 |
+| 2025-06-05 | [SeedEdit3](../papers/2025-06_SeedEdit3/解读.md) | [2506.05083](https://arxiv.org/abs/2506.05083) | 7643 |
+| 2025-06-17 | [FLUX-Kontext](../papers/2025-06_FLUX-Kontext/解读.md) | [2506.15742](https://arxiv.org/abs/2506.15742) | 8679 |
 | 2025-06-18 | [Show-o2](../papers/2025-06_Show-o2/解读.md) | [2506.15564](https://arxiv.org/abs/2506.15564) | 6918 |
 | 2025-06-23 | [OmniGen2](../papers/2025-06_OmniGen2/解读.md) | [2506.18871](https://arxiv.org/abs/2506.18871) | 6695 |
 | 2025-06-29 | [Ovis-U1](../papers/2025-06_Ovis-U1/解读.md) | [2506.23044](https://arxiv.org/abs/2506.23044) | 6716 |
 | 2025-07-18 | [NoHumansRequired](../papers/2025-07_NoHumansRequired/解读.md) | [2507.14119](https://arxiv.org/abs/2507.14119) | 6730 |
 | 2025-07-28 | [GPT-Image-Edit-1.5M](../papers/2025-07_GPT-Image-Edit-1.5M/解读.md) | [2507.21033](https://arxiv.org/abs/2507.21033) | 6615 |
-| 2025-08-04 | [Qwen-Image](../papers/2025-08_Qwen-Image/解读.md) | [2508.02324](https://arxiv.org/abs/2508.02324) | 7179 |
+| 2025-08-04 | [Qwen-Image](../papers/2025-08_Qwen-Image/解读.md) | [2508.02324](https://arxiv.org/abs/2508.02324) | 7310 |
 | 2025-08-11 | [X2Edit](../papers/2025-08_X2Edit/解读.md) | [2508.07607](https://arxiv.org/abs/2508.07607) | 6789 |
 | 2025-08-21 | [VAREdit](../papers/2025-08_VAREdit/解读.md) | [2508.15772](https://arxiv.org/abs/2508.15772) | 7076 |
 | 2025-09-16 | [EdiVal-Agent](../papers/2025-09_EdiVal-Agent/解读.md) | [2509.13399](https://arxiv.org/abs/2509.13399) | 6599 |
 | 2025-09-24 | [EditVerse](../papers/2025-09_EditVerse/解读.md) | [2509.20360](https://arxiv.org/abs/2509.20360) | 7231 |
-| 2025-09-24 | [Seedream4](../papers/2025-09_Seedream4/解读.md) | [2509.20427](https://arxiv.org/abs/2509.20427) | 6523 |
+| 2025-09-24 | [Seedream4](../papers/2025-09_Seedream4/解读.md) | [2509.20427](https://arxiv.org/abs/2509.20427) | 6611 |
 | 2025-09-28 | [EditScore](../papers/2025-09_EditScore/解读.md) | [2509.23909](https://arxiv.org/abs/2509.23909) | 6719 |
 | 2025-09-28 | [HunyuanImage3](../papers/2025-09_HunyuanImage3/解读.md) | [2509.23951](https://arxiv.org/abs/2509.23951) | 6546 |
 | 2025-09-29 | [OpenGPT-4o-Image](../papers/2025-09_OpenGPT-4o-Image/解读.md) | [2509.24900](https://arxiv.org/abs/2509.24900) | 7651 |

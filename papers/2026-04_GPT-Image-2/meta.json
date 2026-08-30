@@ -4,6 +4,7 @@
   "date": "2026/04/21",
   "title": "GPT Image 2",
   "url": "https://developers.openai.com/api/docs/models/gpt-image-2",
+  "cn_chars": 732,
   "guide_url": "https://developers.openai.com/cookbook/examples/multimodal/image-gen-models-prompting-guide",
   "source_type": "official_product_documentation",
   "paper_pdf": false,
