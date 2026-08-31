@@ -1,9 +1,9 @@
-"""全量核对 README 附二每一行：解读路径、标题、原文链接必须来自同一个目录。"""
+"""全量核对 README 全量清单每一行：解读路径、标题、原文链接必须来自同一个目录。"""
 import io, json, os, re, sys
 sys.path.insert(0, "scripts")
 from pdf_sources import RENDITION_DIFFERS
 chk = {r["dir"]: r for r in json.load(open("_work/pdf_link_check.json"))["rows"]}
-s = io.open("README.md", encoding="utf-8").read().split("## 附二")[1]
+s = io.open("README.md", encoding="utf-8").read().split("## 全量清单")[1]
 rows = re.findall(r"^\| ([^|]+) \| \[([^\]]+)\]\(papers/([^)]+)/解读\.md\) \| (.+?) \| \[(?:PDF|官方来源)\]\(([^)]+)\)( ⚠️)? \| (\d+) \|$", s, re.M)
 print(f"解析出 {len(rows)} 行")
 bad = 0

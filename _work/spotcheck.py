@@ -2,7 +2,7 @@
 import random, re, io, sys, time, urllib.request
 UA = "image_edit_paper/1.0 (https://github.com/ManagerYu10/image_edit_paper)"
 s = io.open("README.md", encoding="utf-8").read()
-tbl = s.split("## 附二")[1]
+tbl = s.split("## 全量清单")[1]
 rows = re.findall(r"^\| ([\d-]+) \| \[([^\]]+)\]\([^)]+\) \| (.+?) \| \[(PDF|官方来源)\]\(([^)]+)\)", tbl, re.M)
 random.seed(int(sys.argv[1]) if len(sys.argv) > 1 else 7)
 sample = random.sample([r for r in rows if r[3] == "PDF"], 6)

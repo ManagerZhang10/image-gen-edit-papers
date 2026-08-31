@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""由 meta.json + _work/pdf_link_check.json 生成 README 附二的全量论文表。
+"""由 meta.json + _work/pdf_link_check.json 生成 README 全量清单那张表。
 
 只有核验状态 OK 的条目拿到干净的 PDF 直链；渲染版本对不上的加 ⚠️ 并在脚注
 说明；没有独立论文的给官方来源。任何未核过的东西不会以"PDF"的名义出现。

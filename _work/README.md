@@ -27,9 +27,9 @@
 
 | 脚本 | 干什么 | 依赖 |
 | --- | --- | --- |
-| `gen_paper_table.py` | 读 `pdf_link_check.json` + 各目录 `meta.json`，生成 README 附二那张 186 行的表 | 标准库 + `scripts/pdf_sources.py` |
+| `gen_paper_table.py` | 读 `pdf_link_check.json` + 各目录 `meta.json`，生成 README 全量清单那张 186 行的表 | 标准库 + `scripts/pdf_sources.py` |
 | `check_anchors.py` | 复刻 github-slugger 的去标点规则，检查 md 里的站内锚点能不能对上真实标题 | 标准库 |
-| `check_table_rows.py` | 全量核对附二每一行：解读路径、简称、标题、链接、⚠️ 标注、字数必须都来自同一个目录 | 标准库 |
+| `check_table_rows.py` | 全量核对全量清单每一行：解读路径、简称、标题、链接、⚠️ 标注、字数必须都来自同一个目录 | 标准库 |
 | `check_links.py` | 扫全部进了仓库的 `.md`，站内相对链接的目标文件必须真实存在 | 标准库 |
 | `spotcheck.py` | 从成品 README 随机抽几行，真去打开链接，比对返回的 `citation_title` 和表里写的标题 | 标准库 + 联网 |
 | `sync_cnchars.py` | 把每个 `meta.json` 的 `cn_chars` 与 `解读.md` 实际汉字数对齐，并同步改 `docs/INDEX.md` 里对应的表格行。默认只报告，加 `--write` 写回，可重复跑 | 标准库 |
@@ -37,7 +37,7 @@
 | `factcheck.py` | 数字溯源主程序：解读里每个数字回抽取文本比对，输出逐篇未匹配率 | 标准库 |
 | `unsourced_report.py` | 把每个未匹配的数字连同它所在的整句导出来，供人工翻原文 | 标准库 |
 | `unsourced_triage.py` | 把未匹配项分成 抽取粘连 / 精度差异 / 自述推算 / 外部知识 / 待核 五类，写 `unsourced_triage.txt`。只有"待核"需要人看 | 标准库 |
-| `pdf_link_check.json` | 不是脚本，是 [`scripts/verify_pdf_links.py`](../scripts/verify_pdf_links.py) 的核验结果快照，附二那张表的依据 | — |
+| `pdf_link_check.json` | 不是脚本，是 [`scripts/verify_pdf_links.py`](../scripts/verify_pdf_links.py) 的核验结果快照，全量清单那张表的依据 | — |
 
 一轮完整的自查：
 
