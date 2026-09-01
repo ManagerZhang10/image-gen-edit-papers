@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """由 scripts/papers.json + 实际落盘的解读渲染 README.md。README 不手写。
 
-列顺序遵守 ../CLAUDE.md 第二节：# / 时间 / 简称 / 论文标题 / 发表 / 机构 / 原文
+列顺序与排序方向遵守 ../CLAUDE.md 第二节：# / 时间 / 简称 / 论文标题 / 发表 / 机构 / 原文，
+按时间倒序（最新在最前）。
 七列必须有、相对顺序固定；任务与解读字数作为附加列插在机构之后、原文之前。
 解读字数当场从 解读.md 数（U+4E00–U+9FFF），不读 meta.json。
 """
@@ -35,7 +36,12 @@ def org_cell(p):
 
 def main():
     ps = json.load(open(f"{ROOT}/scripts/papers.json", encoding="utf-8"))
-    ps.sort(key=lambda p: (p["date"] or "9999/99/99", p["short"]))
+    # 全量清单按时间倒序：最新的在最前（../CLAUDE.md 第二节，2026-09-01 起）。
+    # 分两步排：先按简称升序，再按 date 倒序（稳定排序，同日内简称仍是升序）。
+    # 缺失 date 兜底成 "0000/00/00"，倒序时沉到最后——不能用升序那套 "9999/99/99"，
+    # 那会把没日期的顶到最前。date 只有年月的（Grok-Aurora = 2024/12）落在该月末尾。
+    ps.sort(key=lambda p: p["short"])
+    ps.sort(key=lambda p: p["date"] or "0000/00/00", reverse=True)
 
     rows, total, have = [], 0, 0
     for i, p in enumerate(ps, 1):
@@ -123,7 +129,7 @@ UniWorld、Emu3.5 同时是生成和编辑。硬按任务拆仓库，这批论�
 
 ## 怎么用
 
-直接拉到本页最后的[全量清单](#全量清单)，{len(ps)} 行按时间排，浏览器里 `Ctrl/Cmd + F` 搜简称或标题。每行两列可以点：
+直接拉到本页最后的[全量清单](#全量清单)，{len(ps)} 行按时间**倒序**排，最新的在最前，浏览器里 `Ctrl/Cmd + F` 搜简称或标题。每行两列可以点：
 
 | 这一列 | 点开是什么 |
 | --- | --- |
@@ -161,7 +167,7 @@ python3 scripts/fetch_pdfs.py 2024-11_OmniEdit   # 只下一篇
 
 ## 全量清单
 
-{len(ps)} 行按时间排。**解读字数**是当场从 `解读.md` 数的（U+4E00–U+9FFF），不读 `meta.json`。
+{len(ps)} 行按时间**倒序**排，`#1` 是最新的一篇，`#{len(ps)}` 是最早的一篇。**解读字数**是当场从 `解读.md` 数的（U+4E00–U+9FFF），不读 `meta.json`。
 
 | # | 时间 | 简称（→ 解读） | 论文标题 | 发表 | 机构 | 任务 | 原文 | 解读字数 |
 | --- | --- | --- | --- | --- | --- | --- | --- | ---: |

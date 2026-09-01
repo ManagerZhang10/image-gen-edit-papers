@@ -5,7 +5,7 @@
 > 覆盖：195 项，2021-08 ～ 2026-08
 > 最后核对：2026-09-01
 
-[README](../README.md) 是一张按时间排的平表，用来查。本页按技术脉络分组，用来读。
+[README](../README.md) 是一张按时间倒序（最新在最前）的平表，用来查。本页按技术脉络分组，用来读。
 每篇的「一句话」摘自该篇 `解读.md` 第 1 节首句，依据是论文原文，不是另写的导读。
 跨论文的结论在 [总结分析.md](总结分析.md)，笔记能信到什么程度在 [可信度与产出.md](可信度与产出.md)。
 
@@ -352,203 +352,206 @@
 
 带发表、机构、原文直链的完整版在 [README](../README.md#全量清单)。
 
+**这张表按时间倒序，最新的在最前**，跟 README 的全量清单同向——它们是同一类查询表。
+上面 17 条脉络里的表是**时间升序**，从早到晚读才讲得通，两者方向不同不是 bug。
+
 | 时间 | 简称 | 脉络 | 类型 | 任务 | 解读字数 |
 | --- | --- | --- | --- | --- | ---: |
-| 2021-08-02 | [SDEdit](../papers/2021-08_SDEdit/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,249 |
-| 2021-12-20 | [Latent-Diffusion](../papers/2021-12_Latent-Diffusion/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 7,160 |
-| 2022-06-06 | [Blended-Latent-Diffusion](../papers/2022-06_Blended-Latent-Diffusion/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 6,702 |
-| 2022-07-26 | [Classifier-Free-Guidance](../papers/2022-07_Classifier-Free-Guidance/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 6,581 |
-| 2022-08-02 | [Prompt-to-Prompt](../papers/2022-08_Prompt-to-Prompt/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,138 |
-| 2022-08-02 | [Textual-Inversion](../papers/2022-08_Textual-Inversion/解读.md) | 个性化与主体保持 | 方法 | 生成 | 6,900 |
-| 2022-08-25 | [DreamBooth](../papers/2022-08_DreamBooth/解读.md) | 个性化与主体保持 | 方法 | 生成 | 6,553 |
-| 2022-10-17 | [Imagic](../papers/2022-10_Imagic/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,136 |
-| 2022-10-20 | [DiffEdit](../papers/2022-10_DiffEdit/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,215 |
-| 2022-11-17 | [InstructPix2Pix](../papers/2022-11_InstructPix2Pix/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,603 |
-| 2022-11-17 | [Null-text-Inversion](../papers/2022-11_Null-text-Inversion/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,202 |
-| 2022-11-22 | [EDICT](../papers/2022-11_EDICT/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,614 |
-| 2022-11-22 | [Plug-and-Play](../papers/2022-11_Plug-and-Play/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,284 |
-| 2022-11-23 | [Paint-by-Example](../papers/2022-11_Paint-by-Example/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 7,577 |
-| 2022-12-08 | [Custom-Diffusion](../papers/2022-12_Custom-Diffusion/解读.md) | 个性化与主体保持 | 方法 | 生成 | 7,128 |
-| 2022-12-13 | [Imagen-Editor-EditBench](../papers/2022-12_Imagen-Editor-EditBench/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 8,394 |
-| 2023-02-06 | [pix2pix-zero](../papers/2023-02_pix2pix-zero/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 6,692 |
-| 2023-02-10 | [ControlNet](../papers/2023-02_ControlNet/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,943 |
-| 2023-02-16 | [T2I-Adapter](../papers/2023-02_T2I-Adapter/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,127 |
-| 2023-03-02 | [Consistency Models](../papers/2023-03_Consistency-Models/解读.md) | 少步与一步生成 | 方法 | 生成 | 3,194 |
-| 2023-03-16 | [HIVE](../papers/2023-03_HIVE/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,788 |
-| 2023-04-05 | [SAM](../papers/2023-04_SAM/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,768 |
-| 2023-04-13 | [Inpaint-Anything](../papers/2023-04_Inpaint-Anything/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 8,149 |
-| 2023-04-13 | [Rich-Text](../papers/2023-04_Rich-Text/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,817 |
-| 2023-04-17 | [MasaCtrl](../papers/2023-04_MasaCtrl/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 生成+编辑 | 6,562 |
-| 2023-05-18 | [DragGAN](../papers/2023-05_DragGAN/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,007 |
-| 2023-05-29 | [InstructEdit](../papers/2023-05_InstructEdit/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,897 |
-| 2023-06-01 | [Self-Guidance](../papers/2023-06_Self-Guidance/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 生成 | 7,259 |
-| 2023-06-16 | [MagicBrush](../papers/2023-06_MagicBrush/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,080 |
-| 2023-06-26 | [DragDiffusion](../papers/2023-06_DragDiffusion/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,065 |
-| 2023-07-04 | [SDXL](../papers/2023-07_SDXL/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 3,051 |
-| 2023-07-05 | [DragonDiffusion](../papers/2023-07_DragonDiffusion/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,518 |
-| 2023-07-18 | [AnyDoor](../papers/2023-07_AnyDoor/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 7,129 |
-| 2023-08-13 | [IP-Adapter](../papers/2023-08_IP-Adapter/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,379 |
-| 2023-09-07 | [InstructDiffusion](../papers/2023-09_InstructDiffusion/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,804 |
-| 2023-09-29 | [MGIE](../papers/2023-09_MGIE/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 8,943 |
-| 2023-09-30 | [PixArt-alpha](../papers/2023-09_PixArt-alpha/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 6,861 |
-| 2023-10-17 | [GenEval](../papers/2023-10_GenEval/解读.md) | 推理、强化学习与评测 | 基准 | 生成 | 3,290 |
-| 2023-10-19 | [DALL·E 3](../papers/2023-10_DALL-E-3/解读.md) | 生成侧数据与重标注 | 模型 | 生成 | 3,183 |
-| 2023-11-06 | [Cross-Image-Attention](../papers/2023-11_Cross-Image-Attention/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,423 |
-| 2023-11-16 | [Emu-Edit](../papers/2023-11_Emu-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,854 |
-| 2023-11-20 | [Concept-Sliders](../papers/2023-11_Concept-Sliders/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,827 |
-| 2023-11-28 | [LEDITSpp](../papers/2023-11_LEDITSpp/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 6,869 |
-| 2023-11-30 | [DMD](../papers/2023-11_DMD/解读.md) | 少步与一步生成 | 方法 | 生成 | 3,540 |
-| 2023-12-04 | [StyleAligned](../papers/2023-12_StyleAligned/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 生成 | 7,216 |
-| 2023-12-06 | [PowerPaint](../papers/2023-12_PowerPaint/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 7,204 |
-| 2023-12-07 | [InfEdit](../papers/2023-12_InfEdit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,814 |
-| 2023-12-07 | [PhotoMaker](../papers/2023-12_PhotoMaker/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,001 |
-| 2023-12-11 | [SmartEdit](../papers/2023-12_SmartEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,742 |
-| 2023-12-20 | [Emu2](../papers/2023-12_Emu2/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 6,701 |
-| 2024-01-03 | [Instruct-Imagen](../papers/2024-01_Instruct-Imagen/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 生成 | 7,210 |
-| 2024-01-15 | [InstantID](../papers/2024-01_InstantID/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,825 |
-| 2024-02-04 | [DiffEditor](../papers/2024-02_DiffEditor/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,254 |
-| 2024-03-05 | [SD3-RectifiedFlow](../papers/2024-03_SD3-RectifiedFlow/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 6,564 |
-| 2024-03-11 | [BrushNet](../papers/2024-03_BrushNet/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,745 |
-| 2024-03-21 | [ReNoise](../papers/2024-03_ReNoise/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,706 |
-| 2024-04-03 | [VAR](../papers/2024-04_VAR/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 8,136 |
-| 2024-04-15 | [HQ-Edit](../papers/2024-04_HQ-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,232 |
-| 2024-04-22 | [SEED-X](../papers/2024-04_SEED-X/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 6,648 |
-| 2024-05-07 | [SEED-Data-Edit](../papers/2024-05_SEED-Data-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 6,626 |
-| 2024-05-16 | [Chameleon](../papers/2024-05_Chameleon/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 8,109 |
-| 2024-06-11 | [MimicBrush](../papers/2024-06_MimicBrush/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 8,536 |
-| 2024-06-17 | [MAR](../papers/2024-06_MAR/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 3,458 |
-| 2024-07-05 | [Kolors](../papers/2024-07_Kolors/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 3,470 |
-| 2024-07-07 | [UltraEdit](../papers/2024-07_UltraEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,074 |
-| 2024-08-01 | [FLUX.1](../papers/2024-08_FLUX.1/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 634 |
-| 2024-08-01 | [TurboEdit](../papers/2024-08_TurboEdit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,973 |
-| 2024-08-20 | [Transfusion](../papers/2024-08_Transfusion/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 7,019 |
-| 2024-08-22 | [Show-o](../papers/2024-08_Show-o/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 7,514 |
-| 2024-08-26 | [I2EBench](../papers/2024-08_I2EBench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,518 |
-| 2024-09-17 | [OmniGen](../papers/2024-09_OmniGen/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 8,139 |
-| 2024-09-27 | [Emu3](../papers/2024-09_Emu3/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 7,382 |
-| 2024-10-09 | [REPA](../papers/2024-10_REPA/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 3,143 |
-| 2024-10-14 | [RF-Inversion](../papers/2024-10_RF-Inversion/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,312 |
-| 2024-10-31 | [In-Context-LoRA](../papers/2024-10_In-Context-LoRA/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,951 |
-| 2024-11-07 | [RF-Solver-Edit](../papers/2024-11_RF-Solver-Edit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,204 |
-| 2024-11-11 | [Add-it](../papers/2024-11_Add-it/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,033 |
-| 2024-11-11 | [OmniEdit](../papers/2024-11_OmniEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,402 |
-| 2024-11-11 | [SeedEdit](../papers/2024-11_SeedEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,623 |
-| 2024-11-14 | [MagicQuill](../papers/2024-11_MagicQuill/解读.md) | 局部与对象级：抠图、补全、搬物体 | 模型 | 编辑 | 7,389 |
-| 2024-11-22 | [OminiControl](../papers/2024-11_OminiControl/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 编辑 | 6,543 |
-| 2024-11-24 | [AnyEdit](../papers/2024-11_AnyEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,500 |
-| 2024-11-27 | [FlowChef](../papers/2024-12_FlowChef/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 4,314 |
-| 2024-12 | [Grok-Aurora](../papers/2024-12_Grok-Aurora/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 330 |
-| 2024-12-10 | [UniReal](../papers/2024-12_UniReal/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成+编辑 | 6,953 |
-| 2025-01-05 | [ACEpp](../papers/2025-01_ACEpp/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成+编辑 | 7,487 |
-| 2025-01-29 | [Janus-Pro](../papers/2025-01_Janus-Pro/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 8,116 |
-| 2025-03-10 | [EasyControl](../papers/2025-03_EasyControl/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,188 |
-| 2025-03-13 | [GoT](../papers/2025-03_GoT/解读.md) | 推理、强化学习与评测 | 方法 | 生成+编辑 | 7,356 |
-| 2025-03-25 | [FireEdit](../papers/2025-03_FireEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 3,066 |
-| 2025-04-02 | [UNO](../papers/2025-04_UNO/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,202 |
-| 2025-04-03 | [RISEBench](../papers/2025-04_RISEBench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 7,917 |
-| 2025-04-08 | [MetaQuery](../papers/2025-04_MetaQuery/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 7,502 |
-| 2025-04-17 | [Complex-Edit](../papers/2025-04_Complex-Edit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 8,329 |
-| 2025-04-21 | [Insert-Anything](../papers/2025-04_Insert-Anything/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,580 |
-| 2025-04-23 | [DreamO](../papers/2025-04_DreamO/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,727 |
-| 2025-04-24 | [Step1X-Edit](../papers/2025-04_Step1X-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,396 |
-| 2025-04-29 | [ICEdit](../papers/2025-04_ICEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,865 |
-| 2025-05-01 | [HATIE](../papers/2025-05_HATIE/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,842 |
-| 2025-05-01 | [T2I-R1](../papers/2025-05_T2I-R1/解读.md) | 推理、强化学习与评测 | 方法 | 生成 | 6,876 |
-| 2025-05-08 | [Flow-GRPO](../papers/2025-05_Flow-GRPO/解读.md) | 推理、强化学习与评测 | 奖励与 RL | 生成 | 6,502 |
-| 2025-05-12 | [DanceGRPO](../papers/2025-05_DanceGRPO/解读.md) | 推理、强化学习与评测 | 方法 | 生成 | 7,294 |
-| 2025-05-14 | [BLIP3-o](../papers/2025-05_BLIP3-o/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 6,887 |
-| 2025-05-16 | [GIE-Bench](../papers/2025-05_GIE-Bench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,670 |
-| 2025-05-20 | [BAGEL](../papers/2025-05_BAGEL/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 7,170 |
-| 2025-05-22 | [Everyday-Image-Editing](../papers/2025-05_Everyday-Image-Editing/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,986 |
-| 2025-05-22 | [KRIS-Bench](../papers/2025-05_KRIS-Bench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 7,494 |
-| 2025-05-26 | [DICE](../papers/2025-05_DICE/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 3,306 |
-| 2025-05-26 | [ImgEdit](../papers/2025-05_ImgEdit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 7,451 |
-| 2025-05-28 | [HiDream-I1](../papers/2025-05_HiDream-I1/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 7,337 |
-| 2025-06-03 | [RefEdit](../papers/2025-06_RefEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 基准 | 编辑 | 2,516 |
-| 2025-06-03 | [UniWorld-V1](../papers/2025-06_UniWorld-V1/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成+编辑 | 6,657 |
-| 2025-06-05 | [SeedEdit3](../papers/2025-06_SeedEdit3/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 模型 | 编辑 | 7,643 |
-| 2025-06-15 | [BPM](../papers/2025-06_BPM/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,528 |
-| 2025-06-15 | [ComplexBench-Edit](../papers/2025-06_ComplexBench-Edit/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,534 |
-| 2025-06-17 | [FLUX-Kontext](../papers/2025-06_FLUX-Kontext/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成+编辑 | 8,679 |
-| 2025-06-18 | [Show-o2](../papers/2025-06_Show-o2/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 6,918 |
-| 2025-06-23 | [OmniGen2](../papers/2025-06_OmniGen2/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成+编辑 | 6,695 |
-| 2025-06-29 | [Ovis-U1](../papers/2025-06_Ovis-U1/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 6,716 |
-| 2025-07-18 | [NoHumansRequired](../papers/2025-07_NoHumansRequired/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 6,730 |
-| 2025-07-22 | [LMM4Edit](../papers/2025-07_LMM4Edit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,544 |
-| 2025-07-28 | [GPT-Image-Edit-1.5M](../papers/2025-07_GPT-Image-Edit-1.5M/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 6,615 |
-| 2025-08-04 | [Qwen-Image](../papers/2025-08_Qwen-Image/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 7,310 |
-| 2025-08-11 | [X2Edit](../papers/2025-08_X2Edit/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 6,789 |
-| 2025-08-21 | [VAREdit](../papers/2025-08_VAREdit/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,076 |
-| 2025-09-16 | [EdiVal-Agent](../papers/2025-09_EdiVal-Agent/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,599 |
-| 2025-09-24 | [EditVerse](../papers/2025-09_EditVerse/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 生成+编辑 | 7,231 |
-| 2025-09-24 | [Seedream4](../papers/2025-09_Seedream4/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 6,611 |
-| 2025-09-28 | [EditScore](../papers/2025-09_EditScore/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 6,719 |
-| 2025-09-28 | [HunyuanImage3](../papers/2025-09_HunyuanImage3/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成 | 6,546 |
-| 2025-09-29 | [OpenGPT-4o-Image](../papers/2025-09_OpenGPT-4o-Image/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 生成+编辑 | 7,651 |
-| 2025-09-30 | [EditReward](../papers/2025-09_EditReward/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 7,572 |
-| 2025-10-05 | [ChronoEdit](../papers/2025-10_ChronoEdit/解读.md) | 会推理再动手：think-then-edit | 方法 | 编辑 | 6,825 |
-| 2025-10-07 | [Lumina-DiMOO](../papers/2025-10_Lumina-DiMOO/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 7,291 |
-| 2025-10-08 | [DreamOmni2](../papers/2025-10_DreamOmni2/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 生成+编辑 | 6,564 |
-| 2025-10-09 | [InstructX](../papers/2025-10_InstructX/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 6,671 |
-| 2025-10-09 | [Kontinuous-Kontext](../papers/2025-10_Kontinuous-Kontext/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 8,551 |
-| 2025-10-19 | [Edit-R1-UniWorld-V2](../papers/2025-10_Edit-R1-UniWorld-V2/解读.md) | 奖励模型与在线 RL（2025H2 起） | 方法 | 编辑 | 6,542 |
-| 2025-10-20 | [PICABench](../papers/2025-10_PICABench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 7,739 |
-| 2025-10-22 | [Pico-Banana-400K](../papers/2025-10_Pico-Banana-400K/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 7,750 |
-| 2025-10-30 | [Emu3.5](../papers/2025-10_Emu3.5/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 7,580 |
-| 2025-11-03 | [UniREditBench](../papers/2025-11_UniREditBench/解读.md) | 会推理再动手：think-then-edit | 基准 | 编辑 | 7,321 |
-| 2025-11-27 | [ReasonEdit](../papers/2025-11_ReasonEdit/解读.md) | 会推理再动手：think-then-edit | 方法 | 编辑 | 7,349 |
-| 2025-11-27 | [Z-Image](../papers/2025-11_Z-Image/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 6,667 |
-| 2025-11-29 | [WiseEdit](../papers/2025-12_WiseEdit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,593 |
-| 2025-12-04 | [I2I-Bench](../papers/2025-12_I2I-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 7,049 |
-| 2025-12-17 | [Qwen-Image-Edit-2511](../papers/2025-12_Qwen-Image-Edit-2511/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 编辑 | 666 |
-| 2025-12-17 | [Qwen-Image-Layered](../papers/2025-12_Qwen-Image-Layered/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,109 |
-| 2026-01-05 | [nextflow](../papers/2026-01_nextflow/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 7,320 |
-| 2026-01-06 | [ThinkRL-Edit](../papers/2026-01_ThinkRL-Edit/解读.md) | 奖励模型与在线 RL（2025H2 起） | 方法 | 编辑 | 7,196 |
-| 2026-01-06 | [reward-hacking-t2i](../papers/2026-01_reward-hacking-t2i/解读.md) | 奖励模型与在线 RL（2025H2 起） | 方法 | 编辑 | 7,524 |
-| 2026-02-02 | [VIBE](../papers/2026-02_VIBE/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,564 |
-| 2026-02-02 | [unireason](../papers/2026-02_unireason/解读.md) | 会推理再动手：think-then-edit | 方法 | 生成+编辑 | 7,070 |
-| 2026-02-07 | [spatialreward-edit](../papers/2026-02_spatialreward-edit/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 7,019 |
-| 2026-02-09 | [reasoning-to-pixels](../papers/2026-02_reasoning-to-pixels/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 生成 | 6,985 |
-| 2026-02-09 | [rethink-global-text](../papers/2026-02_rethink-global-text/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 7,486 |
-| 2026-02-12 | [FireRed-Image-Edit](../papers/2026-02_FireRed-Image-Edit/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,206 |
-| 2026-02-22 | [ChordEdit](../papers/2026-02_ChordEdit/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,579 |
-| 2026-03-09 | [care-edit](../papers/2026-03_care-edit/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 编辑 | 6,830 |
-| 2026-03-09 | [coco-code-cot](../papers/2026-03_coco-code-cot/解读.md) | 会推理再动手：think-then-edit | 方法 | 生成 | 6,950 |
-| 2026-03-10 | [internvl-u](../papers/2026-03_internvl-u/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 6,642 |
-| 2026-03-16 | [Omni-IIE-Bench](../papers/2026-03_Omni-IIE-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 3,225 |
-| 2026-03-17 | [ug-fight-dpo](../papers/2026-03_ug-fight-dpo/解读.md) | 统一多模态：理解与生成同一个模型 | 综述 | 生成 | 6,969 |
-| 2026-03-20 | [TIEdit-EditProbe](../papers/2026-03_TIEdit-EditProbe/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,864 |
-| 2026-03-30 | [GEditBench-v2](../papers/2026-03_GEditBench-v2/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 3,755 |
-| 2026-03-31 | [editing-manifold](../papers/2026-03_editing-manifold/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 综述 | 编辑 | 7,110 |
-| 2026-04-03 | [banana100](../papers/2026-04_banana100/解读.md) | 新一代评测：物理合理性与多轮 | 数据集 | 编辑 | 8,186 |
-| 2026-04-21 | [GPT-Image-2](../papers/2026-04_GPT-Image-2/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 732 |
-| 2026-04-22 | [GSI-Bench](../papers/2026-04_GSI-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,510 |
-| 2026-04-26 | [edit-where-you-mean](../papers/2026-04_edit-where-you-mean/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,989 |
+| 2026-08-24 | [rl-no-edit-rewards](../papers/2026-08_rl-no-edit-rewards/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 7,117 |
+| 2026-08-14 | [CPI-Bench](../papers/2026-08_CPI-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,517 |
+| 2026-07-28 | [IIE-Survey](../papers/2026-07_IIE-Survey/解读.md) | 新一代评测：物理合理性与多轮 | 综述 | 编辑 | 8,309 |
+| 2026-07-13 | [read-it-back](../papers/2026-07_read-it-back/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 6,611 |
+| 2026-07-08 | [implicit-preservation](../papers/2026-07_implicit-preservation/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,823 |
+| 2026-07-06 | [cfg-inversion-fail](../papers/2026-07_cfg-inversion-fail/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 综述 | 编辑 | 6,682 |
+| 2026-06-25 | [lighting-edit-bench](../papers/2026-06_lighting-edit-bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,897 |
+| 2026-06-25 | [qwen-image-rl](../papers/2026-06_qwen-image-rl/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 生成+编辑 | 8,108 |
+| 2026-06-17 | [moebius-inpainting](../papers/2026-06_moebius-inpainting/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,843 |
+| 2026-06-14 | [mind-the-gap](../papers/2026-06_mind-the-gap/解读.md) | 会推理再动手：think-then-edit | 综述 | 编辑 | 6,741 |
+| 2026-06-11 | [hydra-x](../papers/2026-06_hydra-x/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 6,583 |
+| 2026-06-09 | [arm-unified](../papers/2026-06_arm-unified/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 7,433 |
+| 2026-06-02 | [bootstrap-generator](../papers/2026-06_bootstrap-generator/解读.md) | 编辑数据工程：三元组从哪来 | 方法 | 编辑 | 7,686 |
+| 2026-06-01 | [Inter-Edit](../papers/2026-06_Inter-Edit/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,661 |
+| 2026-05-29 | [PaintBench](../papers/2026-05_PaintBench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 3,038 |
+| 2026-05-20 | [decompose-subject](../papers/2026-05_decompose-subject/解读.md) | 个性化与主体保持 | 方法 | 生成 | 7,064 |
+| 2026-05-13 | [edit-compass](../papers/2026-05_edit-compass/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,567 |
+| 2026-05-12 | [sensenova-u1](../papers/2026-05_sensenova-u1/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 生成+编辑 | 6,907 |
+| 2026-05-11 | [Qwen-Image-2.0](../papers/2026-05_Qwen-Image-2.0/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 8,086 |
+| 2026-05-11 | [masked-gen-transformer](../papers/2026-05_masked-gen-transformer/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 编辑 | 6,797 |
+| 2026-05-04 | [directedit](../papers/2026-05_directedit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,200 |
+| 2026-04-29 | [spatialfusion](../papers/2026-04_spatialfusion/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,812 |
 | 2026-04-27 | [beyond-accuracy](../papers/2026-04_beyond-accuracy/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 生成 | 7,280 |
 | 2026-04-27 | [meta-cot](../papers/2026-04_meta-cot/解读.md) | 会推理再动手：think-then-edit | 方法 | 编辑 | 6,900 |
 | 2026-04-27 | [tuna-2](../papers/2026-04_tuna-2/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 6,618 |
-| 2026-04-29 | [spatialfusion](../papers/2026-04_spatialfusion/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,812 |
-| 2026-05-04 | [directedit](../papers/2026-05_directedit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,200 |
-| 2026-05-11 | [Qwen-Image-2.0](../papers/2026-05_Qwen-Image-2.0/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 8,086 |
-| 2026-05-11 | [masked-gen-transformer](../papers/2026-05_masked-gen-transformer/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 编辑 | 6,797 |
-| 2026-05-12 | [sensenova-u1](../papers/2026-05_sensenova-u1/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 生成+编辑 | 6,907 |
-| 2026-05-13 | [edit-compass](../papers/2026-05_edit-compass/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,567 |
-| 2026-05-20 | [decompose-subject](../papers/2026-05_decompose-subject/解读.md) | 个性化与主体保持 | 方法 | 生成 | 7,064 |
-| 2026-05-29 | [PaintBench](../papers/2026-05_PaintBench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 3,038 |
-| 2026-06-01 | [Inter-Edit](../papers/2026-06_Inter-Edit/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,661 |
-| 2026-06-02 | [bootstrap-generator](../papers/2026-06_bootstrap-generator/解读.md) | 编辑数据工程：三元组从哪来 | 方法 | 编辑 | 7,686 |
-| 2026-06-09 | [arm-unified](../papers/2026-06_arm-unified/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 7,433 |
-| 2026-06-11 | [hydra-x](../papers/2026-06_hydra-x/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 6,583 |
-| 2026-06-14 | [mind-the-gap](../papers/2026-06_mind-the-gap/解读.md) | 会推理再动手：think-then-edit | 综述 | 编辑 | 6,741 |
-| 2026-06-17 | [moebius-inpainting](../papers/2026-06_moebius-inpainting/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,843 |
-| 2026-06-25 | [lighting-edit-bench](../papers/2026-06_lighting-edit-bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,897 |
-| 2026-06-25 | [qwen-image-rl](../papers/2026-06_qwen-image-rl/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 生成+编辑 | 8,108 |
-| 2026-07-06 | [cfg-inversion-fail](../papers/2026-07_cfg-inversion-fail/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 综述 | 编辑 | 6,682 |
-| 2026-07-08 | [implicit-preservation](../papers/2026-07_implicit-preservation/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,823 |
-| 2026-07-13 | [read-it-back](../papers/2026-07_read-it-back/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 6,611 |
-| 2026-07-28 | [IIE-Survey](../papers/2026-07_IIE-Survey/解读.md) | 新一代评测：物理合理性与多轮 | 综述 | 编辑 | 8,309 |
-| 2026-08-14 | [CPI-Bench](../papers/2026-08_CPI-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,517 |
-| 2026-08-24 | [rl-no-edit-rewards](../papers/2026-08_rl-no-edit-rewards/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 7,117 |
+| 2026-04-26 | [edit-where-you-mean](../papers/2026-04_edit-where-you-mean/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,989 |
+| 2026-04-22 | [GSI-Bench](../papers/2026-04_GSI-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,510 |
+| 2026-04-21 | [GPT-Image-2](../papers/2026-04_GPT-Image-2/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 732 |
+| 2026-04-03 | [banana100](../papers/2026-04_banana100/解读.md) | 新一代评测：物理合理性与多轮 | 数据集 | 编辑 | 8,186 |
+| 2026-03-31 | [editing-manifold](../papers/2026-03_editing-manifold/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 综述 | 编辑 | 7,110 |
+| 2026-03-30 | [GEditBench-v2](../papers/2026-03_GEditBench-v2/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 3,755 |
+| 2026-03-20 | [TIEdit-EditProbe](../papers/2026-03_TIEdit-EditProbe/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,864 |
+| 2026-03-17 | [ug-fight-dpo](../papers/2026-03_ug-fight-dpo/解读.md) | 统一多模态：理解与生成同一个模型 | 综述 | 生成 | 6,969 |
+| 2026-03-16 | [Omni-IIE-Bench](../papers/2026-03_Omni-IIE-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 3,225 |
+| 2026-03-10 | [internvl-u](../papers/2026-03_internvl-u/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 6,642 |
+| 2026-03-09 | [care-edit](../papers/2026-03_care-edit/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 编辑 | 6,830 |
+| 2026-03-09 | [coco-code-cot](../papers/2026-03_coco-code-cot/解读.md) | 会推理再动手：think-then-edit | 方法 | 生成 | 6,950 |
+| 2026-02-22 | [ChordEdit](../papers/2026-02_ChordEdit/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,579 |
+| 2026-02-12 | [FireRed-Image-Edit](../papers/2026-02_FireRed-Image-Edit/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,206 |
+| 2026-02-09 | [reasoning-to-pixels](../papers/2026-02_reasoning-to-pixels/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 生成 | 6,985 |
+| 2026-02-09 | [rethink-global-text](../papers/2026-02_rethink-global-text/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 7,486 |
+| 2026-02-07 | [spatialreward-edit](../papers/2026-02_spatialreward-edit/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 7,019 |
+| 2026-02-02 | [VIBE](../papers/2026-02_VIBE/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,564 |
+| 2026-02-02 | [unireason](../papers/2026-02_unireason/解读.md) | 会推理再动手：think-then-edit | 方法 | 生成+编辑 | 7,070 |
+| 2026-01-06 | [ThinkRL-Edit](../papers/2026-01_ThinkRL-Edit/解读.md) | 奖励模型与在线 RL（2025H2 起） | 方法 | 编辑 | 7,196 |
+| 2026-01-06 | [reward-hacking-t2i](../papers/2026-01_reward-hacking-t2i/解读.md) | 奖励模型与在线 RL（2025H2 起） | 方法 | 编辑 | 7,524 |
+| 2026-01-05 | [nextflow](../papers/2026-01_nextflow/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 7,320 |
+| 2025-12-17 | [Qwen-Image-Edit-2511](../papers/2025-12_Qwen-Image-Edit-2511/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 编辑 | 666 |
+| 2025-12-17 | [Qwen-Image-Layered](../papers/2025-12_Qwen-Image-Layered/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,109 |
+| 2025-12-04 | [I2I-Bench](../papers/2025-12_I2I-Bench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 7,049 |
+| 2025-11-29 | [WiseEdit](../papers/2025-12_WiseEdit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,593 |
+| 2025-11-27 | [ReasonEdit](../papers/2025-11_ReasonEdit/解读.md) | 会推理再动手：think-then-edit | 方法 | 编辑 | 7,349 |
+| 2025-11-27 | [Z-Image](../papers/2025-11_Z-Image/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 6,667 |
+| 2025-11-03 | [UniREditBench](../papers/2025-11_UniREditBench/解读.md) | 会推理再动手：think-then-edit | 基准 | 编辑 | 7,321 |
+| 2025-10-30 | [Emu3.5](../papers/2025-10_Emu3.5/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 7,580 |
+| 2025-10-22 | [Pico-Banana-400K](../papers/2025-10_Pico-Banana-400K/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 7,750 |
+| 2025-10-20 | [PICABench](../papers/2025-10_PICABench/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 7,739 |
+| 2025-10-19 | [Edit-R1-UniWorld-V2](../papers/2025-10_Edit-R1-UniWorld-V2/解读.md) | 奖励模型与在线 RL（2025H2 起） | 方法 | 编辑 | 6,542 |
+| 2025-10-09 | [InstructX](../papers/2025-10_InstructX/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 6,671 |
+| 2025-10-09 | [Kontinuous-Kontext](../papers/2025-10_Kontinuous-Kontext/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 8,551 |
+| 2025-10-08 | [DreamOmni2](../papers/2025-10_DreamOmni2/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 生成+编辑 | 6,564 |
+| 2025-10-07 | [Lumina-DiMOO](../papers/2025-10_Lumina-DiMOO/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 7,291 |
+| 2025-10-05 | [ChronoEdit](../papers/2025-10_ChronoEdit/解读.md) | 会推理再动手：think-then-edit | 方法 | 编辑 | 6,825 |
+| 2025-09-30 | [EditReward](../papers/2025-09_EditReward/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 7,572 |
+| 2025-09-29 | [OpenGPT-4o-Image](../papers/2025-09_OpenGPT-4o-Image/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 生成+编辑 | 7,651 |
+| 2025-09-28 | [EditScore](../papers/2025-09_EditScore/解读.md) | 奖励模型与在线 RL（2025H2 起） | 奖励与 RL | 编辑 | 6,719 |
+| 2025-09-28 | [HunyuanImage3](../papers/2025-09_HunyuanImage3/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成 | 6,546 |
+| 2025-09-24 | [EditVerse](../papers/2025-09_EditVerse/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 生成+编辑 | 7,231 |
+| 2025-09-24 | [Seedream4](../papers/2025-09_Seedream4/解读.md) | 2025H2–2026 的编辑与统一模型 | 模型 | 生成+编辑 | 6,611 |
+| 2025-09-16 | [EdiVal-Agent](../papers/2025-09_EdiVal-Agent/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,599 |
+| 2025-08-21 | [VAREdit](../papers/2025-08_VAREdit/解读.md) | 2025H2–2026 的编辑与统一模型 | 方法 | 编辑 | 7,076 |
+| 2025-08-11 | [X2Edit](../papers/2025-08_X2Edit/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 6,789 |
+| 2025-08-04 | [Qwen-Image](../papers/2025-08_Qwen-Image/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 7,310 |
+| 2025-07-28 | [GPT-Image-Edit-1.5M](../papers/2025-07_GPT-Image-Edit-1.5M/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 6,615 |
+| 2025-07-22 | [LMM4Edit](../papers/2025-07_LMM4Edit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,544 |
+| 2025-07-18 | [NoHumansRequired](../papers/2025-07_NoHumansRequired/解读.md) | 编辑数据工程：三元组从哪来 | 数据集 | 编辑 | 6,730 |
+| 2025-06-29 | [Ovis-U1](../papers/2025-06_Ovis-U1/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 6,716 |
+| 2025-06-23 | [OmniGen2](../papers/2025-06_OmniGen2/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成+编辑 | 6,695 |
+| 2025-06-18 | [Show-o2](../papers/2025-06_Show-o2/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 6,918 |
+| 2025-06-17 | [FLUX-Kontext](../papers/2025-06_FLUX-Kontext/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成+编辑 | 8,679 |
+| 2025-06-15 | [BPM](../papers/2025-06_BPM/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,528 |
+| 2025-06-15 | [ComplexBench-Edit](../papers/2025-06_ComplexBench-Edit/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 2,534 |
+| 2025-06-05 | [SeedEdit3](../papers/2025-06_SeedEdit3/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 模型 | 编辑 | 7,643 |
+| 2025-06-03 | [RefEdit](../papers/2025-06_RefEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 基准 | 编辑 | 2,516 |
+| 2025-06-03 | [UniWorld-V1](../papers/2025-06_UniWorld-V1/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成+编辑 | 6,657 |
+| 2025-05-28 | [HiDream-I1](../papers/2025-05_HiDream-I1/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 7,337 |
+| 2025-05-26 | [DICE](../papers/2025-05_DICE/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 3,306 |
+| 2025-05-26 | [ImgEdit](../papers/2025-05_ImgEdit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 7,451 |
+| 2025-05-22 | [Everyday-Image-Editing](../papers/2025-05_Everyday-Image-Editing/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,986 |
+| 2025-05-22 | [KRIS-Bench](../papers/2025-05_KRIS-Bench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 7,494 |
+| 2025-05-20 | [BAGEL](../papers/2025-05_BAGEL/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 7,170 |
+| 2025-05-16 | [GIE-Bench](../papers/2025-05_GIE-Bench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,670 |
+| 2025-05-14 | [BLIP3-o](../papers/2025-05_BLIP3-o/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 6,887 |
+| 2025-05-12 | [DanceGRPO](../papers/2025-05_DanceGRPO/解读.md) | 推理、强化学习与评测 | 方法 | 生成 | 7,294 |
+| 2025-05-08 | [Flow-GRPO](../papers/2025-05_Flow-GRPO/解读.md) | 推理、强化学习与评测 | 奖励与 RL | 生成 | 6,502 |
+| 2025-05-01 | [HATIE](../papers/2025-05_HATIE/解读.md) | 新一代评测：物理合理性与多轮 | 基准 | 编辑 | 6,842 |
+| 2025-05-01 | [T2I-R1](../papers/2025-05_T2I-R1/解读.md) | 推理、强化学习与评测 | 方法 | 生成 | 6,876 |
+| 2025-04-29 | [ICEdit](../papers/2025-04_ICEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,865 |
+| 2025-04-24 | [Step1X-Edit](../papers/2025-04_Step1X-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,396 |
+| 2025-04-23 | [DreamO](../papers/2025-04_DreamO/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,727 |
+| 2025-04-21 | [Insert-Anything](../papers/2025-04_Insert-Anything/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,580 |
+| 2025-04-17 | [Complex-Edit](../papers/2025-04_Complex-Edit/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 8,329 |
+| 2025-04-08 | [MetaQuery](../papers/2025-04_MetaQuery/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 7,502 |
+| 2025-04-03 | [RISEBench](../papers/2025-04_RISEBench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 7,917 |
+| 2025-04-02 | [UNO](../papers/2025-04_UNO/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,202 |
+| 2025-03-25 | [FireEdit](../papers/2025-03_FireEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 3,066 |
+| 2025-03-13 | [GoT](../papers/2025-03_GoT/解读.md) | 推理、强化学习与评测 | 方法 | 生成+编辑 | 7,356 |
+| 2025-03-10 | [EasyControl](../papers/2025-03_EasyControl/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,188 |
+| 2025-01-29 | [Janus-Pro](../papers/2025-01_Janus-Pro/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 8,116 |
+| 2025-01-05 | [ACEpp](../papers/2025-01_ACEpp/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成+编辑 | 7,487 |
+| 2024-12-10 | [UniReal](../papers/2024-12_UniReal/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成+编辑 | 6,953 |
+| 2024-12 | [Grok-Aurora](../papers/2024-12_Grok-Aurora/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 330 |
+| 2024-11-27 | [FlowChef](../papers/2024-12_FlowChef/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 4,314 |
+| 2024-11-24 | [AnyEdit](../papers/2024-11_AnyEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,500 |
+| 2024-11-22 | [OminiControl](../papers/2024-11_OminiControl/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 编辑 | 6,543 |
+| 2024-11-14 | [MagicQuill](../papers/2024-11_MagicQuill/解读.md) | 局部与对象级：抠图、补全、搬物体 | 模型 | 编辑 | 7,389 |
+| 2024-11-11 | [Add-it](../papers/2024-11_Add-it/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,033 |
+| 2024-11-11 | [OmniEdit](../papers/2024-11_OmniEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,402 |
+| 2024-11-11 | [SeedEdit](../papers/2024-11_SeedEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,623 |
+| 2024-11-07 | [RF-Solver-Edit](../papers/2024-11_RF-Solver-Edit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,204 |
+| 2024-10-31 | [In-Context-LoRA](../papers/2024-10_In-Context-LoRA/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,951 |
+| 2024-10-14 | [RF-Inversion](../papers/2024-10_RF-Inversion/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,312 |
+| 2024-10-09 | [REPA](../papers/2024-10_REPA/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 3,143 |
+| 2024-09-27 | [Emu3](../papers/2024-09_Emu3/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 7,382 |
+| 2024-09-17 | [OmniGen](../papers/2024-09_OmniGen/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 8,139 |
+| 2024-08-26 | [I2EBench](../papers/2024-08_I2EBench/解读.md) | 推理、强化学习与评测 | 基准 | 编辑 | 2,518 |
+| 2024-08-22 | [Show-o](../papers/2024-08_Show-o/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 7,514 |
+| 2024-08-20 | [Transfusion](../papers/2024-08_Transfusion/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 7,019 |
+| 2024-08-01 | [FLUX.1](../papers/2024-08_FLUX.1/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 634 |
+| 2024-08-01 | [TurboEdit](../papers/2024-08_TurboEdit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,973 |
+| 2024-07-07 | [UltraEdit](../papers/2024-07_UltraEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,074 |
+| 2024-07-05 | [Kolors](../papers/2024-07_Kolors/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 3,470 |
+| 2024-06-17 | [MAR](../papers/2024-06_MAR/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 3,458 |
+| 2024-06-11 | [MimicBrush](../papers/2024-06_MimicBrush/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 8,536 |
+| 2024-05-16 | [Chameleon](../papers/2024-05_Chameleon/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 8,109 |
+| 2024-05-07 | [SEED-Data-Edit](../papers/2024-05_SEED-Data-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 6,626 |
+| 2024-04-22 | [SEED-X](../papers/2024-04_SEED-X/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成+编辑 | 6,648 |
+| 2024-04-15 | [HQ-Edit](../papers/2024-04_HQ-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,232 |
+| 2024-04-03 | [VAR](../papers/2024-04_VAR/解读.md) | 统一多模态：理解与生成同一个模型 | 方法 | 生成 | 8,136 |
+| 2024-03-21 | [ReNoise](../papers/2024-03_ReNoise/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,706 |
+| 2024-03-11 | [BrushNet](../papers/2024-03_BrushNet/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,745 |
+| 2024-03-05 | [SD3-RectifiedFlow](../papers/2024-03_SD3-RectifiedFlow/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 6,564 |
+| 2024-02-04 | [DiffEditor](../papers/2024-02_DiffEditor/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,254 |
+| 2024-01-15 | [InstantID](../papers/2024-01_InstantID/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,825 |
+| 2024-01-03 | [Instruct-Imagen](../papers/2024-01_Instruct-Imagen/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 生成 | 7,210 |
+| 2023-12-20 | [Emu2](../papers/2023-12_Emu2/解读.md) | 统一多模态：理解与生成同一个模型 | 模型 | 生成 | 6,701 |
+| 2023-12-11 | [SmartEdit](../papers/2023-12_SmartEdit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,742 |
+| 2023-12-07 | [InfEdit](../papers/2023-12_InfEdit/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,814 |
+| 2023-12-07 | [PhotoMaker](../papers/2023-12_PhotoMaker/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,001 |
+| 2023-12-06 | [PowerPaint](../papers/2023-12_PowerPaint/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 7,204 |
+| 2023-12-04 | [StyleAligned](../papers/2023-12_StyleAligned/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 生成 | 7,216 |
+| 2023-11-30 | [DMD](../papers/2023-11_DMD/解读.md) | 少步与一步生成 | 方法 | 生成 | 3,540 |
+| 2023-11-28 | [LEDITSpp](../papers/2023-11_LEDITSpp/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 6,869 |
+| 2023-11-20 | [Concept-Sliders](../papers/2023-11_Concept-Sliders/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,827 |
+| 2023-11-16 | [Emu-Edit](../papers/2023-11_Emu-Edit/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,854 |
+| 2023-11-06 | [Cross-Image-Attention](../papers/2023-11_Cross-Image-Attention/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,423 |
+| 2023-10-19 | [DALL·E 3](../papers/2023-10_DALL-E-3/解读.md) | 生成侧数据与重标注 | 模型 | 生成 | 3,183 |
+| 2023-10-17 | [GenEval](../papers/2023-10_GenEval/解读.md) | 推理、强化学习与评测 | 基准 | 生成 | 3,290 |
+| 2023-09-30 | [PixArt-alpha](../papers/2023-09_PixArt-alpha/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 6,861 |
+| 2023-09-29 | [MGIE](../papers/2023-09_MGIE/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 8,943 |
+| 2023-09-07 | [InstructDiffusion](../papers/2023-09_InstructDiffusion/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 6,804 |
+| 2023-08-13 | [IP-Adapter](../papers/2023-08_IP-Adapter/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,379 |
+| 2023-07-18 | [AnyDoor](../papers/2023-07_AnyDoor/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 7,129 |
+| 2023-07-05 | [DragonDiffusion](../papers/2023-07_DragonDiffusion/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,518 |
+| 2023-07-04 | [SDXL](../papers/2023-07_SDXL/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 模型 | 生成 | 3,051 |
+| 2023-06-26 | [DragDiffusion](../papers/2023-06_DragDiffusion/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,065 |
+| 2023-06-16 | [MagicBrush](../papers/2023-06_MagicBrush/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,080 |
+| 2023-06-01 | [Self-Guidance](../papers/2023-06_Self-Guidance/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 生成 | 7,259 |
+| 2023-05-29 | [InstructEdit](../papers/2023-05_InstructEdit/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,897 |
+| 2023-05-18 | [DragGAN](../papers/2023-05_DragGAN/解读.md) | 拖拽与点控编辑 | 方法 | 编辑 | 7,007 |
+| 2023-04-17 | [MasaCtrl](../papers/2023-04_MasaCtrl/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 生成+编辑 | 6,562 |
+| 2023-04-13 | [Inpaint-Anything](../papers/2023-04_Inpaint-Anything/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 8,149 |
+| 2023-04-13 | [Rich-Text](../papers/2023-04_Rich-Text/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 6,817 |
+| 2023-04-05 | [SAM](../papers/2023-04_SAM/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 6,768 |
+| 2023-03-16 | [HIVE](../papers/2023-03_HIVE/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 方法 | 编辑 | 7,788 |
+| 2023-03-02 | [Consistency Models](../papers/2023-03_Consistency-Models/解读.md) | 少步与一步生成 | 方法 | 生成 | 3,194 |
+| 2023-02-16 | [T2I-Adapter](../papers/2023-02_T2I-Adapter/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,127 |
+| 2023-02-10 | [ControlNet](../papers/2023-02_ControlNet/解读.md) | 条件控制：结构、身份、参考图怎么注入 | 方法 | 生成 | 7,943 |
+| 2023-02-06 | [pix2pix-zero](../papers/2023-02_pix2pix-zero/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 6,692 |
+| 2022-12-13 | [Imagen-Editor-EditBench](../papers/2022-12_Imagen-Editor-EditBench/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 8,394 |
+| 2022-12-08 | [Custom-Diffusion](../papers/2022-12_Custom-Diffusion/解读.md) | 个性化与主体保持 | 方法 | 生成 | 7,128 |
+| 2022-11-23 | [Paint-by-Example](../papers/2022-11_Paint-by-Example/解读.md) | 局部与对象级：抠图、补全、搬物体 | 方法 | 编辑 | 7,577 |
+| 2022-11-22 | [EDICT](../papers/2022-11_EDICT/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 6,614 |
+| 2022-11-22 | [Plug-and-Play](../papers/2022-11_Plug-and-Play/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,284 |
+| 2022-11-17 | [InstructPix2Pix](../papers/2022-11_InstructPix2Pix/解读.md) | 指令式编辑：说人话改图，以及数据从哪来 | 数据集 | 编辑 | 7,603 |
+| 2022-11-17 | [Null-text-Inversion](../papers/2022-11_Null-text-Inversion/解读.md) | 反演精度：真实图片怎么无损映回噪声 | 方法 | 编辑 | 7,202 |
+| 2022-10-20 | [DiffEdit](../papers/2022-10_DiffEdit/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,215 |
+| 2022-10-17 | [Imagic](../papers/2022-10_Imagic/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,136 |
+| 2022-08-25 | [DreamBooth](../papers/2022-08_DreamBooth/解读.md) | 个性化与主体保持 | 方法 | 生成 | 6,553 |
+| 2022-08-02 | [Prompt-to-Prompt](../papers/2022-08_Prompt-to-Prompt/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,138 |
+| 2022-08-02 | [Textual-Inversion](../papers/2022-08_Textual-Inversion/解读.md) | 个性化与主体保持 | 方法 | 生成 | 6,900 |
+| 2022-07-26 | [Classifier-Free-Guidance](../papers/2022-07_Classifier-Free-Guidance/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 6,581 |
+| 2022-06-06 | [Blended-Latent-Diffusion](../papers/2022-06_Blended-Latent-Diffusion/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 6,702 |
+| 2021-12-20 | [Latent-Diffusion](../papers/2021-12_Latent-Diffusion/解读.md) | 生成骨干：编辑方法赖以运行的底座 | 方法 | 生成 | 7,160 |
+| 2021-08-02 | [SDEdit](../papers/2021-08_SDEdit/解读.md) | 训练-free 扩散编辑：靠注意力和反演改图 | 方法 | 编辑 | 7,249 |
 
 ## 可信度边界
 

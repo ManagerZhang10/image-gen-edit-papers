@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """渲染 docs/INDEX.md：按技术脉络、任务和贡献类型分组的索引。
 
-README 是一张按时间排的平表（规范要求），分组视图放这里。
+README 是一张按时间倒序（最新在最前）的平表（规范要求），分组视图放这里。
+本页「按时间的全量清单」跟 README 同向倒序；17 条脉络里的表保持时间升序，那是阅读路径。
 每篇的「一句话」摘自该篇 解读.md 第 1 节首句——依据是论文原文，不另编导读。
 
 ⚠️ 本文件里的 BLURB 与 §可信度边界 两段是人写的，不由数据生成。
@@ -106,6 +107,7 @@ def one_liner(d):
 
 def main():
     ps = json.load(open(f"{ROOT}/scripts/papers.json", encoding="utf-8"))
+    # 脉络表是阅读路径，保持时间升序（缺失 date 兜底 "9999/99/99"，排到最后）。
     ps.sort(key=lambda p: (p["date"] or "9999/99/99", p["short"]))
     by_line = OrderedDict((k, []) for k in ORDER)
     for p in ps:
@@ -124,7 +126,7 @@ def main():
 > 覆盖：{len(ps)} 项，2021-08 ～ 2026-08
 > 最后核对：{CHECKED}
 
-[README](../README.md) 是一张按时间排的平表，用来查。本页按技术脉络分组，用来读。
+[README](../README.md) 是一张按时间倒序（最新在最前）的平表，用来查。本页按技术脉络分组，用来读。
 每篇的「一句话」摘自该篇 `解读.md` 第 1 节首句，依据是论文原文，不是另写的导读。
 跨论文的结论在 [总结分析.md](总结分析.md)，笔记能信到什么程度在 [可信度与产出.md](可信度与产出.md)。
 
@@ -165,9 +167,14 @@ def main():
 
 带发表、机构、原文直链的完整版在 [README](../README.md#全量清单)。
 
+**这张表按时间倒序，最新的在最前**，跟 README 的全量清单同向——它们是同一类查询表。
+上面 17 条脉络里的表是**时间升序**，从早到晚读才讲得通，两者方向不同不是 bug。
+
 | 时间 | 简称 | 脉络 | 类型 | 任务 | 解读字数 |
 | --- | --- | --- | --- | --- | ---: |""")
-    for p in ps:
+    # 平表倒序：ps 已按 (date, short) 升序，sorted 稳定，所以同日内简称仍是升序。
+    # 兜底 "0000/00/00" 让缺失 date 沉到最后，不会被倒序顶到最前。
+    for p in sorted(ps, key=lambda p: p["date"] or "0000/00/00", reverse=True):
         note = f"{ROOT}/papers/{p['dir']}/解读.md"
         n = f"{CJK(open(note, encoding='utf-8').read()):,}" if os.path.exists(note) else "—"
         out.append(f"| {(p['date'] or '—').replace('/','-')} | "
