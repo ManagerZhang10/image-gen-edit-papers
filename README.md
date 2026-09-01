@@ -7,7 +7,7 @@
 [![license](https://img.shields.io/badge/license-CC_BY_4.0-777777)](LICENSE)
 
 **187 篇图像编辑论文，每篇一份中文深读笔记，外加一条核验过的原文直链。**
-时间跨度 2021-08 → 2026-08，笔记合计 1,234,859 个汉字。
+时间跨度 2021-08 → 2026-08，笔记合计 1,234,956 个汉字。
 
 *187 image-editing papers, each with an in-depth Chinese reading note and a byte-verified link to the original PDF. Aug 2021 – Aug 2026.*
 
@@ -239,7 +239,7 @@ image_edit_paper/
 | 2026-01-05 | [nextflow](papers/2026-01_nextflow/解读.md) | NextFlow: Unified Sequential Modeling Activates Multimodal Understanding and Generation | [PDF](https://arxiv.org/pdf/2601.02204) | 7320 |
 | 2026-01-06 | [reward-hacking-t2i](papers/2026-01_reward-hacking-t2i/解读.md) | Understanding Reward Hacking in Text-to-Image Reinforcement Learning | [PDF](https://arxiv.org/pdf/2601.03468) | 7524 |
 | 2026-02-22 | [ChordEdit](papers/2026-02_ChordEdit/解读.md) | ChordEdit: One-Step Low-Energy Transport for Image Editing | [PDF](https://arxiv.org/pdf/2602.19083) | 7579 |
-| 2026-02-12 | [FireRed-Image-Edit](papers/2026-02_FireRed-Image-Edit/解读.md) | FireRed-Image-Edit-1.0 Technical Report | [PDF](https://arxiv.org/pdf/2602.13344) | 7109 |
+| 2026-02-12 | [FireRed-Image-Edit](papers/2026-02_FireRed-Image-Edit/解读.md) | FireRed-Image-Edit-1.0 Technical Report | [PDF](https://arxiv.org/pdf/2602.13344) | 7206 |
 | 2026-02-02 | [VIBE](papers/2026-02_VIBE/解读.md) | How Well Do Models Follow Visual Instructions? VIBE: A Systematic Benchmark for Visual Instruction-Driven Image Editing | [PDF](https://arxiv.org/pdf/2602.01851) | 2564 |
 | 2026-02-09 | [reasoning-to-pixels](papers/2026-02_reasoning-to-pixels/解读.md) | From Reasoning to Pixels: Benchmarking the Alignment Gap in Unified Multimodal Models | [PDF](https://arxiv.org/pdf/2602.08336) | 6985 |
 | 2026-02-09 | [rethink-global-text](papers/2026-02_rethink-global-text/解读.md) | Rethinking Global Text Conditioning in Diffusion Transformers | [PDF](https://arxiv.org/pdf/2602.09268) | 7486 |

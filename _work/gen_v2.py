@@ -53,6 +53,8 @@ def extract(pdf, dst):
             pages.append("")
     t = "\n".join(pages)
     t = re.sub(r"[\ud800-\udfff]", "", t)
+    # 控制字符（含 NUL）会让 grep/file 把抽出的 txt 当二进制，后续排查很难受
+    t = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", t)
     t = re.sub(r"[ \t]{3,}", " ", t)
     t = re.sub(r"\n{3,}", "\n\n", t)
     if len(t) > 130000:

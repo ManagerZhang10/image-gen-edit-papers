@@ -4,6 +4,29 @@
   "date": "2026/02/12",
   "title": "FireRed-Image-Edit-1.0 Technical Report",
   "url": "https://arxiv.org/abs/2602.13344",
-  "cn_chars": 7109,
-  "note": "达标"
+  "cn_chars": 7206,
+  "note": "DeepSeek V4 Pro 生成，旧 11 节规范。2026-09-01 人工复核修正三处：①ImgEdit 的 Extract 4.34 原写成落后于 Emu3.5 3.96 / Qwen2511 4.13，实为该列全表最高，真正落后项是 Hybrid 4.07 与 Action 4.71；②GEdit 的 G_PQ 原写成领先，实际只在开源内最高，低于 Nano-Banana 8.454/8.424 与 Nano-Banana-Pro 8.344/8.306；③删掉正文里残留的模型自问自答（带问号的臆测胜率），Figure 10 的百分比在 PDF 文本层无法与模型配对，改为只采信图注。Table 1/3/4/5/6/7、REDEdit-Bench 1673 例 15 类、1.6B→100M+ 等其余引用已逐条比对原文，准确。",
+  "source_type": "tech_report",
+  "publication": {
+    "first_public": "2026-02-12",
+    "latest_version": "v2 (2026-06-14)",
+    "venue": "arXiv 预印本（小红书 Super Intelligence Team 技术报告）",
+    "venue_type": "tech_report",
+    "formal_publication": null
+  },
+  "paper_sha256": "c09146a14492ddbd6dd5c9dfbbbb89246874ddaeba9e960a3e0004ed66f73c31",
+  "checked_at": "2026-09-01",
+  "link_check": {
+    "arxiv_pdf": "HTTP 206, application/pdf, remote=46506094 = local=46506094",
+    "arxiv_api": "id_list=2602.13344 → 标题逐字符一致，published 2026-02-12，updated 2026-06-14",
+    "note": "本地 paper.pdf 为 34 页 / pikepdf 8.15.1，2026-08-28 下载；与当前 arXiv 直链字节数一致"
+  },
+  "impact": {
+    "citation_count": 0,
+    "provider": "OpenAlex",
+    "provider_url": "https://openalex.org/W7129230457",
+    "checked_at": "2026-09-01",
+    "note": "OpenAlex 有两条重复记录（W7129230457 / W7130237408），均为 0 引用"
+  },
+  "spec": "v1-11节-6500~8500"
 }
