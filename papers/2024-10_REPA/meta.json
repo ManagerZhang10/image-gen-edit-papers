@@ -1,0 +1,25 @@
+{
+ "short": "REPA",
+ "date": "2024/10/09",
+ "arxiv_id": "2410.06940",
+ "title": "Representation Alignment for Generation: Training Diffusion Transformers Is Easier Than You Think",
+ "url": "https://arxiv.org/abs/2410.06940",
+ "venue": "ICLR 2025 (Oral)",
+ "task": [
+  "生成"
+ ],
+ "type": "方法",
+ "line": "生成骨干：编辑方法赖以运行的底座",
+ "source_type": null,
+ "impact": {
+  "citation_count": 661,
+  "provider": "Semantic Scholar / HF Papers（image-generation-papers 口径）",
+  "hf_upvotes": 14,
+  "checked_at": "2026-08-31"
+ },
+ "hub": null,
+ "note": "自 image-generation-papers 并入，解读待生成",
+ "cn_chars": 3143,
+ "attempts": 1,
+ "spec": "v2-8节-3000~5000"
+}

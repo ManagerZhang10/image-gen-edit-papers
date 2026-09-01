@@ -1,0 +1,26 @@
+{
+ "short": "DALL·E 3",
+ "date": "2023/10/19",
+ "arxiv_id": null,
+ "title": "Improving Image Generation with Better Captions",
+ "url": "https://cdn.openai.com/papers/dall-e-3.pdf",
+ "venue": "OpenAI 报告（无 arXiv 条目、无同行评审）",
+ "task": [
+  "生成"
+ ],
+ "type": "模型",
+ "line": "生成侧数据与重标注",
+ "source_type": "tech_report",
+ "impact": {
+  "citation_count": null,
+  "provider": "Semantic Scholar / HF Papers（image-generation-papers 口径）",
+  "hf_upvotes": null,
+  "checked_at": "2026-08-31"
+ },
+ "hub": "闭源，无权重",
+ "note": "自 image-generation-papers 并入。DeepSeek V4 Pro 依据官方报告 PDF 生成，v2 规范。脉络单开「生成侧数据与重标注」而不塞进「编辑数据工程：三元组从哪来」——后者讲的是编辑三元组，这篇讲的是生成侧的合成重标注（recaptioning），不是一回事。",
+ "cn_chars": 3183,
+ "attempts": 2,
+ "spec": "v2-8节-3000~5000",
+ "pdf": "https://cdn.openai.com/papers/dall-e-3.pdf"
+}

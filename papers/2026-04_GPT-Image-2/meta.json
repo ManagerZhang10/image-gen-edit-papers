@@ -1,22 +1,24 @@
 {
-  "arxiv_id": null,
-  "short": "GPT-Image-2",
-  "date": "2026/04/21",
-  "title": "GPT Image 2",
-  "url": "https://developers.openai.com/api/docs/models/gpt-image-2",
-  "cn_chars": 732,
-  "guide_url": "https://developers.openai.com/cookbook/examples/multimodal/image-gen-models-prompting-guide",
-  "source_type": "official_product_documentation",
-  "paper_pdf": false,
-  "publication": {
-    "first_public": "2026-04-21",
-    "venue": "OpenAI official model documentation",
-    "formal_publication": null
-  },
-  "impact": {
-    "citation_count": null,
-    "provider": null,
-    "checked_at": "2026-08-29"
-  },
-  "note": "无正式论文；仅以官方模型文档和官方 prompting guide 核验"
+ "arxiv_id": null,
+ "short": "GPT-Image-2",
+ "date": "2026/04/21",
+ "title": "GPT Image 2",
+ "url": "https://developers.openai.com/api/docs/models/gpt-image-2",
+ "cn_chars": 732,
+ "guide_url": "https://developers.openai.com/cookbook/examples/multimodal/image-gen-models-prompting-guide",
+ "source_type": "official_product_documentation",
+ "paper_pdf": false,
+ "publication": {
+  "first_public": "2026-04-21",
+  "venue": "OpenAI official model documentation",
+  "formal_publication": null
+ },
+ "impact": {
+  "citation_count": null,
+  "provider": null,
+  "checked_at": "2026-08-29"
+ },
+ "note": "无正式论文；仅以官方模型文档和官方 prompting guide 核验",
+ "org": "OpenAI",
+ "org_source": "官方来源（OpenAI official model documentation）"
 }

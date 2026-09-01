@@ -1,0 +1,25 @@
+{
+ "short": "Consistency Models",
+ "date": "2023/03/02",
+ "arxiv_id": "2303.01469",
+ "title": "Consistency Models",
+ "url": "https://arxiv.org/abs/2303.01469",
+ "venue": "ICML 2023",
+ "task": [
+  "生成"
+ ],
+ "type": "方法",
+ "line": "少步与一步生成",
+ "source_type": null,
+ "impact": {
+  "citation_count": 2137,
+  "provider": "Semantic Scholar / HF Papers（image-generation-papers 口径）",
+  "hf_upvotes": 9,
+  "checked_at": "2026-08-31"
+ },
+ "hub": null,
+ "note": "自 image-generation-papers 并入，解读待生成",
+ "cn_chars": 3194,
+ "attempts": 2,
+ "spec": "v2-8节-3000~5000"
+}

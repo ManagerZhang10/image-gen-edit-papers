@@ -1,18 +1,22 @@
 {
-  "short": "Grok-Aurora",
-  "title": "Grok (Aurora)",
-  "source_type": "official_product_no_independent_paper_found",
-  "url": "https://docs.x.ai/docs/models",
-  "cn_chars": 330,
-  "publication": {
-    "venue": null,
-    "first_public": "2024-12 (product-era label; paper date not applicable)",
-    "formal_publication": null
-  },
-  "impact": {
-    "citation_count": null,
-    "provider": null,
-    "checked_at": "2026-08-29"
-  },
-  "note": "No independent public paper or technical report was verified; paper.pdf intentionally absent."
+ "short": "Grok-Aurora",
+ "title": "Grok (Aurora)",
+ "source_type": "official_product_no_independent_paper_found",
+ "url": "https://docs.x.ai/docs/models",
+ "cn_chars": 330,
+ "publication": {
+  "venue": null,
+  "first_public": "2024-12 (product-era label; paper date not applicable)",
+  "formal_publication": null
+ },
+ "impact": {
+  "citation_count": null,
+  "provider": null,
+  "checked_at": "2026-08-29"
+ },
+ "note": "No independent public paper or technical report was verified; paper.pdf intentionally absent.",
+ "org": "xAI",
+ "date": "2024/12",
+ "date_note": "xAI 官方文档只给到月份，没有确切发布日；不补一个日期上去",
+ "org_source": "官方来源（https://docs.x.ai/docs/models）"
 }

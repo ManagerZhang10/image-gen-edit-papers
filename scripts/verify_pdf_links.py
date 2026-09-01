@@ -13,14 +13,14 @@
     python3 scripts/verify_pdf_links.py              # 全量核验，写 _work/pdf_link_check.json
     python3 scripts/verify_pdf_links.py 2023-02_ControlNet   # 只核一个
 """
-import json, os, sys, time, urllib.error, urllib.request
+import json, os, sys, time, urllib.error, urllib.parse, urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from pdf_sources import pdf_url          # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAPERS = os.path.join(ROOT, "papers")
-UA = "image_edit_paper/1.0 (https://github.com/ManagerYu10/image_edit_paper)"
+UA = "image-gen-edit-papers/1.0 (https://github.com/ManagerYu10/image-gen-edit-papers)"
 DELAY = 3.0          # arXiv 对批量访问要求 >=3s 间隔
 OUT = os.path.join(ROOT, "_work", "pdf_link_check.json")
 
@@ -71,7 +71,16 @@ def main(argv):
             continue
         row.update(http=code, content_type=ctype,
                    magic=magic.decode("latin-1"), remote_bytes=total)
-        ok = (code == 206 and ctype == "application/pdf" and magic == b"%PDF"
+        # Content-Type 的例外：GitHub raw 对 .pdf 一律回 application/octet-stream。
+        # 只在「魔数是 %PDF 且远端字节数与本地完全一致」时放行，并在行里留痕。
+        # 不放宽到全部主机——arXiv / CVF 回错 Content-Type 才是真该报的问题。
+        CTYPE_EXCEPT = {"raw.githubusercontent.com": {"application/octet-stream"}}
+        host = urllib.parse.urlparse(url).netloc
+        ctype_ok = (ctype == "application/pdf"
+                    or ctype in CTYPE_EXCEPT.get(host, set()))
+        if ctype_ok and ctype != "application/pdf":
+            row["content_type_note"] = f"{host} 对 PDF 回 {ctype}，按主机例外放行"
+        ok = (code == 206 and ctype_ok and magic == b"%PDF"
               and total is not None and total == row["local_bytes"])
         row["status"] = "OK" if ok else "MISMATCH"
         rows.append(row)

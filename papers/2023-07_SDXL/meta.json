@@ -1,0 +1,25 @@
+{
+ "short": "SDXL",
+ "date": "2023/07/04",
+ "arxiv_id": "2307.01952",
+ "title": "SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis",
+ "url": "https://arxiv.org/abs/2307.01952",
+ "venue": "ICLR 2024",
+ "task": [
+  "生成"
+ ],
+ "type": "模型",
+ "line": "生成骨干：编辑方法赖以运行的底座",
+ "source_type": null,
+ "impact": {
+  "citation_count": 5261,
+  "provider": "Semantic Scholar / HF Papers（image-generation-papers 口径）",
+  "hf_upvotes": 93,
+  "checked_at": "2026-08-31"
+ },
+ "hub": "stable-diffusion-xl-base-1.0：1,720,740 次/月下载 · 8,091 likes",
+ "note": "自 image-generation-papers 并入，解读待生成",
+ "cn_chars": 3051,
+ "attempts": 1,
+ "spec": "v2-8节-3000~5000"
+}

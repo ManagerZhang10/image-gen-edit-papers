@@ -1,0 +1,26 @@
+{
+ "short": "Kolors",
+ "date": "2024/07/05",
+ "arxiv_id": null,
+ "title": "Kolors: Effective Training of Diffusion Model for Photorealistic Text-to-Image Synthesis",
+ "url": "https://github.com/Kwai-Kolors/Kolors",
+ "venue": "快手可图技术报告（只在 GitHub，无 arXiv 条目）",
+ "task": [
+  "生成"
+ ],
+ "type": "模型",
+ "line": "生成骨干：编辑方法赖以运行的底座",
+ "source_type": "tech_report",
+ "impact": {
+  "citation_count": null,
+  "provider": "Semantic Scholar / HF Papers（image-generation-papers 口径）",
+  "hf_upvotes": null,
+  "checked_at": "2026-08-31"
+ },
+ "hub": "Kolors 783 + Kolors-diffusers 8,664 次/月下载 · 974 likes 合计 · GitHub 4,612 star",
+ "note": "自 image-generation-papers 并入，解读待生成",
+ "cn_chars": 3470,
+ "attempts": 1,
+ "spec": "v2-8节-3000~5000",
+ "pdf": "https://raw.githubusercontent.com/Kwai-Kolors/Kolors/master/imgs/Kolors_paper.pdf"
+}

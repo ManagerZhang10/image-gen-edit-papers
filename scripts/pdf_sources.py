@@ -46,6 +46,10 @@ def pdf_url(meta, dirname=None):
     """由 meta.json（和目录名）推出 PDF 直链；没有可下载来源时返回 None。"""
     if dirname and dirname in OVERRIDES:
         return OVERRIDES[dirname]
+    # 没有 arXiv 条目、也不在 CVF 上的（DALL·E 3 在 cdn.openai.com、
+    # Kolors 只在 GitHub raw），直链没有可推导的规则，由 meta.json 自带。
+    if meta.get("pdf"):
+        return meta["pdf"]
     if meta.get("arxiv_id"):
         return f"https://arxiv.org/pdf/{meta['arxiv_id']}"
     url = meta.get("url") or ""

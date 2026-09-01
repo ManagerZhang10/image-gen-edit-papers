@@ -1,0 +1,25 @@
+{
+ "short": "MAR",
+ "date": "2024/06/17",
+ "arxiv_id": "2406.11838",
+ "title": "Autoregressive Image Generation without Vector Quantization",
+ "url": "https://arxiv.org/abs/2406.11838",
+ "venue": "NeurIPS 2024 (Spotlight)",
+ "task": [
+  "生成"
+ ],
+ "type": "方法",
+ "line": "统一多模态：理解与生成同一个模型",
+ "source_type": null,
+ "impact": {
+  "citation_count": 716,
+  "provider": "Semantic Scholar / HF Papers（image-generation-papers 口径）",
+  "hf_upvotes": 5,
+  "checked_at": "2026-08-31"
+ },
+ "hub": null,
+ "note": "自 image-generation-papers 并入，解读待生成",
+ "cn_chars": 3458,
+ "attempts": 2,
+ "spec": "v2-8节-3000~5000"
+}

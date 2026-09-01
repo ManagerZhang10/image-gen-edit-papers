@@ -28,7 +28,7 @@ from pdf_sources import pdf_url          # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAPERS = os.path.join(ROOT, "papers")
-UA = "image_edit_paper/1.0 (https://github.com/ManagerYu10/image_edit_paper)"
+UA = "image-gen-edit-papers/1.0 (https://github.com/ManagerYu10/image-gen-edit-papers)"
 DELAY = 3.0
 
 

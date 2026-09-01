@@ -211,6 +211,17 @@
    "status": "OK"
   },
   {
+   "dir": "2023-03_Consistency-Models",
+   "short": "Consistency Models",
+   "url": "https://arxiv.org/pdf/2303.01469",
+   "local_bytes": 31529980,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 31529980,
+   "status": "OK"
+  },
+  {
    "dir": "2023-03_HIVE",
    "short": "HIVE",
    "url": "https://arxiv.org/pdf/2303.09618",
@@ -343,6 +354,17 @@
    "status": "OK"
   },
   {
+   "dir": "2023-07_SDXL",
+   "short": "SDXL",
+   "url": "https://arxiv.org/pdf/2307.01952",
+   "local_bytes": 18407785,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 18407785,
+   "status": "OK"
+  },
+  {
    "dir": "2023-08_IP-Adapter",
    "short": "IP-Adapter",
    "url": "https://arxiv.org/pdf/2308.06721",
@@ -387,6 +409,28 @@
    "status": "OK"
   },
   {
+   "dir": "2023-10_DALL-E-3",
+   "short": "DALL·E 3",
+   "url": "https://cdn.openai.com/papers/dall-e-3.pdf",
+   "local_bytes": 28086764,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 28086764,
+   "status": "OK"
+  },
+  {
+   "dir": "2023-10_GenEval",
+   "short": "GenEval",
+   "url": "https://arxiv.org/pdf/2310.11513",
+   "local_bytes": 3863771,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 3863771,
+   "status": "OK"
+  },
+  {
    "dir": "2023-11_Concept-Sliders",
    "short": "Concept-Sliders",
    "url": "https://arxiv.org/pdf/2311.12092",
@@ -406,6 +450,17 @@
    "content_type": "application/pdf",
    "magic": "%PDF",
    "remote_bytes": 39698698,
+   "status": "OK"
+  },
+  {
+   "dir": "2023-11_DMD",
+   "short": "DMD",
+   "url": "https://arxiv.org/pdf/2311.18828",
+   "local_bytes": 12914839,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 12914839,
    "status": "OK"
   },
   {
@@ -618,6 +673,17 @@
    "status": "OK"
   },
   {
+   "dir": "2024-06_MAR",
+   "short": "MAR",
+   "url": "https://arxiv.org/pdf/2406.11838",
+   "local_bytes": 5956366,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 5956366,
+   "status": "OK"
+  },
+  {
    "dir": "2024-06_MimicBrush",
    "short": "MimicBrush",
    "url": "https://arxiv.org/pdf/2406.07547",
@@ -626,6 +692,18 @@
    "content_type": "application/pdf",
    "magic": "%PDF",
    "remote_bytes": 7319691,
+   "status": "OK"
+  },
+  {
+   "dir": "2024-07_Kolors",
+   "short": "Kolors",
+   "url": "https://raw.githubusercontent.com/Kwai-Kolors/Kolors/master/imgs/Kolors_paper.pdf",
+   "local_bytes": 12075125,
+   "http": 206,
+   "content_type": "application/octet-stream",
+   "magic": "%PDF",
+   "remote_bytes": 12075125,
+   "content_type_note": "raw.githubusercontent.com 对 PDF 回 application/octet-stream，按主机例外放行",
    "status": "OK"
   },
   {
@@ -721,6 +799,17 @@
    "content_type": "application/pdf",
    "magic": "%PDF",
    "remote_bytes": 25085329,
+   "status": "OK"
+  },
+  {
+   "dir": "2024-10_REPA",
+   "short": "REPA",
+   "url": "https://arxiv.org/pdf/2410.06940",
+   "local_bytes": 34940112,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 34940112,
    "status": "OK"
   },
   {
