@@ -1,5 +1,5 @@
 {
- "checked_at": "2026-08-30",
+ "checked_at": "2026-09-01",
  "rows": [
   {
    "dir": "2021-08_SDEdit",
@@ -871,6 +871,17 @@
    "content_type": "application/pdf",
    "magic": "%PDF",
    "remote_bytes": 42591372,
+   "status": "OK"
+  },
+  {
+   "dir": "2025-03_FireEdit",
+   "short": "FireEdit",
+   "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Zhou_FireEdit_Fine-grained_Instruction-based_Image_Editing_via_Region-aware_Vision_Language_Model_CVPR_2025_paper.pdf",
+   "local_bytes": 4750274,
+   "http": 206,
+   "content_type": "application/pdf",
+   "magic": "%PDF",
+   "remote_bytes": 4750274,
    "status": "OK"
   },
   {

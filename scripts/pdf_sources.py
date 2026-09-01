@@ -21,6 +21,14 @@ OVERRIDES = {
     # 10 页 1,739,117 字节，PDF 元数据写着 /Subject: IEEE International
     # Conference on Computer Vision、/Producer: pikepdf——即 ICCV 2025
     # proceedings 版。CVF 这条与本地 sha256 完全一致（2026-08-30 实拉比对）。
+    # arXiv v2（2503.19839）是 pdfTeX 排版的预印本，与本地副本同为 11 页但字节不同
+    # （sha256 e1cd6fff…）。本库解读依据 CVPR 2025 proceedings 版：PDF 元数据为
+    # /Producer: pikepdf 9.7.0、/Subject: IEEE Conference on Computer Vision and
+    # Pattern Recognition。CVF 这条与本地 sha256 完全一致（2026-09-01 实拉比对）。
+    "2025-03_FireEdit":
+        "https://openaccess.thecvf.com/content/CVPR2025/papers/"
+        "Zhou_FireEdit_Fine-grained_Instruction-based_Image_Editing_via_"
+        "Region-aware_Vision_Language_Model_CVPR_2025_paper.pdf",
     "2025-05_DICE":
         "https://openaccess.thecvf.com/content/ICCV2025/papers/"
         "Baraldi_What_Changed_Detecting_and_Evaluating_Instruction-Guided_"

@@ -1,17 +1,17 @@
 # 图像编辑论文库 2021–2026
 
-[![papers](https://img.shields.io/badge/papers-186-2b7489)](#全量清单)
+[![papers](https://img.shields.io/badge/papers-187-2b7489)](#全量清单)
 [![notes](https://img.shields.io/badge/notes-1.23M_CJK_chars-4c9a2a)](#全量清单)
 [![coverage](https://img.shields.io/badge/coverage-2021.08_--_2026.08-e07b39)](#全量清单)
-[![links](https://img.shields.io/badge/source_links-182%2F186_byte--verified-1f883d)](docs/可信度与产出.md#2-原文直链是怎么核的)
+[![links](https://img.shields.io/badge/source_links-183%2F187_byte--verified-1f883d)](docs/可信度与产出.md#2-原文直链是怎么核的)
 [![license](https://img.shields.io/badge/license-CC_BY_4.0-777777)](LICENSE)
 
-**186 篇图像编辑论文，每篇一份中文深读笔记，外加一条核验过的原文直链。**
-时间跨度 2021-08 → 2026-08，笔记合计 1,231,793 个汉字。
+**187 篇图像编辑论文，每篇一份中文深读笔记，外加一条核验过的原文直链。**
+时间跨度 2021-08 → 2026-08，笔记合计 1,234,859 个汉字。
 
-*186 image-editing papers, each with an in-depth Chinese reading note and a byte-verified link to the original PDF. Aug 2021 – Aug 2026.*
+*187 image-editing papers, each with an in-depth Chinese reading note and a byte-verified link to the original PDF. Aug 2021 – Aug 2026.*
 
-> **维护者** [@ManagerYu10](https://github.com/ManagerYu10) · **授权** [CC BY 4.0](LICENSE)（署名即可转载、改写、商用） · **最后核对** 2026-08-31
+> **维护者** [@ManagerYu10](https://github.com/ManagerYu10) · **授权** [CC BY 4.0](LICENSE)（署名即可转载、改写、商用） · **最后核对** 2026-09-01
 >
 > ⚠️ **笔记正文由 DeepSeek v4 Pro 依据 PDF 抽取的文字生成**，人定标准、做机器校验、逐条抽查。
 > 图里的信息模型读不到，公式符号会在 PDF 抽取时丢失。哪些能直接当依据、哪些必须回原文，
@@ -21,7 +21,7 @@
 
 ## 怎么用
 
-直接拉到本页最后的[全量清单](#全量清单)，186 行按时间排，浏览器里 `Ctrl/Cmd + F` 搜简称或标题。每行两列可以点：
+直接拉到本页最后的[全量清单](#全量清单)，187 行按时间排，浏览器里 `Ctrl/Cmd + F` 搜简称或标题。每行两列可以点：
 
 | 时间 | 简称（→ 解读） | 论文标题 | 原文 | 解读字数 |
 | --- | --- | --- | --- | ---: |
@@ -30,13 +30,14 @@
 | 这一列 | 点开是什么 |
 | --- | --- |
 | **简称** | 这篇的 `解读.md`，中文深读笔记，就在本仓库里 |
-| **原文** | 论文本身。182 行标 `PDF`，直链与写笔记时用的那份本地 PDF 逐字节比对一致；4 行标 `官方来源`，那 4 项确实没有独立论文 |
+| **原文** | 论文本身。183 行标 `PDF`，直链与写笔记时用的那份本地 PDF 逐字节比对一致；4 行标 `官方来源`，那 4 项确实没有独立论文 |
 
 **解读的定位是替代第一次完整泛读**，不替代精读——要抠实现细节仍然得回 PDF。
 其中 160 篇是固定 11 节：30 秒定位 → 为什么这篇会出现 → 最小概念 → 数据流 → 核心公式 → 训练 → 推理 → 实验与消融 → 与前作怎么选 → 工程判断 → 收束（规范见 [prompt.md](docs/prompt.md)）。
 另外 26 项是决策型短笔记，8～9 节；其中 4 项没有独立论文，只写官方资料和核验边界。
+2026-09 起新增的篇目改用 8 节 / 3000～5000 字的 v2 规范（同样见 [prompt.md](docs/prompt.md)），目前 1 篇（FireEdit）；旧的 11 节规范不回炉重写。
 
-**要原文 PDF**：不在仓库里，182 份合计 3.3 GB。单篇点表里的链接就行，批量拉到本地：
+**要原文 PDF**：不在仓库里，183 份合计 3.3 GB。单篇点表里的链接就行，批量拉到本地：
 
 ```bash
 python3 scripts/fetch_pdfs.py                    # 补齐所有缺的，约 10 分钟
@@ -46,7 +47,7 @@ python3 scripts/fetch_pdfs.py 2024-11_OmniEdit   # 只下一篇
 
 只用标准库，按 arXiv 要求节流到每 3 秒一份，断了重跑只补没下成的。下载到的 `paper.pdf` 被 `.gitignore` 挡住。
 
-**还有三份文档**：[INDEX.md](docs/INDEX.md) 把 186 项按 15 条技术脉络分组；[总结分析.md](docs/总结分析.md) 只写跨论文的结论；[可信度与产出.md](docs/可信度与产出.md) 写做过哪些校验、哪些地方已知会出错。
+**还有三份文档**：[INDEX.md](docs/INDEX.md) 把 186 项按 15 条技术脉络分组（未含 2026-09 新增的 FireEdit）；[总结分析.md](docs/总结分析.md) 只写跨论文的结论；[可信度与产出.md](docs/可信度与产出.md) 写做过哪些校验、哪些地方已知会出错。
 
 ---
 
@@ -54,10 +55,10 @@ python3 scripts/fetch_pdfs.py 2024-11_OmniEdit   # 只下一篇
 
 ```
 image_edit_paper/
-├── README.md                       ← 本文件。怎么用 + 186 项全量清单
+├── README.md                       ← 本文件。怎么用 + 187 项全量清单
 ├── LICENSE                         ← CC BY 4.0
 │
-├── papers/                         ← 186 个论文目录，名字就是 YYYY-MM_简称，按时间自然排序
+├── papers/                         ← 187 个论文目录，名字就是 YYYY-MM_简称，按时间自然排序
 │   ├── 2021-08_SDEdit/
 │   │   ├── 解读.md                  ← 中文笔记（唯一正文）
 │   │   ├── meta.json                ← arXiv ID、日期、标题、字数、venue、引用量
@@ -69,7 +70,7 @@ image_edit_paper/
 │   ├── INDEX.md                     ← 总索引：15 条脉络 + 按时间全量清单
 │   ├── 总结分析.md                   ← 跨论文结论：转折点、脉络咬合、未解问题
 │   ├── 可信度与产出.md                ← 做过哪些校验、哪些地方已知会出错、笔记怎么生成的
-│   ├── prompt.md                     ← 11 节深读的写作规范（原样作为 system prompt）
+│   ├── prompt.md                     ← 深读的写作规范（原样作为 system prompt）；现为 v2：8 节 / 3000～5000 字
 │   ├── LARK论文短版解读_PROMPT.md      ← 短版解读的写作规范
 │   ├── PLAN.md                       ← 建库规划与五个阶段
 │   ├── LARK清单_核验索引.md            ← 2026-08-29 那轮核验的总入口
@@ -77,9 +78,9 @@ image_edit_paper/
 │   └── review/                       ← 核验产出：4 份逐项 manifest + 4 份错误报告 + 数字溯源与 PDF 直链两份记录
 │
 ├── scripts/
-│   ├── pdf_sources.py               ← 直链推导规则 + 3 条例外（默认规则会取错的）
+│   ├── pdf_sources.py               ← 直链推导规则 + 4 条例外（默认规则会取错的）
 │   ├── fetch_pdfs.py                ← 按 meta.json 把 arXiv / CVF 原文拉回本地
-│   └── verify_pdf_links.py          ← 核验清单里那 182 条直链，逐条比对远端与本地字节数
+│   └── verify_pdf_links.py          ← 核验清单里那 183 条直链，逐条比对远端与本地字节数
 │
 └── _work/                          ← 生产管线脚本（只留 .py 和 pdf_link_check.json，日志和中间产物没进仓库）
 ```
@@ -174,6 +175,7 @@ image_edit_paper/
 | 2025-01-05 | [ACEpp](papers/2025-01_ACEpp/解读.md) | ACE++: Instruction-Based Image Creation and Editing via Context-Aware Content Filling | [PDF](https://arxiv.org/pdf/2501.02487) | 7487 |
 | 2025-01-29 | [Janus-Pro](papers/2025-01_Janus-Pro/解读.md) | Janus-Pro: Unified Multimodal Understanding and Generation with Data and Model Scaling | [PDF](https://arxiv.org/pdf/2501.17811) | 8116 |
 | 2025-03-10 | [EasyControl](papers/2025-03_EasyControl/解读.md) | EasyControl: Adding Efficient and Flexible Control for Diffusion Transformer | [PDF](https://arxiv.org/pdf/2503.07027) | 7188 |
+| 2025-03-25 | [FireEdit](papers/2025-03_FireEdit/解读.md) | FireEdit: Fine-grained Instruction-based Image Editing via Region-aware Vision Language Model | [PDF](https://openaccess.thecvf.com/content/CVPR2025/papers/Zhou_FireEdit_Fine-grained_Instruction-based_Image_Editing_via_Region-aware_Vision_Language_Model_CVPR_2025_paper.pdf) | 3066 |
 | 2025-03-13 | [GoT](papers/2025-03_GoT/解读.md) | GoT: Unleashing Reasoning Capability of Multimodal Large Language Model for Visual Generation and Editing | [PDF](https://arxiv.org/pdf/2503.10639) | 7356 |
 | 2025-04-17 | [Complex-Edit](papers/2025-04_Complex-Edit/解读.md) | $texttt{Complex-Edit}$: CoT-Like Instruction Generation for Complexity-Controllable Image Editing Benchmark | [PDF](https://arxiv.org/pdf/2504.13143) | 8329 |
 | 2025-04-23 | [DreamO](papers/2025-04_DreamO/解读.md) | DreamO: A Unified Framework for Image Customization | [PDF](https://arxiv.org/pdf/2504.16915) | 7727 |

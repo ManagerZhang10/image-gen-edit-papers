@@ -1,0 +1,34 @@
+{
+  "arxiv_id": "2503.19839",
+  "short": "FireEdit",
+  "date": "2025/03/25",
+  "title": "FireEdit: Fine-grained Instruction-based Image Editing via Region-aware Vision Language Model",
+  "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Zhou_FireEdit_Fine-grained_Instruction-based_Image_Editing_via_Region-aware_Vision_Language_Model_CVPR_2025_paper.html",
+  "source_type": "formal_paper",
+  "publication": {
+    "first_public": "2025-03-25",
+    "venue": "CVPR 2025",
+    "venue_type": "conference",
+    "formal_publication": "2025-06"
+  },
+  "paper_sha256": "9cbbeee53b2f7e9883147b63dc8be3175d87001c4a912d5785fc6e241c808370",
+  "checked_at": "2026-09-01",
+  "link_check": {
+    "cvf_html": "HTTP 200",
+    "cvf_pdf": "HTTP 200, sha256 与本地 paper.pdf 一致",
+    "arxiv_abs": "HTTP 200",
+    "note": "本库解读依据 CVPR 2025 proceedings 版（pikepdf 9.7.0 / Subject: IEEE CVPR）；arXiv v2 是 pdfTeX 排版的预印本，同为 11 页但字节不同（sha256 e1cd6fff…），已在 scripts/pdf_sources.py 的 OVERRIDES 里指向 CVF 版"
+  },
+  "note": "DeepSeek V4 Pro 生成，v2 规范（8 节 / 3000～5000 汉字），一次通过；人工复核后修正两处：①把检测器称为「开放词表检测器」属论文未支持的推断，改为照实写 Deformable DETR + Groma 预训练权重；②MagicBrush 多轮原写成四项皆不如 MagicBrush，实为互有胜负（L1/L2 优、CLIP-I/DINO 劣）",
+  "cn_chars": 3066,
+  "attempts": 1,
+  "spec": "v2-8节-3000~5000",
+  "impact": {
+    "citation_count": 6,
+    "provider": "OpenAlex",
+    "provider_url": "https://openalex.org/W4413147351",
+    "doi": "10.1109/cvpr52734.2025.01222",
+    "checked_at": "2026-09-01",
+    "note": "Semantic Scholar Graph API 返回 HTTP 429，回退 OpenAlex 按标题检索命中唯一记录"
+  }
+}
