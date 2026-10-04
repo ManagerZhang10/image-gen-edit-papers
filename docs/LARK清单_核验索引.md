@@ -2,7 +2,7 @@
 
 > 基准：《Image Edit 领域论文调研》清单 revision 1687  
 > 核对日期：2026-08-29  
-> 仓库：<https://github.com/ManagerYu10/image_edit_paper>
+> 仓库：<https://github.com/ManagerZhang10/image-gen-edit-papers>
 
 ## 交付结果
 

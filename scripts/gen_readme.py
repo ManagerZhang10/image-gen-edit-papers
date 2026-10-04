@@ -99,7 +99,7 @@ def main():
 
 *{len(ps)} image generation & editing papers, each with an in-depth Chinese reading note and a verified link to the original source. Aug 2021 – Aug 2026.*
 
-> **维护者** [@ManagerYu10](https://github.com/ManagerYu10) · **授权** [CC BY 4.0](LICENSE)（署名即可转载、改写、商用） · **最后核对** {CHECKED}
+> **维护者** [@ManagerZhang10](https://github.com/ManagerZhang10) · **授权** [CC BY 4.0](LICENSE)（署名即可转载、改写、商用） · **最后核对** {CHECKED}
 >
 > ⚠️ **笔记正文由 DeepSeek V4 Pro 依据原文抽取的文字生成**，人定标准、做机器校验、逐条抽查。
 > 图里的信息模型读不到，公式符号会在 PDF 抽取时丢失。哪些能直接当依据、哪些必须回原文，
@@ -123,7 +123,7 @@ UniWorld、Emu3.5 同时是生成和编辑。硬按任务拆仓库，这批论�
 | 生成 | {tasks['生成']} |
 | 两者都是（统一模型） | {len(both)} |
 
-视频侧在另一个库：[video-gen-edit-papers](https://github.com/ManagerYu10/video-gen-edit-papers)。
+视频侧在另一个库：[video-gen-edit-papers](https://github.com/ManagerZhang10/video-gen-edit-papers)。
 
 按贡献类型分：{'、'.join(f'{k} {v}' for k, v in types.most_common())}。
 
