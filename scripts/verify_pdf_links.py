@@ -20,7 +20,7 @@ from pdf_sources import pdf_url          # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAPERS = os.path.join(ROOT, "papers")
-UA = "image-gen-edit-papers/1.0 (https://github.com/ManagerYu10/image-gen-edit-papers)"
+UA = "image-gen-edit-papers/1.0 (https://github.com/ManagerZhang10/image-gen-edit-papers)"
 DELAY = 3.0          # arXiv 对批量访问要求 >=3s 间隔
 OUT = os.path.join(ROOT, "_work", "pdf_link_check.json")
 
